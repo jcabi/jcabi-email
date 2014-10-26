@@ -54,6 +54,7 @@ public interface Postman {
     /**
      * Send this envelope.
      * @param env Envelope to send
+     * @throws IOException If fails
      */
     void send(Envelope env) throws IOException;
 
@@ -91,13 +92,21 @@ public interface Postman {
             } catch (final MessagingException ex) {
                 throw new IOException(ex);
             } finally {
-                try {
-                    transport.close();
-                } catch (final MessagingException ex) {
-                    throw new IOException(ex);
-                }
+                Postman.Default.close(transport);
             }
         }
-
+        /**
+         * Close transport.
+         * @param transport Transport to close
+         * @throws IOException If fails
+         */
+        private static void close(final Transport transport)
+            throws IOException {
+            try {
+                transport.close();
+            } catch (final MessagingException ex) {
+                throw new IOException(ex);
+            }
+        }
     }
 }

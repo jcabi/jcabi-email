@@ -46,6 +46,7 @@ public interface Wire {
     /**
      * Make a transport.
      * @return Transport
+     * @throws IOException If fails
      */
     Transport connect() throws IOException;
 

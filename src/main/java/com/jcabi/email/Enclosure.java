@@ -46,6 +46,7 @@ public interface Enclosure {
     /**
      * Create a MIME body part.
      * @return MIME body part
+     * @throws IOException If fails
      */
     MimeBodyPart part() throws IOException;
 
