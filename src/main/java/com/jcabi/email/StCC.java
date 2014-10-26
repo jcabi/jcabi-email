@@ -32,6 +32,7 @@ package com.jcabi.email;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
 import java.io.IOException;
+import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
@@ -55,6 +56,14 @@ public final class StCC implements Stamp {
      * Email to send to.
      */
     private final transient String email;
+
+    /**
+     * Ctor.
+     * @param addr Address
+     */
+    public StCC(final Address addr) {
+        this(addr.toString());
+    }
 
     /**
      * Ctor.
