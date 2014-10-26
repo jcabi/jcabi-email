@@ -33,10 +33,7 @@ import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
 import com.jcabi.log.Logger;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Properties;
-import javax.mail.Address;
-import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -54,7 +51,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(of = { "host", "port", "user", "password" })
 @Loggable(Loggable.DEBUG)
-public final class SMTP implements Postman {
+public final class SMTP implements Wire {
 
     /**
      * SMTP host.
@@ -93,29 +90,20 @@ public final class SMTP implements Postman {
     }
 
     @Override
-    public void send(final Envelope env) throws IOException {
+    public Transport connect() throws IOException {
+        final Properties props = new Properties();
+        props.setProperty("mail.smtp.auth", "true");
+        final Session session = Session.getInstance(props);
         try {
-            final Properties props = new Properties();
-            props.setProperty("mail.smtp.auth", "true");
-            final Session session = Session.getInstance(props);
             final Transport transport = session.getTransport("smtp");
             transport.connect(this.host, this.port, this.user, this.password);
             Logger.info(
                 this, "sending email through %s:%s as %s...",
                 this.host, this.port, this.user
             );
-            final Message message = env.unwrap();
-            final Address[] rcpts = message.getAllRecipients();
-            transport.sendMessage(message, rcpts);
-            transport.close();
-            Logger.info(
-                this, "email sent from %s to %[list]s",
-                Arrays.asList(message.getFrom()),
-                Arrays.asList(rcpts)
-            );
+            return transport;
         } catch (final MessagingException ex) {
             throw new IOException(ex);
         }
     }
-
 }

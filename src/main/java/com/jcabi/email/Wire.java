@@ -30,74 +30,23 @@
 package com.jcabi.email;
 
 import com.jcabi.aspects.Immutable;
-import com.jcabi.aspects.Loggable;
-import com.jcabi.log.Logger;
 import java.io.IOException;
-import java.util.Arrays;
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Transport;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
- * Postman.
+ * Wire used by a {@link Postman}.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
  */
 @Immutable
-public interface Postman {
+public interface Wire {
 
     /**
-     * Send this envelope.
-     * @param env Envelope to send
+     * Make a transport.
+     * @return Transport
      */
-    void send(Envelope env) throws IOException;
+    Transport connect() throws IOException;
 
-    /**
-     * Default postman.
-     */
-    @Immutable
-    @ToString
-    @EqualsAndHashCode(of = "wire")
-    @Loggable(Loggable.DEBUG)
-    final class Default implements Postman {
-        /**
-         * Wire.
-         */
-        private final transient Wire wire;
-        /**
-         * Ctor.
-         * @param wre Wire
-         */
-        public Default(final Wire wre) {
-            this.wire = wre;
-        }
-        @Override
-        public void send(final Envelope env) throws IOException {
-            final Message message = env.unwrap();
-            final Transport transport = this.wire.connect();
-            try {
-                final Address[] rcpts = message.getAllRecipients();
-                transport.sendMessage(message, rcpts);
-                Logger.info(
-                    this, "email sent from %s to %[list]s",
-                    Arrays.asList(message.getFrom()),
-                    Arrays.asList(rcpts)
-                );
-            } catch (final MessagingException ex) {
-                throw new IOException(ex);
-            } finally {
-                try {
-                    transport.close();
-                } catch (final MessagingException ex) {
-                    throw new IOException(ex);
-                }
-            }
-        }
-
-    }
 }

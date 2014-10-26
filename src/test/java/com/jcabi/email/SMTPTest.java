@@ -57,7 +57,7 @@ public final class SMTPTest {
         final int port = SMTPTest.port();
         final SimpleSmtpServer server = SimpleSmtpServer.start(port);
         try {
-            new SMTP("localhost", port, "", "").send(
+            new Postman.Default(new SMTP("localhost", port, "", "")).send(
                 new Envelope.MIME(
                     new Array<Stamp>(
                         new StSender("FromTester <test-from@jcabi.com>"),
