@@ -29,18 +29,24 @@
  */
 package com.jcabi.email;
 
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.mockito.Mockito;
+import com.jcabi.aspects.Immutable;
+import java.io.IOException;
+import javax.mail.internet.MimeBodyPart;
 
 /**
- * Tests for ${@link JDKPostman}.
+ * Enclosure in MIME envelope.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
  */
-public final class JDKPostmanTest {
+@Immutable
+public interface Enclosure {
+
+    /**
+     * Create a MIME body part.
+     * @return MIME body part
+     */
+    MimeBodyPart part() throws IOException;
 
 }

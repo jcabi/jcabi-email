@@ -30,21 +30,64 @@
 package com.jcabi.email;
 
 import com.jcabi.aspects.Immutable;
+import com.jcabi.aspects.Loggable;
+import java.io.File;
 import java.io.IOException;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeBodyPart;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
- * Postman.
+ * Binary enclosure in MIME envelope.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
  */
 @Immutable
-public interface Postman {
+@ToString
+@EqualsAndHashCode(of = { "path", "name", "ctype" })
+@Loggable(Loggable.DEBUG)
+public final class EnBinary implements Enclosure {
 
     /**
-     * Send this envelope.
-     * @param env Envelope to send
+     * File path.
      */
-    void send(Envelope env) throws IOException;
+    private final transient String path;
+
+    /**
+     * Name.
+     */
+    private final transient String name;
+
+    /**
+     * Content type.
+     */
+    private final transient String ctype;
+
+    /**
+     * Ctor.
+     * @param file File to attach
+     * @param label Name of the file to show
+     * @param type MIME content type
+     */
+    public EnBinary(final File file, final String label, final String type) {
+        this.path = file.getAbsolutePath();
+        this.name = label;
+        this.ctype = type;
+    }
+
+    @Override
+    public MimeBodyPart part() throws IOException {
+        final MimeBodyPart mime = new MimeBodyPart();
+        try {
+            mime.attachFile(new File(this.path));
+            mime.setFileName(this.name);
+            mime.addHeader("Content-Type", this.ctype);
+        } catch (final MessagingException ex) {
+            throw new IOException(ex);
+        }
+        return mime;
+    }
 }

@@ -30,21 +30,49 @@
 package com.jcabi.email;
 
 import com.jcabi.aspects.Immutable;
+import com.jcabi.aspects.Loggable;
 import java.io.IOException;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
- * Postman.
+ * Stamp for a MIME envelope, with a CC recipient.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
  */
 @Immutable
-public interface Postman {
+@ToString
+@EqualsAndHashCode(of = "email")
+@Loggable(Loggable.DEBUG)
+public final class StCC implements Stamp {
 
     /**
-     * Send this envelope.
-     * @param env Envelope to send
+     * Email to send to.
      */
-    void send(Envelope env) throws IOException;
+    private final transient String email;
+
+    /**
+     * Ctor.
+     * @param addr Address
+     */
+    public StCC(final String addr) {
+        this.email = addr;
+    }
+
+    @Override
+    public void attach(final Message message) throws IOException {
+        try {
+            message.setRecipient(
+                Message.RecipientType.CC,
+                new InternetAddress(this.email)
+            );
+        } catch (final MessagingException ex) {
+            throw new IOException(ex);
+        }
+    }
 }

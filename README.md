@@ -11,6 +11,25 @@ More details are here: [email.jcabi.com](http://email.jcabi.com/)
 It is an object-oriented email sending SDK for Java:
 
 ```java
+Postman postman = new SMTP("smtp.googlemail.com", 465, "username", "password");
+postman.send(
+  new Envelope.MIME(
+    Arrays.asList(
+      new StSender("Yegor Bugayenko <yegor@jcabi.com>"),
+      new StRecipient("Jeff Lebowski <jeff@gmail.com>"),
+      new StSubject("dude, how are you?"),
+      new StBCC("my-boss@jcabi.com")
+    ),
+    Arrays.asList(
+      new EnPlain("Hi, long time no see! :) Check my pic!"),
+      new EnBinary(
+        new File("/tmp/picture.gif"),
+        "my-picture.gif",
+        "image/gif"
+      )
+    )
+  )
+);
 ```
 
 ## Questions?

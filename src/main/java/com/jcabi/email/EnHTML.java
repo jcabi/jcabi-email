@@ -30,21 +30,50 @@
 package com.jcabi.email;
 
 import com.jcabi.aspects.Immutable;
+import com.jcabi.aspects.Loggable;
 import java.io.IOException;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeBodyPart;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.apache.commons.lang3.CharEncoding;
 
 /**
- * Postman.
+ * Plain enclosure in MIME envelope.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
  */
 @Immutable
-public interface Postman {
+@ToString
+@EqualsAndHashCode(of = "text")
+@Loggable(Loggable.DEBUG)
+public final class EnHTML implements Enclosure {
 
     /**
-     * Send this envelope.
-     * @param env Envelope to send
+     * Text content.
      */
-    void send(Envelope env) throws IOException;
+    private final transient String text;
+
+    /**
+     * Ctor.
+     * @param content HTML content
+     */
+    public EnHTML(final String content) {
+        this.text = content;
+    }
+
+    @Override
+    public MimeBodyPart part() throws IOException {
+        final MimeBodyPart mime = new MimeBodyPart();
+        try {
+            mime.setText(this.text, CharEncoding.UTF_8);
+            mime.addHeader("Content-Type", "text/html");
+        } catch (final MessagingException ex) {
+            throw new IOException(ex);
+        }
+        return mime;
+    }
+
 }

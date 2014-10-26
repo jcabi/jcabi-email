@@ -31,20 +31,23 @@ package com.jcabi.email;
 
 import com.jcabi.aspects.Immutable;
 import java.io.IOException;
+import javax.mail.Message;
 
 /**
- * Postman.
+ * Stamp for a MIME envelope.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
  */
 @Immutable
-public interface Postman {
+public interface Stamp {
 
     /**
-     * Send this envelope.
-     * @param env Envelope to send
+     * Attach yourself to the message.
+     * @param message Message to add to
+     * @throws IOException If fails
      */
-    void send(Envelope env) throws IOException;
+    void attach(Message message) throws IOException;
+
 }

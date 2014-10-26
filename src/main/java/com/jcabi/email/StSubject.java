@@ -30,21 +30,46 @@
 package com.jcabi.email;
 
 import com.jcabi.aspects.Immutable;
+import com.jcabi.aspects.Loggable;
 import java.io.IOException;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
- * Postman.
+ * Stamp for a MIME envelope, with a subject.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
  */
 @Immutable
-public interface Postman {
+@ToString
+@EqualsAndHashCode(of = "subject")
+@Loggable(Loggable.DEBUG)
+public final class StSubject implements Stamp {
 
     /**
-     * Send this envelope.
-     * @param env Envelope to send
+     * Subject.
      */
-    void send(Envelope env) throws IOException;
+    private final transient String subject;
+
+    /**
+     * Ctor.
+     * @param subj Subject
+     */
+    public StSubject(final String subj) {
+        this.subject = subj;
+    }
+
+    @Override
+    public void attach(final Message message) throws IOException {
+        try {
+            message.setSubject(this.subject);
+        } catch (final MessagingException ex) {
+            throw new IOException(ex);
+        }
+    }
+
 }
