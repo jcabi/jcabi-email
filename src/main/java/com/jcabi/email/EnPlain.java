@@ -36,7 +36,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.apache.commons.lang3.CharEncoding;
 
 /**
  * Plain enclosure in MIME envelope.
@@ -68,7 +67,7 @@ public final class EnPlain implements Enclosure {
     public MimeBodyPart part() throws IOException {
         final MimeBodyPart mime = new MimeBodyPart();
         try {
-            mime.setText(this.text, CharEncoding.UTF_8);
+            mime.setText(this.text, "UTF-8");
             mime.addHeader("Content-Type", "text/plain");
         } catch (final MessagingException ex) {
             throw new IOException(ex);
