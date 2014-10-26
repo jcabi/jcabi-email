@@ -41,10 +41,37 @@ Object-Oriented Email Sending SDK
   It is as simple as this:
 
 +--
-import com.jcabi.email.Postman;
+import com.jcabi.email.EnBinary;
+import com.jcabi.email.EnPlain;
+import com.jcabi.email.Enclosure;
 import com.jcabi.email.Envelope;
-Postmap post = new JDKPostman();
-Envelope env = new Envelope();
+import com.jcabi.email.Postmap;
+import com.jcabi.email.SMTP;
+import com.jcabi.email.Stamp;
+import com.jcabi.email.StBCC;
+import com.jcabi.email.StRecipient;
+import com.jcabi.email.StSender;
+import com.jcabi.email.StSubject;
+
+Postman postman = new SMTP("smtp.googlemail.com", 465, "username", "password");
+postman.send(
+  new Envelope.MIME(
+    new Array<Stamp>(
+      new StSender("Yegor Bugayenko <yegor@jcabi.com>"),
+      new StRecipient("Jeff Lebowski <jeff@gmail.com>"),
+      new StSubject("dude, how are you?"),
+      new StBCC("my-boss@jcabi.com")
+    ),
+    new Array<Enclosure>(
+      new EnPlain("Hi, long time no see! :) Check my pic!"),
+      new EnBinary(
+        new File("/tmp/picture.gif"),
+        "my-picture.gif",
+        "image/gif"
+      )
+    )
+  )
+);
 +--
 
   The only dependency you need is
