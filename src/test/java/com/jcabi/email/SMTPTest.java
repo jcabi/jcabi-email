@@ -31,10 +31,9 @@ package com.jcabi.email;
 
 import com.dumbster.smtp.SimpleSmtpServer;
 import com.dumbster.smtp.SmtpMessage;
+import com.jcabi.immutable.Array;
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Iterator;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -57,16 +56,15 @@ public final class SMTPTest {
     public void sendsErrorsBySmtp() throws IOException {
         final int port = SMTPTest.port();
         final SimpleSmtpServer server = SimpleSmtpServer.start(port);
-        final Postman postman = new SMTP("localhost", port, "", "");
         try {
-            postman.send(
+            new SMTP("localhost", port, "", "").send(
                 new Envelope.MIME(
-                    Arrays.asList(
+                    new Array<Stamp>(
                         new StSender("FromTester <test-from@jcabi.com>"),
                         new StRecipient("ToTester <test-to@jcabi.com>"),
                         new StSubject("test subject: test me")
                     ),
-                    Collections.<Enclosure>singleton(
+                    new Array<Enclosure>(
                         new EnPlain("hello")
                     )
                 )
