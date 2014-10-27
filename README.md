@@ -17,7 +17,7 @@ Postman postman = new Postman.Default(
 postman.send(
   new Envelope.MIME()
     .with(new StSender("Yegor Bugayenko <yegor@jcabi.com>"))
-    .with(new StRecipient("Jeff Lebowski <jeff@gmail.com>"))
+    .with(new StRecipient("Jeff Lebowski", "jeff@gmail.com"))
     .with(new StSubject("dude, how are you?"))
     .with(new StBCC("my-boss@jcabi.com"))
     .with(new EnPlain("Hi, long time no see! :) Check my pic!"))
