@@ -52,6 +52,27 @@ import lombok.ToString;
 public interface Postman {
 
     /**
+     * Doesn't send anything, just logs to console.
+     * @since 1.1
+     */
+    Postman CONSOLE = new Postman() {
+        @Override
+        public void send(final Envelope env) throws IOException {
+            final Message msg = env.unwrap();
+            try {
+                Logger.info(
+                    this, "fake email \"%s\" from %s to %s",
+                    msg.getSubject(),
+                    Arrays.asList(msg.getFrom()),
+                    Arrays.asList(msg.getAllRecipients())
+                );
+            } catch (final MessagingException ex) {
+                throw new IOException(ex);
+            }
+        }
+    };
+
+    /**
      * Send this envelope.
      * @param env Envelope to send
      * @throws IOException If fails
