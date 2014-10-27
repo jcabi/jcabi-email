@@ -38,7 +38,6 @@ import com.jcabi.email.stamp.StCC;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
 import com.jcabi.email.stamp.StSubject;
-import com.jcabi.immutable.Array;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Iterator;
@@ -67,18 +66,15 @@ public final class SMTPTest {
         final SimpleSmtpServer server = SimpleSmtpServer.start(port);
         try {
             new Postman.Default(new SMTP("localhost", port, "", "")).send(
-                new Envelope.MIME(
-                    new Array<Stamp>(
-                        new StSender("from <test-from@jcabi.com>"),
-                        new StRecipient("to", "test-to@jcabi.com"),
-                        new StCC(new InternetAddress("cc <cc@jcabi.com>")),
-                        new StBCC("bcc <bcc@jcabi.com>"),
-                        new StSubject("test subject: test me")
-                    ),
-                    new Array<Enclosure>(
-                        new EnPlain("hello"),
-                        new EnHTML("<p>how are you?</p>")
-                    )
+                new Envelope.Safe(
+                    new Envelope.MIME()
+                        .with(new StSender("from <test-from@jcabi.com>"))
+                        .with(new StRecipient("to", "test-to@jcabi.com"))
+                        .with(new StCC(new InternetAddress("cc <c@jcabi.com>")))
+                        .with(new StBCC("bcc <bcc@jcabi.com>"))
+                        .with(new StSubject("test subject: test me"))
+                        .with(new EnPlain("hello"))
+                        .with(new EnHTML("<p>how are you?</p>"))
                 )
             );
         } finally {

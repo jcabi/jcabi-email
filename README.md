@@ -15,22 +15,19 @@ Postman postman = new Postman.Default(
   new SMTP("smtp.googlemail.com", 465, "username", "password")
 );
 postman.send(
-  new Envelope.MIME(
-    new Array<Stamp>(
-      new StSender("Yegor Bugayenko <yegor@jcabi.com>"),
-      new StRecipient("Jeff Lebowski <jeff@gmail.com>"),
-      new StSubject("dude, how are you?"),
-      new StBCC("my-boss@jcabi.com")
-    ),
-    new Array<Enclosure>(
-      new EnPlain("Hi, long time no see! :) Check my pic!"),
+  new Envelope.MIME()
+    .with(new StSender("Yegor Bugayenko <yegor@jcabi.com>"))
+    .with(new StRecipient("Jeff Lebowski <jeff@gmail.com>"))
+    .with(new StSubject("dude, how are you?"))
+    .with(new StBCC("my-boss@jcabi.com"))
+    .with(new EnPlain("Hi, long time no see! :) Check my pic!"))
+    .with(
       new EnBinary(
         new File("/tmp/picture.gif"),
         "my-picture.gif",
         "image/gif"
       )
     )
-  )
 );
 ```
 

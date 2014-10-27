@@ -32,12 +32,14 @@ package com.jcabi.email;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
 import com.jcabi.immutable.Array;
+import com.jcabi.log.Logger;
 import java.io.IOException;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import lombok.EqualsAndHashCode;
@@ -48,6 +50,9 @@ import lombok.ToString;
  *
  * <p>The best way is to use {@link com.jcabi.email.Envelope.MIME}, but
  * you can easily create your own implementation of it.
+ *
+ * <p>It is recommended to always wrap your envelope into
+ * {@link com.jcabi.email.Envelope.Safe}.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
@@ -143,6 +148,7 @@ public interface Envelope {
 
     /**
      * Strict envelope that fails if message is not valid.
+     * @since 1.3
      */
     @Immutable
     @ToString
@@ -178,6 +184,52 @@ public interface Envelope {
                     throw new IllegalStateException(
                         "subject is NULL"
                     );
+                }
+            } catch (final MessagingException ex) {
+                throw new IOException(ex);
+            }
+            return msg;
+        }
+    }
+
+    /**
+     * Safe envelope that adds missing parts to the message.
+     * @since 1.3
+     */
+    @Immutable
+    @ToString
+    @EqualsAndHashCode(of = "origin")
+    @Loggable(Loggable.DEBUG)
+    final class Safe implements Envelope {
+        /**
+         * Origin env.
+         */
+        private final transient Envelope origin;
+        /**
+         * Ctor.
+         * @param env Envelope
+         */
+        public Safe(final Envelope env) {
+            this.origin = env;
+        }
+        @Override
+        public Message unwrap() throws IOException {
+            final Message msg = this.origin.unwrap();
+            try {
+                if (msg.getAllRecipients() == null) {
+                    msg.addRecipient(
+                        Message.RecipientType.TO,
+                        new InternetAddress("to@example.com")
+                    );
+                    Logger.warn(this, "recipients were NULL, fake one set");
+                }
+                if (msg.getFrom() == null) {
+                    msg.setFrom(new InternetAddress("from@example.com"));
+                    Logger.warn(this, "senders were NULL, fake one set");
+                }
+                if (msg.getSubject() == null) {
+                    msg.setSubject(this.getClass().getCanonicalName());
+                    Logger.warn(this, "subject was NULL, fake one set");
                 }
             } catch (final MessagingException ex) {
                 throw new IOException(ex);
