@@ -89,6 +89,29 @@ postman.send(
 </dependency>
 +--
 
+  Well, you will also need these (in this specific order):
+
++--
+<dependency>
+  <groupId>javax.activation</groupId>
+  <artifactId>activation</artifactId>
+  <version>1.1.1</version>
+  <scope>runtime</scope>
+</dependency>
+<dependency>
+  <groupId>javax.mail</groupId>
+  <artifactId>mail</artifactId>
+  <version>1.5.0-b01</version>
+  <scope>runtime</scope>
+</dependency>
+<dependency>
+  <groupId>javax.mail</groupId>
+  <artifactId>mailapi</artifactId>
+  <version>1.4.3</version>
+  <scope>provided</scope>
+</dependency>
++--
+
 * Cutting Edge Version
 
   If you want to use current version of the product, you can do it with
