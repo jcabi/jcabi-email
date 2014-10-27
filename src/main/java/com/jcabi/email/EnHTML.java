@@ -37,7 +37,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * Plain enclosure in MIME envelope.
+ * HTML enclosure in MIME envelope.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
