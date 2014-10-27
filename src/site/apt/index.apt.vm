@@ -41,13 +41,14 @@ Object-Oriented Email Sending SDK
   It is as simple as this:
 
 +--
-import com.jcabi.email.enclosure.EnBinary;
-import com.jcabi.email.enclosure.EnPlain;
+import com.jcabi.immutable.Array;
 import com.jcabi.email.Enclosure;
 import com.jcabi.email.Envelope;
 import com.jcabi.email.Postmap;
 import com.jcabi.email.SMTP;
 import com.jcabi.email.Stamp;
+import com.jcabi.email.enclosure.EnBinary;
+import com.jcabi.email.enclosure.EnPlain;
 import com.jcabi.email.stamp.StBCC;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
