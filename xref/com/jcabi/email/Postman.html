@@ -92,7 +92,7 @@
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>      <a href="../../../com/jcabi/email/Postman.html">Postman</a> CONSOLE = <strong class="jxr_keyword">new</strong> <a href="../../../com/jcabi/email/Postman.html">Postman</a>() {
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>          @Override
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>          <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> send(<strong class="jxr_keyword">final</strong> <a href="../../../com/jcabi/email/Envelope.html">Envelope</a> env) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L87" href="#L87">87</a>              <strong class="jxr_keyword">final</strong> Message msg = env.unwrap();
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>              <strong class="jxr_keyword">final</strong> Message msg = <strong class="jxr_keyword">new</strong> Envelope.Strict(env).unwrap();
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>              <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>                  Logger.info(
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>                      <strong class="jxr_keyword">this</strong>, <span class="jxr_string">"fake email \&quot;%s\&quot; from %s to %s"</span>,
@@ -134,7 +134,7 @@
 <a class="jxr_linenumber" name="L126" href="#L126">126</a>         }
 <a class="jxr_linenumber" name="L127" href="#L127">127</a>         @Override
 <a class="jxr_linenumber" name="L128" href="#L128">128</a>         <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> send(<strong class="jxr_keyword">final</strong> <a href="../../../com/jcabi/email/Envelope.html">Envelope</a> env) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L129" href="#L129">129</a>             <strong class="jxr_keyword">final</strong> Message message = env.unwrap();
+<a class="jxr_linenumber" name="L129" href="#L129">129</a>             <strong class="jxr_keyword">final</strong> Message message = <strong class="jxr_keyword">new</strong> Envelope.Strict(env).unwrap();
 <a class="jxr_linenumber" name="L130" href="#L130">130</a>             <strong class="jxr_keyword">final</strong> Transport transport = <strong class="jxr_keyword">this</strong>.wire.connect();
 <a class="jxr_linenumber" name="L131" href="#L131">131</a>             <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L132" href="#L132">132</a>                 <strong class="jxr_keyword">final</strong> Address[] rcpts = message.getAllRecipients();
