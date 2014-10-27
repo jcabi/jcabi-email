@@ -38,7 +38,7 @@
                                                                     </ul>
                                                     </li>
                                                                                                                         <li >
-                            <span>                        <a href="apidocs-1.0/index.html" title="JavaDoc 1.0">JavaDoc 1.0</a>
+                            <span>                        <a href="apidocs-1.1/index.html" title="JavaDoc 1.1">JavaDoc 1.1</a>
         </span>
                                                                                                                                                                 <ul>
                                                                     </ul>
@@ -94,13 +94,13 @@
                             </div>
                             <ul class="badges">
                                 <li>
-                                    <strong itemprop="version">1.0</strong>
+                                    <strong itemprop="version">1.1</strong>
                                 </li>
                                 <li>
                                     
-                                    <time itemprop="datePublished" datetime="2014-10-26T07:21:42Z">
+                                    <time itemprop="datePublished" datetime="2014-10-27T10:10:40Z">
                                         
-                                        26-Oct-2014
+                                        27-Oct-2014
                                     </time>
                                 </li>
                                 <li class="menu-button">menu</li>
@@ -182,12 +182,32 @@ postman.send(
     )
   )
 );</pre></div>
-<p>The only dependency you need is (you can also download <a class="externalLink" href="http://repo1.maven.org/maven2/com/jcabi/jcabi-email/1.0/jcabi-email-1.0.jar"><tt>jcabi-email-1.0.jar</tt></a> and add it to the classpath):</p>
+<p>The only dependency you need is (you can also download <a class="externalLink" href="http://repo1.maven.org/maven2/com/jcabi/jcabi-email/1.1/jcabi-email-1.1.jar"><tt>jcabi-email-1.1.jar</tt></a> and add it to the classpath):</p>
 <div class="source">
 <pre>&lt;dependency&gt;
   &lt;groupId&gt;com.jcabi&lt;/groupId&gt;
   &lt;artifactId&gt;jcabi-email&lt;/artifactId&gt;
-  &lt;version&gt;1.0&lt;/version&gt;
+  &lt;version&gt;1.1&lt;/version&gt;
+&lt;/dependency&gt;</pre></div>
+<p>Well, you will also need these (in this specific order):</p>
+<div class="source">
+<pre>&lt;dependency&gt;
+  &lt;groupId&gt;javax.activation&lt;/groupId&gt;
+  &lt;artifactId&gt;activation&lt;/artifactId&gt;
+  &lt;version&gt;1.1.1&lt;/version&gt;
+  &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;javax.mail&lt;/groupId&gt;
+  &lt;artifactId&gt;mail&lt;/artifactId&gt;
+  &lt;version&gt;1.5.0-b01&lt;/version&gt;
+  &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;javax.mail&lt;/groupId&gt;
+  &lt;artifactId&gt;mailapi&lt;/artifactId&gt;
+  &lt;version&gt;1.4.3&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
 &lt;/dependency&gt;</pre></div>
 <div class="section">
 <h3><a name="Cutting_Edge_Version"></a>Cutting Edge Version</h3>
