@@ -110,4 +110,49 @@ public interface Envelope {
         }
     }
 
+    /**
+     * Strict envelope that fails if message is not valid.
+     */
+    @Immutable
+    @ToString
+    @EqualsAndHashCode(of = "origin")
+    @Loggable(Loggable.DEBUG)
+    final class Strict implements Envelope {
+        /**
+         * Origin env.
+         */
+        private final transient Envelope origin;
+        /**
+         * Ctor.
+         * @param env Envelope
+         */
+        public Strict(final Envelope env) {
+            this.origin = env;
+        }
+        @Override
+        public Message unwrap() throws IOException {
+            final Message msg = this.origin.unwrap();
+            try {
+                if (msg.getAllRecipients() == null) {
+                    throw new IllegalStateException(
+                        "list of recipients is NULL"
+                    );
+                }
+                if (msg.getFrom() == null) {
+                    throw new IllegalStateException(
+                        "list of senders is NULL"
+                    );
+                }
+                if (msg.getSubject() == null) {
+                    throw new IllegalStateException(
+                        "subject is NULL"
+                    );
+                }
+            } catch (final MessagingException ex) {
+                throw new IOException(ex);
+            }
+            return msg;
+        }
+    }
+
 }

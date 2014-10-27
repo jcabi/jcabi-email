@@ -84,7 +84,7 @@ public interface Postman {
     Postman CONSOLE = new Postman() {
         @Override
         public void send(final Envelope env) throws IOException {
-            final Message msg = env.unwrap();
+            final Message msg = new Envelope.Strict(env).unwrap();
             try {
                 Logger.info(
                     this, "fake email \"%s\" from %s to %s",
@@ -126,7 +126,7 @@ public interface Postman {
         }
         @Override
         public void send(final Envelope env) throws IOException {
-            final Message message = env.unwrap();
+            final Message message = new Envelope.Strict(env).unwrap();
             final Transport transport = this.wire.connect();
             try {
                 final Address[] rcpts = message.getAllRecipients();
