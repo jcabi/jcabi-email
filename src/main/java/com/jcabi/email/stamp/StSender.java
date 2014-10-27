@@ -74,7 +74,7 @@ public final class StSender implements Stamp {
      */
     public StSender(final String name, final String addr) {
         try {
-            this.email = new InternetAddress(name, addr, "UTF-8").toString();
+            this.email = new InternetAddress(addr, name, "UTF-8").toString();
         } catch (final UnsupportedEncodingException ex) {
             throw new IllegalStateException(ex);
         }
