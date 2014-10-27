@@ -79,15 +79,15 @@ public final class EnBinary implements Enclosure {
     }
 
     @Override
-    public MimeBodyPart part() throws IOException {
+    public MimeBodyPart part() throws MessagingException {
         final MimeBodyPart mime = new MimeBodyPart();
         try {
             mime.attachFile(new File(this.path));
-            mime.setFileName(this.name);
-            mime.addHeader("Content-Type", this.ctype);
-        } catch (final MessagingException ex) {
-            throw new IOException(ex);
+        } catch (final IOException ex) {
+            throw new IllegalStateException(ex);
         }
+        mime.setFileName(this.name);
+        mime.addHeader("Content-Type", this.ctype);
         return mime;
     }
 }

@@ -31,7 +31,6 @@ package com.jcabi.email;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
-import java.io.IOException;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import lombok.EqualsAndHashCode;
@@ -64,12 +63,8 @@ public final class StSubject implements Stamp {
     }
 
     @Override
-    public void attach(final Message message) throws IOException {
-        try {
-            message.setSubject(this.subject);
-        } catch (final MessagingException ex) {
-            throw new IOException(ex);
-        }
+    public void attach(final Message message) throws MessagingException {
+        message.setSubject(this.subject);
     }
 
 }

@@ -30,8 +30,8 @@
 package com.jcabi.email;
 
 import com.jcabi.aspects.Immutable;
-import java.io.IOException;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 
 /**
  * Stamp for a MIME envelope.
@@ -39,6 +39,11 @@ import javax.mail.Message;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
+ * @see com.jcabi.email.StRecipient
+ * @see com.jcabi.email.StSender
+ * @see com.jcabi.email.StCC
+ * @see com.jcabi.email.StBCC
+ * @see com.jcabi.email.StSubject
  */
 @Immutable
 public interface Stamp {
@@ -46,8 +51,8 @@ public interface Stamp {
     /**
      * Attach yourself to the message.
      * @param message Message to add to
-     * @throws IOException If fails
+     * @throws MessagingException If fails
      */
-    void attach(Message message) throws IOException;
+    void attach(Message message) throws MessagingException;
 
 }

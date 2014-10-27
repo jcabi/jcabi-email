@@ -46,6 +46,9 @@ import lombok.ToString;
 /**
  * Envelope.
  *
+ * <p>The best way is to use {@link com.jcabi.email.Envelope.MIME}, but
+ * you can easily create your own implementation of it.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0

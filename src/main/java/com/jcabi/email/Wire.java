@@ -39,6 +39,7 @@ import javax.mail.Transport;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
+ * @see com.jcabi.email.SMTP
  */
 @Immutable
 public interface Wire {

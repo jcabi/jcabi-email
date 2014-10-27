@@ -31,7 +31,6 @@ package com.jcabi.email;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import javax.mail.Address;
 import javax.mail.Message;
@@ -89,14 +88,10 @@ public final class StCC implements Stamp {
     }
 
     @Override
-    public void attach(final Message message) throws IOException {
-        try {
-            message.setRecipient(
-                Message.RecipientType.CC,
-                new InternetAddress(this.email)
-            );
-        } catch (final MessagingException ex) {
-            throw new IOException(ex);
-        }
+    public void attach(final Message message) throws MessagingException {
+        message.setRecipient(
+            Message.RecipientType.CC,
+            new InternetAddress(this.email)
+        );
     }
 }

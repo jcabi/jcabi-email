@@ -44,6 +44,31 @@ import lombok.ToString;
 /**
  * Postman.
  *
+ * <p>The best way to use it is to make an instance of
+ * {@link com.jcabi.email.Postman.Default}:
+ *
+ * <pre> Postman postman = new Postman.Default(
+ *   new SMTP("smtp.googlemail.com", 465, "username", "password")
+ * );
+ * postman.send(
+ *   new Envelope.MIME(
+ *     new Array&lt;Stamp&gt;(
+ *       new StSender("Yegor Bugayenko &lt;yegor@jcabi.com&gt;"),
+ *       new StRecipient("Jeff Lebowski &lt;jeff@gmail.com&gt;"),
+ *       new StSubject("dude, how are you?"),
+ *       new StBCC("my-boss@jcabi.com")
+ *     ),
+ *     new Array&lt;Enclosure&gt;(
+ *       new EnPlain("Hi, long time no see! :) Check my pic!"),
+ *       new EnBinary(
+ *         new File("/tmp/picture.gif"),
+ *         "my-picture.gif",
+ *         "image/gif"
+ *       )
+ *     )
+ *   )
+ * );</pre>
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0

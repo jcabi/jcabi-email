@@ -31,7 +31,6 @@ package com.jcabi.email;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
-import java.io.IOException;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 import lombok.EqualsAndHashCode;
@@ -64,14 +63,10 @@ public final class EnHTML implements Enclosure {
     }
 
     @Override
-    public MimeBodyPart part() throws IOException {
+    public MimeBodyPart part() throws MessagingException {
         final MimeBodyPart mime = new MimeBodyPart();
-        try {
-            mime.setText(this.text, "UTF-8");
-            mime.addHeader("Content-Type", "text/html");
-        } catch (final MessagingException ex) {
-            throw new IOException(ex);
-        }
+        mime.setText(this.text, "UTF-8");
+        mime.addHeader("Content-Type", "text/html");
         return mime;
     }
 

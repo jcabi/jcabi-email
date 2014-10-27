@@ -30,7 +30,7 @@
 package com.jcabi.email;
 
 import com.jcabi.aspects.Immutable;
-import java.io.IOException;
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 
 /**
@@ -39,6 +39,9 @@ import javax.mail.internet.MimeBodyPart;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
+ * @see com.jcabi.email.EnPlain
+ * @see com.jcabi.email.EnBinary
+ * @see com.jcabi.email.EnHTML
  */
 @Immutable
 public interface Enclosure {
@@ -46,8 +49,8 @@ public interface Enclosure {
     /**
      * Create a MIME body part.
      * @return MIME body part
-     * @throws IOException If fails
+     * @throws MessagingException If fails
      */
-    MimeBodyPart part() throws IOException;
+    MimeBodyPart part() throws MessagingException;
 
 }
