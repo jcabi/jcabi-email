@@ -27,30 +27,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jcabi.email;
-
-import com.jcabi.aspects.Immutable;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeBodyPart;
 
 /**
- * Enclosure in MIME envelope.
+ * Stamps.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 1.0
- * @see com.jcabi.email.enclosure.EnPlain
- * @see com.jcabi.email.enclosure.EnBinary
- * @see com.jcabi.email.enclosure.EnHTML
+ * @since 1.2
  */
-@Immutable
-public interface Enclosure {
-
-    /**
-     * Create a MIME body part.
-     * @return MIME body part
-     * @throws MessagingException If fails
-     */
-    MimeBodyPart part() throws MessagingException;
-
-}
+package com.jcabi.email.stamp;

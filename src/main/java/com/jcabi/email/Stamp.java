@@ -39,11 +39,11 @@ import javax.mail.MessagingException;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
- * @see com.jcabi.email.StRecipient
- * @see com.jcabi.email.StSender
- * @see com.jcabi.email.StCC
- * @see com.jcabi.email.StBCC
- * @see com.jcabi.email.StSubject
+ * @see com.jcabi.email.stamp.StRecipient
+ * @see com.jcabi.email.stamp.StSender
+ * @see com.jcabi.email.stamp.StCC
+ * @see com.jcabi.email.stamp.StBCC
+ * @see com.jcabi.email.stamp.StSubject
  */
 @Immutable
 public interface Stamp {

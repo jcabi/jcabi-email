@@ -27,10 +27,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jcabi.email;
+package com.jcabi.email.stamp;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
+import com.jcabi.email.Stamp;
 import java.io.UnsupportedEncodingException;
 import javax.mail.Address;
 import javax.mail.Message;
@@ -40,7 +41,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * Stamp for a MIME envelope, with a CC recipient.
+ * Stamp for a MIME envelope, with a sender.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
@@ -50,10 +51,10 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(of = "email")
 @Loggable(Loggable.DEBUG)
-public final class StCC implements Stamp {
+public final class StSender implements Stamp {
 
     /**
-     * Email to send to.
+     * Email to send from.
      */
     private final transient String email;
 
@@ -61,7 +62,7 @@ public final class StCC implements Stamp {
      * Ctor.
      * @param addr Address
      */
-    public StCC(final Address addr) {
+    public StSender(final Address addr) {
         this(addr.toString());
     }
 
@@ -71,7 +72,7 @@ public final class StCC implements Stamp {
      * @param addr His email
      * @since 1.1
      */
-    public StCC(final String name, final String addr) {
+    public StSender(final String name, final String addr) {
         try {
             this.email = new InternetAddress(name, addr, "UTF-8").toString();
         } catch (final UnsupportedEncodingException ex) {
@@ -83,15 +84,13 @@ public final class StCC implements Stamp {
      * Ctor.
      * @param addr Address
      */
-    public StCC(final String addr) {
+    public StSender(final String addr) {
         this.email = addr;
     }
 
     @Override
     public void attach(final Message message) throws MessagingException {
-        message.setRecipient(
-            Message.RecipientType.CC,
-            new InternetAddress(this.email)
-        );
+        message.setFrom(new InternetAddress(this.email));
     }
+
 }

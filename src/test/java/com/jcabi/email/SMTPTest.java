@@ -31,10 +31,18 @@ package com.jcabi.email;
 
 import com.dumbster.smtp.SimpleSmtpServer;
 import com.dumbster.smtp.SmtpMessage;
+import com.jcabi.email.enclosure.EnHTML;
+import com.jcabi.email.enclosure.EnPlain;
+import com.jcabi.email.stamp.StBCC;
+import com.jcabi.email.stamp.StCC;
+import com.jcabi.email.stamp.StRecipient;
+import com.jcabi.email.stamp.StSender;
+import com.jcabi.email.stamp.StSubject;
 import com.jcabi.immutable.Array;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Iterator;
+import javax.mail.internet.InternetAddress;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -51,22 +59,25 @@ public final class SMTPTest {
 
     /**
      * SMTP can send errors by email through SMTP.
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
     @Test
-    public void sendsErrorsBySmtp() throws IOException {
+    public void sendsErrorsBySmtp() throws Exception {
         final int port = SMTPTest.port();
         final SimpleSmtpServer server = SimpleSmtpServer.start(port);
         try {
             new Postman.Default(new SMTP("localhost", port, "", "")).send(
                 new Envelope.MIME(
                     new Array<Stamp>(
-                        new StSender("FromTester <test-from@jcabi.com>"),
-                        new StRecipient("ToTester <test-to@jcabi.com>"),
+                        new StSender("from <test-from@jcabi.com>"),
+                        new StRecipient("to", "test-to@jcabi.com"),
+                        new StCC(new InternetAddress("cc <cc@jcabi.com>")),
+                        new StBCC("bcc <bcc@jcabi.com>"),
                         new StSubject("test subject: test me")
                     ),
                     new Array<Enclosure>(
-                        new EnPlain("hello")
+                        new EnPlain("hello"),
+                        new EnHTML("<p>how are you?</p>")
                     )
                 )
             );

@@ -27,10 +27,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jcabi.email;
+package com.jcabi.email.stamp;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
+import com.jcabi.email.Stamp;
 import java.io.UnsupportedEncodingException;
 import javax.mail.Address;
 import javax.mail.Message;
@@ -40,7 +41,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * Stamp for a MIME envelope, with a sender.
+ * Stamp for a MIME envelope, with a BCC recipient.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
@@ -50,10 +51,10 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(of = "email")
 @Loggable(Loggable.DEBUG)
-public final class StSender implements Stamp {
+public final class StBCC implements Stamp {
 
     /**
-     * Email to send from.
+     * Email to send to.
      */
     private final transient String email;
 
@@ -61,7 +62,7 @@ public final class StSender implements Stamp {
      * Ctor.
      * @param addr Address
      */
-    public StSender(final Address addr) {
+    public StBCC(final Address addr) {
         this(addr.toString());
     }
 
@@ -71,7 +72,7 @@ public final class StSender implements Stamp {
      * @param addr His email
      * @since 1.1
      */
-    public StSender(final String name, final String addr) {
+    public StBCC(final String name, final String addr) {
         try {
             this.email = new InternetAddress(name, addr, "UTF-8").toString();
         } catch (final UnsupportedEncodingException ex) {
@@ -83,13 +84,15 @@ public final class StSender implements Stamp {
      * Ctor.
      * @param addr Address
      */
-    public StSender(final String addr) {
+    public StBCC(final String addr) {
         this.email = addr;
     }
 
     @Override
     public void attach(final Message message) throws MessagingException {
-        message.setFrom(new InternetAddress(this.email));
+        message.setRecipient(
+            Message.RecipientType.BCC,
+            new InternetAddress(this.email)
+        );
     }
-
 }

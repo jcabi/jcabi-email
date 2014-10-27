@@ -27,20 +27,18 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jcabi.email;
+package com.jcabi.email.stamp;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
-import java.io.UnsupportedEncodingException;
-import javax.mail.Address;
+import com.jcabi.email.Stamp;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * Stamp for a MIME envelope, with a BCC recipient.
+ * Stamp for a MIME envelope, with a subject.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
@@ -48,50 +46,26 @@ import lombok.ToString;
  */
 @Immutable
 @ToString
-@EqualsAndHashCode(of = "email")
+@EqualsAndHashCode(of = "subject")
 @Loggable(Loggable.DEBUG)
-public final class StBCC implements Stamp {
+public final class StSubject implements Stamp {
 
     /**
-     * Email to send to.
+     * Subject.
      */
-    private final transient String email;
-
-    /**
-     * Ctor.
-     * @param addr Address
-     */
-    public StBCC(final Address addr) {
-        this(addr.toString());
-    }
+    private final transient String subject;
 
     /**
      * Ctor.
-     * @param name Name of the recipient
-     * @param addr His email
-     * @since 1.1
+     * @param subj Subject
      */
-    public StBCC(final String name, final String addr) {
-        try {
-            this.email = new InternetAddress(name, addr, "UTF-8").toString();
-        } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
-        }
-    }
-
-    /**
-     * Ctor.
-     * @param addr Address
-     */
-    public StBCC(final String addr) {
-        this.email = addr;
+    public StSubject(final String subj) {
+        this.subject = subj;
     }
 
     @Override
     public void attach(final Message message) throws MessagingException {
-        message.setRecipient(
-            Message.RecipientType.BCC,
-            new InternetAddress(this.email)
-        );
+        message.setSubject(this.subject);
     }
+
 }

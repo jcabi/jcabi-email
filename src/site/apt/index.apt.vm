@@ -41,17 +41,17 @@ Object-Oriented Email Sending SDK
   It is as simple as this:
 
 +--
-import com.jcabi.email.EnBinary;
-import com.jcabi.email.EnPlain;
+import com.jcabi.email.enclosure.EnBinary;
+import com.jcabi.email.enclosure.EnPlain;
 import com.jcabi.email.Enclosure;
 import com.jcabi.email.Envelope;
 import com.jcabi.email.Postmap;
 import com.jcabi.email.SMTP;
 import com.jcabi.email.Stamp;
-import com.jcabi.email.StBCC;
-import com.jcabi.email.StRecipient;
-import com.jcabi.email.StSender;
-import com.jcabi.email.StSubject;
+import com.jcabi.email.stamp.StBCC;
+import com.jcabi.email.stamp.StRecipient;
+import com.jcabi.email.stamp.StSender;
+import com.jcabi.email.stamp.StSubject;
 
 Postman postman = new Postman.Default(
   new SMTP("smtp.googlemail.com", 465, "username", "password")
