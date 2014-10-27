@@ -35,6 +35,7 @@ import com.jcabi.log.Logger;
 import java.io.IOException;
 import java.util.Arrays;
 import javax.mail.Address;
+import javax.mail.Flags;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Transport;
@@ -150,6 +151,40 @@ public interface Postman {
             throws IOException {
             try {
                 transport.close();
+            } catch (final MessagingException ex) {
+                throw new IOException(ex);
+            }
+        }
+    }
+
+    /**
+     * Postman that ignores drafts.
+     */
+    @Immutable
+    @ToString
+    @EqualsAndHashCode(of = "origin")
+    @Loggable(Loggable.DEBUG)
+    final class NoDrafts implements Postman {
+        /**
+         * Original postman.
+         */
+        private final transient Postman origin;
+        /**
+         * Ctor.
+         * @param post Original postman
+         */
+        public NoDrafts(final Postman post) {
+            this.origin = post;
+        }
+        @Override
+        public void send(final Envelope env) throws IOException {
+            final Message message = env.unwrap();
+            try {
+                if (message.isSet(Flags.Flag.DRAFT)) {
+                    Logger.info(this, "message has DRAFT flag, ignoring");
+                } else {
+                    this.origin.send(env);
+                }
             } catch (final MessagingException ex) {
                 throw new IOException(ex);
             }
