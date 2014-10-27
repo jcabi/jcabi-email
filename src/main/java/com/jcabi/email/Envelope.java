@@ -81,6 +81,13 @@ public interface Envelope {
         private final transient Array<Enclosure> encs;
         /**
          * Ctor.
+         * @since 1.3
+         */
+        public MIME() {
+            this(new Array<Stamp>(), new Array<Enclosure>());
+        }
+        /**
+         * Ctor.
          * @param stmps Stamps
          * @param list List of enclosures
          */
@@ -107,6 +114,30 @@ public interface Envelope {
                 throw new IOException(ex);
             }
             return msg;
+        }
+        /**
+         * With this stamp.
+         * @param stamp Stamp
+         * @return MIME envelope
+         * @since 1.3
+         */
+        public Envelope.MIME with(final Stamp stamp) {
+            return new Envelope.MIME(
+                this.stamps.with(stamp),
+                this.encs
+            );
+        }
+        /**
+         * With this enclosure.
+         * @param enc Enclosure
+         * @return MIME envelope
+         * @since 1.3
+         */
+        public Envelope.MIME with(final Enclosure enc) {
+            return new Envelope.MIME(
+                this.stamps,
+                this.encs.with(enc)
+            );
         }
     }
 
