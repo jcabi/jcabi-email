@@ -32,6 +32,7 @@ package com.jcabi.email.stamp;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -55,10 +56,14 @@ public final class StRecipientTest {
         final Message msg = new MimeMessage(
             Session.getDefaultInstance(new Properties())
         );
-        new StRecipient("Jeff Lebowski", "jeff@gmail.com").attach(msg);
+        new StRecipient(
+            "Jeff Петровский", "jeff@gmail.com"
+        ).attach(msg);
         MatcherAssert.assertThat(
-            msg.getRecipients(Message.RecipientType.TO)[0].toString(),
-            Matchers.equalTo("Jeff Lebowski <jeff@gmail.com>")
+            new InternetAddress(
+                msg.getRecipients(Message.RecipientType.TO)[0].toString()
+            ).getAddress(),
+            Matchers.endsWith("@gmail.com")
         );
     }
 

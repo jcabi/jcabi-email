@@ -32,8 +32,10 @@ package com.jcabi.email.stamp;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
 import com.jcabi.email.Stamp;
+import java.io.UnsupportedEncodingException;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.internet.MimeUtility;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -65,7 +67,13 @@ public final class StSubject implements Stamp {
 
     @Override
     public void attach(final Message message) throws MessagingException {
-        message.setSubject(this.subject);
+        try {
+            message.setSubject(
+                MimeUtility.encodeText(this.subject, "UTF-8", "Q")
+            );
+        } catch (final UnsupportedEncodingException ex) {
+            throw new IllegalStateException(ex);
+        }
     }
 
 }
