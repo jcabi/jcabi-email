@@ -238,4 +238,30 @@ public interface Envelope {
         }
     }
 
+    /**
+     * Envelope that always returns the same message.
+     * @since 1.4
+     */
+    @Immutable
+    @ToString
+    @EqualsAndHashCode(of = "origin")
+    @Loggable(Loggable.DEBUG)
+    final class Constant implements Envelope {
+        /**
+         * Origin env.
+         */
+        private final transient Envelope origin;
+        /**
+         * Ctor.
+         * @param env Envelope
+         */
+        public Constant(final Envelope env) {
+            this.origin = env;
+        }
+        @Override
+        public Message unwrap() throws IOException {
+            return this.origin.unwrap();
+        }
+    }
+
 }
