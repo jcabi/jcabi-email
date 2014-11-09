@@ -27,10 +27,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jcabi.email;
+package com.jcabi.email.wire;
 
 import com.dumbster.smtp.SimpleSmtpServer;
 import com.dumbster.smtp.SmtpMessage;
+import com.jcabi.email.Envelope;
+import com.jcabi.email.Postman;
 import com.jcabi.email.enclosure.EnHTML;
 import com.jcabi.email.enclosure.EnPlain;
 import com.jcabi.email.stamp.StBCC;

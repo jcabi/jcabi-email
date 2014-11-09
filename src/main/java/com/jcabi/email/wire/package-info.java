@@ -27,28 +27,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jcabi.email;
-
-import com.jcabi.aspects.Immutable;
-import java.io.IOException;
-import javax.mail.Transport;
 
 /**
- * Wire used by a {@link Postman}.
+ * Wires.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 1.0
- * @see com.jcabi.email.wire.SMTP
+ * @since 1.4
  */
-@Immutable
-public interface Wire {
-
-    /**
-     * Make a transport.
-     * @return Transport
-     * @throws IOException If fails
-     */
-    Transport connect() throws IOException;
-
-}
+package com.jcabi.email.wire;
