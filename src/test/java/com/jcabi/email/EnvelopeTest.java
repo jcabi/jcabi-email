@@ -29,6 +29,9 @@
  */
 package com.jcabi.email;
 
+import java.util.Properties;
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -48,6 +51,9 @@ public final class EnvelopeTest {
     @Test
     public void cachesPreviousCall() throws Exception {
         final Envelope origin = Mockito.mock(Envelope.class);
+        Mockito.doReturn(
+            new MimeMessage(Session.getDefaultInstance(new Properties()))
+        ).when(origin).unwrap();
         final Envelope envelope = new Envelope.Constant(origin);
         envelope.unwrap();
         envelope.unwrap();
