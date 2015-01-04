@@ -7,7 +7,9 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/ueunlwvuxyiws57s/branch/master?svg=true)](https://ci.appveyor.com/project/yegor256/jcabi-email/branch/master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.jcabi/jcabi-email/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.jcabi/jcabi-email)
 
-More details are here: [email.jcabi.com](http://email.jcabi.com/)
+More details are here: [email.jcabi.com](http://email.jcabi.com/).
+This article explains how this library was designed:
+[How Immutability Helps](http://www.yegor256.com/2014/11/07/how-immutability-helps.html).
 
 It is an object-oriented email sending SDK for Java:
 
