@@ -29,11 +29,12 @@
  */
 package com.jcabi.email;
 
-import java.util.Properties;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
 import org.junit.Test;
 import org.mockito.Mockito;
+
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
 
 /**
  * Test case for {@link Envelope}.
