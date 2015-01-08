@@ -43,7 +43,6 @@ import lombok.ToString;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
- * @checkstyle MultipleStringLiteralsCheck
  */
 @Immutable
 @ToString
