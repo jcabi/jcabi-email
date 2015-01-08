@@ -49,6 +49,7 @@ import org.mockito.Mockito;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.4
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class EnvelopeTest {
 

@@ -95,10 +95,6 @@ public interface Envelope {
     @Loggable(Loggable.DEBUG)
     final class MIME implements Envelope {
         /**
-         * Original envelope.
-         */
-        private final transient Envelope origin;
-        /**
          * List of stamps.
          */
         private final transient Array<Stamp> stamps;
@@ -111,7 +107,7 @@ public interface Envelope {
          * @since 1.3
          */
         public MIME() {
-            this(Envelope.EMPTY, new Array<Stamp>(), new Array<Enclosure>());
+            this(new Array<Stamp>(), new Array<Enclosure>());
         }
         /**
          * Ctor.
@@ -119,7 +115,10 @@ public interface Envelope {
          * @since 1.5
          */
         public MIME(final Envelope env) {
-            this(env, new Array<Stamp>(), new Array<Enclosure>());
+            this(
+                Envelope.MIME.class.cast(env).stamps,
+                Envelope.MIME.class.cast(env).encs
+            );
         }
         /**
          * Ctor.
@@ -128,26 +127,12 @@ public interface Envelope {
          */
         public MIME(final Iterable<Stamp> stmps,
             final Iterable<Enclosure> list) {
-            this(
-                Envelope.EMPTY, new Array<Stamp>(stmps),
-                new Array<Enclosure>(list)
-            );
-        }
-        /**
-         * Ctor.
-         * @param env Original envelope
-         * @param stmps Stamps
-         * @param list List of enclosures
-         */
-        public MIME(final Envelope env, final Iterable<Stamp> stmps,
-            final Iterable<Enclosure> list) {
-            this.origin = env;
             this.stamps = new Array<Stamp>(stmps);
             this.encs = new Array<Enclosure>(list);
         }
         @Override
         public Message unwrap() throws IOException {
-            final Message msg = this.origin.unwrap();
+            final Message msg = Envelope.EMPTY.unwrap();
             final Multipart multi = new MimeMultipart("alternative");
             try {
                 for (final Enclosure enc : this.encs) {
@@ -170,7 +155,6 @@ public interface Envelope {
          */
         public Envelope.MIME with(final Stamp stamp) {
             return new Envelope.MIME(
-                this.origin,
                 this.stamps.with(stamp),
                 this.encs
             );
@@ -183,7 +167,6 @@ public interface Envelope {
          */
         public Envelope.MIME with(final Enclosure enc) {
             return new Envelope.MIME(
-                this.origin,
                 this.stamps,
                 this.encs.with(enc)
             );
