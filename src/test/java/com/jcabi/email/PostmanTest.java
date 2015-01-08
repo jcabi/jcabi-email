@@ -21,15 +21,15 @@ import com.jcabi.email.enclosure.EnHTML;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
 import com.jcabi.email.stamp.StSubject;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Transport;
+import javax.mail.*;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 
 public class PostmanTest {
@@ -45,8 +45,15 @@ public class PostmanTest {
         Mockito.doAnswer(new Answer() {
             @Override
             public Object answer(final InvocationOnMock invoc) throws Throwable {
-                final Message msg = (Message) invoc.getArguments()[0];
-                System.out.println("msg: " + msg.getContent());
+                Assert.assertTrue(invoc.getArguments()[0] instanceof MimeMessage);
+                final MimeMessage msg = (MimeMessage) invoc.getArguments()[0];
+                Assert.assertTrue(msg.getContent() instanceof Multipart);
+                final Multipart multipart = (Multipart) msg.getContent();
+                Assert.assertEquals(1, multipart.getCount());
+                Assert.assertTrue(multipart.getBodyPart(0) instanceof MimeBodyPart);
+                final MimeBodyPart bodyPart = (MimeBodyPart) multipart.getBodyPart(0);
+                Assert.assertEquals("UTF-8", bodyPart.getEncoding());
+                Assert.assertEquals("<html><body>привет</body></html>", bodyPart.getContent());
                 return null;
             }
         }).when(transport).sendMessage(Mockito.isA(Message.class),
