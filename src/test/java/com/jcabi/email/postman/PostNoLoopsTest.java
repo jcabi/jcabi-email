@@ -74,8 +74,7 @@ public final class PostNoLoopsTest {
         new PostNoLoops(post).send(
             new Envelope.MIME()
                 .with(new StRecipient("jeff@example.com"))
-                .with(new StSender("Walter", "walter@example.com")
-            )
+                .with(new StSender("Walter", "walter@example.com"))
         );
         Mockito.verify(post).send(Mockito.any(Envelope.class));
     }
