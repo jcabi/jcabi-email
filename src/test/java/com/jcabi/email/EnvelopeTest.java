@@ -29,9 +29,14 @@
  */
 package com.jcabi.email;
 
+import com.jcabi.email.stamp.StRecipient;
+import com.jcabi.email.stamp.StSender;
 import java.util.Properties;
+import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -58,6 +63,28 @@ public final class EnvelopeTest {
         envelope.unwrap();
         envelope.unwrap();
         Mockito.verify(origin, Mockito.times(1)).unwrap();
+    }
+
+    /**
+     * Envelope.MIME can wrap another envelope.
+     * @throws Exception If fails
+     */
+    @Test
+    public void wrapsAnotherEnvelope() throws Exception {
+        final Envelope origin = new Envelope.MIME().with(
+            new StSender("jack@example.com")
+        );
+        final Message message = new Envelope.MIME(origin).with(
+            new StRecipient("paul@example.com")
+        ).unwrap();
+        MatcherAssert.assertThat(
+            message.getAllRecipients().length,
+            Matchers.equalTo(1)
+        );
+        MatcherAssert.assertThat(
+            message.getFrom().length,
+            Matchers.equalTo(1)
+        );
     }
 
 }
