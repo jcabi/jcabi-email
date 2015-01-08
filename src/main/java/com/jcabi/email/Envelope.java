@@ -170,6 +170,7 @@ public interface Envelope {
          */
         public Envelope.MIME with(final Stamp stamp) {
             return new Envelope.MIME(
+                this.origin,
                 this.stamps.with(stamp),
                 this.encs
             );
@@ -182,6 +183,7 @@ public interface Envelope {
          */
         public Envelope.MIME with(final Enclosure enc) {
             return new Envelope.MIME(
+                this.origin,
                 this.stamps,
                 this.encs.with(enc)
             );
