@@ -29,6 +29,13 @@
  */
 package com.jcabi.email;
 
+import com.google.common.base.Joiner;
+import com.jcabi.email.enclosure.EnHTML;
+import com.jcabi.email.stamp.StRecipient;
+import com.jcabi.email.stamp.StSender;
+import com.jcabi.email.stamp.StSubject;
+import java.io.ByteArrayOutputStream;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -60,5 +67,29 @@ public final class EnvelopeTest {
         envelope.unwrap();
         Mockito.verify(origin, Mockito.times(1)).unwrap();
     }
+    /**
+     * Test for issue #8 (unicode/UTF-8 is broken).
+     * @throws Exception Thrown in case of problem of writing a message to
+     *  string.
+     */
+    @Test
+    public void handlesUnicodeCorrectly() throws Exception {
+        final Envelope.MIME env = new Envelope.MIME()
+            .with(new StSender("from <test-from@jcabi.com>"))
+            .with(new StRecipient("to", "test-to@jcabi.com"))
+            .with(new StSubject("test subject: test me"))
+            .with(new EnHTML("<html><body>привет</body></html>"));
 
+        final ByteArrayOutputStream stream =
+            new ByteArrayOutputStream();
+        env.unwrap().writeTo(stream);
+        final String msgtxt = stream.toString();
+        Assert.assertTrue(msgtxt.contains(
+            "Content-Type: text/html;charset=\"utf-8\""));
+        Assert.assertTrue(msgtxt.contains(
+            "Content-Transfer-Encoding: quoted-printable"));
+        Assert.assertTrue(msgtxt.contains(
+            Joiner.on("").join("<html><body>",
+                "=D0=BF=D1=80=D0=B8=D0=B2=D0=B5=D1=82</body></html>")));
+    }
 }
