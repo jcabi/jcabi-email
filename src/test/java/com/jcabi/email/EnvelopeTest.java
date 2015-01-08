@@ -29,10 +29,13 @@
  */
 package com.jcabi.email;
 
+import com.jcabi.email.enclosure.EnPlain;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
+import java.io.ByteArrayOutputStream;
 import java.util.Properties;
 import javax.mail.Message;
+import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import org.hamcrest.MatcherAssert;
@@ -84,6 +87,29 @@ public final class EnvelopeTest {
         MatcherAssert.assertThat(
             message.getFrom().length,
             Matchers.equalTo(1)
+        );
+    }
+
+    /**
+     * Envelope.MIME can wrap another envelope with enclosures.
+     * @throws Exception If fails
+     */
+    @Test
+    public void wrapsAnotherEnvelopeWithEnclosures() throws Exception {
+        final Envelope origin = new Envelope.MIME().with(
+            new EnPlain("first enclosure")
+        );
+        final Message message = new Envelope.MIME(origin).with(
+            new EnPlain("second enclosure")
+        ).unwrap();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Multipart.class.cast(message.getContent()).writeTo(baos);
+        MatcherAssert.assertThat(
+            baos.toString(),
+            Matchers.allOf(
+                Matchers.containsString("first"),
+                Matchers.containsString("second")
+            )
         );
     }
 
