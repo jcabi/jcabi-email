@@ -29,13 +29,10 @@
  */
 package com.jcabi.email.postman;
 
-import com.jcabi.email.Enclosure;
 import com.jcabi.email.Envelope;
 import com.jcabi.email.Postman;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
-import java.util.Arrays;
-import java.util.Collections;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -53,18 +50,15 @@ public final class PostNoLoopsTest {
      * @throws Exception If fails
      */
     @Test
+    @SuppressWarnings("unchecked")
     public void ignoresLoopMessages() throws Exception {
         final Postman post = Mockito.mock(Postman.class);
         final String email = "test@example.com";
         new PostNoLoops(post).send(
-            new Envelope.MIME(
-                Arrays.asList(
-                    new StRecipient(email),
-                    new StRecipient("hello@example.com"),
-                    new StSender("Jeff", email)
-                ),
-                Collections.<Enclosure>emptyList()
-            )
+            new Envelope.MIME()
+                .with(new StRecipient(email))
+                .with(new StRecipient("hello@example.com"))
+                .with(new StSender("Jeff", email))
         );
         Mockito.verify(post, Mockito.never()).send(Mockito.any(Envelope.class));
     }
@@ -74,15 +68,13 @@ public final class PostNoLoopsTest {
      * @throws Exception If fails
      */
     @Test
+    @SuppressWarnings("unchecked")
     public void doesntTouchNormalMessages() throws Exception {
         final Postman post = Mockito.mock(Postman.class);
         new PostNoLoops(post).send(
-            new Envelope.MIME(
-                Arrays.asList(
-                    new StRecipient("jeff@example.com"),
-                    new StSender("Walter", "walter@example.com")
-                ),
-                Collections.<Enclosure>emptyList()
+            new Envelope.MIME()
+                .with(new StRecipient("jeff@example.com"))
+                .with(new StSender("Walter", "walter@example.com")
             )
         );
         Mockito.verify(post).send(Mockito.any(Envelope.class));
