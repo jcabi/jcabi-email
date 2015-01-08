@@ -67,8 +67,9 @@ public final class EnHTML implements Enclosure {
     @Override
     public MimeBodyPart part() throws MessagingException {
         final MimeBodyPart mime = new MimeBodyPart();
-        mime.setContent(this.text, "text/html;charset=\"utf-8\"");
-        mime.addHeader("Content-Type", "text/html;charset=\"utf-8\"");
+        final String ctype = "text/html;charset=\"utf-8\"";
+        mime.setContent(this.text, ctype);
+        mime.addHeader("Content-Type", ctype);
         return mime;
     }
 
