@@ -29,18 +29,18 @@
  */
 package com.jcabi.email;
 
+import java.io.ByteArrayOutputStream;
+import java.util.Properties;
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
 import com.google.common.base.Joiner;
 import com.jcabi.email.enclosure.EnHTML;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
 import com.jcabi.email.stamp.StSubject;
-import java.io.ByteArrayOutputStream;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
-import java.util.Properties;
 
 /**
  * Test case for {@link Envelope}.
