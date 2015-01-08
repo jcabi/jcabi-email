@@ -53,7 +53,6 @@ public class PostmanTest {
                     new ByteArrayOutputStream();
                 msg.writeTo(stream);
                 final String msgtxt = stream.toString();
-                Assert.assertEquals("", msgtxt);
                 Assert.assertTrue(msgtxt.contains(
                     "Content-Type: text/html;charset=\"utf-8\""));
                 Assert.assertTrue(msgtxt.contains(
