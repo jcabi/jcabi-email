@@ -27,72 +27,65 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jcabi.email.stamp;
+package com.jcabi.email.postman;
 
-import com.jcabi.aspects.Immutable;
-import com.jcabi.aspects.Loggable;
-import com.jcabi.email.Stamp;
-import java.io.UnsupportedEncodingException;
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import com.jcabi.email.Enclosure;
+import com.jcabi.email.Envelope;
+import com.jcabi.email.Postman;
+import com.jcabi.email.stamp.StRecipient;
+import com.jcabi.email.stamp.StSender;
+import java.util.Arrays;
+import java.util.Collections;
+import org.junit.Test;
+import org.mockito.Mockito;
 
 /**
- * Stamp for a MIME envelope, with a recipient.
+ * Test case for {@link PostNoLoops}.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 1.0
+ * @since 1.6
  */
-@Immutable
-@ToString
-@EqualsAndHashCode(of = "email")
-@Loggable(Loggable.DEBUG)
-public final class StRecipient implements Stamp {
+public final class PostNoLoopsTest {
 
     /**
-     * Email to send to.
+     * PostNoLoops can ignore messages.
+     * @throws Exception If fails
      */
-    private final transient String email;
-
-    /**
-     * Ctor.
-     * @param addr Address
-     */
-    public StRecipient(final Address addr) {
-        this(addr.toString());
-    }
-
-    /**
-     * Ctor.
-     * @param name Name of the recipient
-     * @param addr His email
-     * @since 1.1
-     */
-    public StRecipient(final String name, final String addr) {
-        try {
-            this.email = new InternetAddress(addr, name, "UTF-8").toString();
-        } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
-        }
-    }
-
-    /**
-     * Ctor.
-     * @param addr Address
-     */
-    public StRecipient(final String addr) {
-        this.email = addr;
-    }
-
-    @Override
-    public void attach(final Message message) throws MessagingException {
-        message.addRecipient(
-            Message.RecipientType.TO,
-            new InternetAddress(this.email)
+    @Test
+    public void ignoresLoopMessages() throws Exception {
+        final Postman post = Mockito.mock(Postman.class);
+        final String email = "test@example.com";
+        new PostNoLoops(post).send(
+            new Envelope.MIME(
+                Arrays.asList(
+                    new StRecipient(email),
+                    new StRecipient("hello@example.com"),
+                    new StSender("Jeff", email)
+                ),
+                Collections.<Enclosure>emptyList()
+            )
         );
+        Mockito.verify(post, Mockito.never()).send(Mockito.any(Envelope.class));
     }
+
+    /**
+     * PostNoLoops can pass normal messages through.
+     * @throws Exception If fails
+     */
+    @Test
+    public void doesntTouchNormalMessages() throws Exception {
+        final Postman post = Mockito.mock(Postman.class);
+        new PostNoLoops(post).send(
+            new Envelope.MIME(
+                Arrays.asList(
+                    new StRecipient("jeff@example.com"),
+                    new StSender("Walter", "walter@example.com")
+                ),
+                Collections.<Enclosure>emptyList()
+            )
+        );
+        Mockito.verify(post).send(Mockito.any(Envelope.class));
+    }
+
 }

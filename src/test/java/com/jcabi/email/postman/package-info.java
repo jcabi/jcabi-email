@@ -27,72 +27,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jcabi.email.stamp;
-
-import com.jcabi.aspects.Immutable;
-import com.jcabi.aspects.Loggable;
-import com.jcabi.email.Stamp;
-import java.io.UnsupportedEncodingException;
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
- * Stamp for a MIME envelope, with a recipient.
+ * Postmen, tests.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 1.0
+ * @since 1.6
  */
-@Immutable
-@ToString
-@EqualsAndHashCode(of = "email")
-@Loggable(Loggable.DEBUG)
-public final class StRecipient implements Stamp {
-
-    /**
-     * Email to send to.
-     */
-    private final transient String email;
-
-    /**
-     * Ctor.
-     * @param addr Address
-     */
-    public StRecipient(final Address addr) {
-        this(addr.toString());
-    }
-
-    /**
-     * Ctor.
-     * @param name Name of the recipient
-     * @param addr His email
-     * @since 1.1
-     */
-    public StRecipient(final String name, final String addr) {
-        try {
-            this.email = new InternetAddress(addr, name, "UTF-8").toString();
-        } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
-        }
-    }
-
-    /**
-     * Ctor.
-     * @param addr Address
-     */
-    public StRecipient(final String addr) {
-        this.email = addr;
-    }
-
-    @Override
-    public void attach(final Message message) throws MessagingException {
-        message.addRecipient(
-            Message.RecipientType.TO,
-            new InternetAddress(this.email)
-        );
-    }
-}
+package com.jcabi.email.postman;
