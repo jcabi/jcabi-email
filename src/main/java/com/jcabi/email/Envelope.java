@@ -67,6 +67,19 @@ import lombok.ToString;
 public interface Envelope {
 
     /**
+     * Empty (always returns an empty MIME message).
+     * @since 1.5
+     */
+    Envelope EMPTY = new Envelope() {
+        @Override
+        public Message unwrap() {
+            return new MimeMessage(
+                Session.getDefaultInstance(new Properties())
+            );
+        }
+    };
+
+    /**
      * Get a message out of it.
      * @return Message to send
      * @throws IOException If fails
@@ -98,6 +111,17 @@ public interface Envelope {
         }
         /**
          * Ctor.
+         * @param env Original envelope
+         * @since 1.5
+         */
+        public MIME(final Envelope env) {
+            this(
+                Envelope.MIME.class.cast(env).stamps,
+                Envelope.MIME.class.cast(env).encs
+            );
+        }
+        /**
+         * Ctor.
          * @param stmps Stamps
          * @param list List of enclosures
          */
@@ -108,9 +132,7 @@ public interface Envelope {
         }
         @Override
         public Message unwrap() throws IOException {
-            final Message msg = new MimeMessage(
-                Session.getDefaultInstance(new Properties())
-            );
+            final Message msg = Envelope.EMPTY.unwrap();
             final Multipart multi = new MimeMultipart("alternative");
             try {
                 for (final Enclosure enc : this.encs) {
