@@ -31,19 +31,19 @@ package com.jcabi.email;
 
 import com.google.common.base.Joiner;
 import com.jcabi.email.enclosure.EnHTML;
+import com.jcabi.email.enclosure.EnPlain;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
 import com.jcabi.email.stamp.StSubject;
-import com.jcabi.email.enclosure.EnPlain;
 import java.io.ByteArrayOutputStream;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
-import org.junit.Assert;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
