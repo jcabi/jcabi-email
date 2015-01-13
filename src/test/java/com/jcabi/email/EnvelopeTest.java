@@ -74,7 +74,9 @@ public final class EnvelopeTest {
     }
 
     /**
-     * Test for issue #8 (unicode/UTF-8 is broken).
+     * Verifies that the encoding of the mail is set correctly and - as a
+     *  consequence - non-Latin (e. g. Cyrillic) characters are displayed
+     *  correctly in the received e-mail.
      * @throws Exception Thrown in case of problem of writing a message to
      *  string.
      */
