@@ -43,7 +43,6 @@ import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -91,21 +90,17 @@ public final class EnvelopeTest {
             new ByteArrayOutputStream();
         env.unwrap().writeTo(stream);
         final String msgtxt = stream.toString();
-        Assert.assertTrue(
-            msgtxt.contains(
-                "Content-Type: text/html;charset=\"utf-8\""
-            )
-        );
-        Assert.assertTrue(
-            msgtxt.contains(
-                "Content-Transfer-Encoding: quoted-printable"
-            )
-        );
-        Assert.assertTrue(
-            msgtxt.contains(
-                Joiner.on("").join(
-                    "<html><body>",
-                    "=D0=BF=D1=80=D0=B8=D0=B2=D0=B5=D1=82</body></html>"
+        MatcherAssert.assertThat(
+            msgtxt,            Matchers.allOf(
+                Matchers.containsString(
+                    "Content-Type: text/html;charset=\"utf-8\""),
+                Matchers.containsString(
+                    "Content-Transfer-Encoding: quoted-printable"
+                ),
+                Matchers.containsString(
+                    Joiner.on("").join(
+                        "<html><body>",
+                        "=D0=BF=D1=80=D0=B8=D0=B2=D0=B5=D1=82</body></html>")
                 )
             )
         );
