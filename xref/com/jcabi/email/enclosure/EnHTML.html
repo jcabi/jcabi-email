@@ -74,12 +74,13 @@
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>      @Override
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>      <strong class="jxr_keyword">public</strong> MimeBodyPart part() <strong class="jxr_keyword">throws</strong> MessagingException {
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>          <strong class="jxr_keyword">final</strong> MimeBodyPart mime = <strong class="jxr_keyword">new</strong> MimeBodyPart();
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>          mime.setText(<strong class="jxr_keyword">this</strong>.text, <span class="jxr_string">"UTF-8"</span>);
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>          mime.addHeader(<span class="jxr_string">"Content-Type"</span>, <span class="jxr_string">"text/html"</span>);
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>          <strong class="jxr_keyword">return</strong> mime;
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>      }
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>  
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>  }
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>          <strong class="jxr_keyword">final</strong> String ctype = <span class="jxr_string">"text/html;charset=\&quot;utf-8\&quot;"</span>;
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>          mime.setContent(<strong class="jxr_keyword">this</strong>.text, ctype);
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>          mime.addHeader(<span class="jxr_string">"Content-Type"</span>, ctype);
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>          <strong class="jxr_keyword">return</strong> mime;
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>      }
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>  
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2012&#x2013;2015 <a href="http://www.jcabi.com">jcabi.com</a>. All rights reserved.</div>
