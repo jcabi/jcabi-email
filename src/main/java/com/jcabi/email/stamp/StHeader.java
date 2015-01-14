@@ -62,13 +62,13 @@ public final class StHeader implements Stamp {
 
     /**
      * Ctor.
-     * @param hname Name of header
-     * @param hvalue Value to add under header's name
+     * @param nme Name of header
+     * @param val Value to add under header's name
      * @since 1.1
      */
-    public StHeader(final String hname, final String hvalue) {
-        this.name = hname;
-        this.value = hvalue;
+    public StHeader(final String nme, final String val) {
+        this.name = nme;
+        this.value = val;
     }
 
     @Override
