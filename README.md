@@ -6,6 +6,7 @@
 [![Build Status](https://travis-ci.org/jcabi/jcabi-email.svg?branch=master)](https://travis-ci.org/jcabi/jcabi-email)
 [![Build status](https://ci.appveyor.com/api/projects/status/ueunlwvuxyiws57s/branch/master?svg=true)](https://ci.appveyor.com/project/yegor256/jcabi-email/branch/master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.jcabi/jcabi-email/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.jcabi/jcabi-email)
+[![JavaDoc](https://img.shields.io/badge/javadoc-html-blue.svg)](http://www.javadoc.io/doc/com.jcabi/jcabi-email)
 
 More details are here: [email.jcabi.com](http://email.jcabi.com/).
 This article explains how this library was designed:
