@@ -40,6 +40,7 @@ import java.util.Properties;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import javax.mail.Flags;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -308,6 +309,38 @@ public interface Envelope {
             } catch (final ExecutionException ex) {
                 throw new IOException(ex);
             }
+        }
+    }
+
+    /**
+     * Envelope that adds DRAFT flag to the message.
+     * @since 1.7
+     */
+    @Immutable
+    @ToString
+    @EqualsAndHashCode(of = "env")
+    @Loggable(Loggable.DEBUG)
+    final class Draft implements Envelope {
+        /**
+         * Origin env.
+         */
+        private final transient Envelope env;
+        /**
+         * Ctor.
+         * @param origin Envelope
+         */
+        public Draft(final Envelope origin) {
+            this.env = origin;
+        }
+        @Override
+        public Message unwrap() throws IOException {
+            final Message msg = this.env.unwrap();
+            try {
+                msg.setFlag(Flags.Flag.DRAFT, true);
+            } catch (final MessagingException ex) {
+                throw new IOException(ex);
+            }
+            return msg;
         }
     }
 
