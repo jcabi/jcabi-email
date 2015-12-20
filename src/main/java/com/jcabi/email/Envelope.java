@@ -278,7 +278,6 @@ public interface Envelope {
         /**
          * Guava cache.
          */
-        @SuppressWarnings("PMD.UnusedPrivateField")
         private static final Cache<Envelope, Message> CACHE =
             CacheBuilder.newBuilder()
                 .expireAfterWrite(1L, TimeUnit.HOURS)
