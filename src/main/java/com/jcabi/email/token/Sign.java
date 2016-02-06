@@ -27,95 +27,92 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jcabi.email.wire;
+package com.jcabi.email.token;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
-import com.jcabi.email.Wire;
-import com.jcabi.log.Logger;
-import java.io.IOException;
-import java.lang.Integer;
+import com.jcabi.email.Protocol;
+import com.jcabi.email.Token;
+import java.util.Map;
 import java.util.Properties;
-import javax.mail.MessagingException;
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-import javax.mail.Transport;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * SMTP postman with SSL.
- *
+ * User signature to network node.
  * @author Piotr Kotlicki (piotr.kotlicki@gmail.com)
  * @version $Id$
- * @since 1.20.1
+ * @since 1.0
  */
 @Immutable
 @ToString
-@EqualsAndHashCode(of = { "host", "port", "user", "password" })
+@EqualsAndHashCode(of = {"user", "password"})
 @Loggable(Loggable.DEBUG)
-public final class SMTPS implements Wire {
+public final class Sign implements Token {
 
     /**
-     * SMTP host.
-     */
-    private final transient String host;
-
-    /**
-     * SMTP port.
-     */
-    private final transient int port;
-
-    /**
-     * SMTP user name.
+     * User name with access.
      */
     private final transient String user;
 
     /**
-     * SMTP password.
+     * User's password.
      */
     private final transient String password;
 
     /**
      * Public ctor.
-     * @param hst SMTP Host
-     * @param prt SMTP Port
-     * @param usr SMTP user name
-     * @param pwd SMTP password
-     * @checkstyle ParameterNumberCheck (6 lines)
+     * @param usr User name with access
+     * @param pwd User's password
      */
-    public SMTPS(final String hst, final int prt,
-        final String usr, final String pwd) {
-        this.host = hst;
-        this.port = prt;
+    public Sign(final String usr, final String pwd) {
         this.user = usr;
         this.password = pwd;
     }
 
     @Override
-    public Transport connect() throws IOException {
+    public Session access(final Protocol protocol) {
         final Properties props = new Properties();
-        props.setProperty("mail.smtp.auth", "true");
-        props.setProperty("mail.smtp.ssl.checkserveridentity", "true");
-        props.setProperty(
-            "mail.smtp.socketFactory.class",
-            "javax.net.ssl.SSLSocketFactory"
+        for (final Map.Entry<String, String> entry : protocol.entries()
+            .entrySet()) {
+            props.setProperty(entry.getKey(), entry.getValue());
+        }
+        return Session.getInstance(
+            props,
+            new Verification(this.user, this.password)
         );
-        props.setProperty(
-            "mail.smtp.socketFactory.port",
-            Integer.toString(this.port)
-        );
-        props.setProperty("mail.smtp.socketFactory.fallback", "false");
-        final Session session = Session.getInstance(props);
-        try {
-            final Transport transport = session.getTransport("smtp");
-            transport.connect(this.host, this.port, this.user, this.password);
-            Logger.info(
-                this, "sending email through %s:%s as %s...",
-                this.host, this.port, this.user
-            );
-            return transport;
-        } catch (final MessagingException ex) {
-            throw new IOException(ex);
+    }
+
+    /**
+     * Authenticating credentials.
+     */
+    class Verification extends Authenticator {
+        /**
+         * User name.
+         */
+        private final transient String user;
+        /**
+         * User password.
+         */
+        private final transient String password;
+
+        /**
+         * Public ctor.
+         * @param usr User name
+         * @param pwd User password
+         */
+        public Verification(final String usr, final String pwd) {
+            super();
+            this.user = usr;
+            this.password = pwd;
+        }
+
+        @Override
+        protected PasswordAuthentication getPasswordAuthentication() {
+            return new PasswordAuthentication(this.user, this.password);
         }
     }
 }

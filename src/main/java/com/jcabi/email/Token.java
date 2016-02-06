@@ -27,48 +27,21 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jcabi.email.wire;
+package com.jcabi.email;
 
-import com.jcabi.aspects.Immutable;
-import com.jcabi.aspects.Loggable;
-import com.jcabi.email.Wire;
-import java.io.IOException;
-import javax.mail.MessagingException;
 import javax.mail.Session;
-import javax.mail.Transport;
 
 /**
- * SMTP postman.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Credentials required to access net protocol.
+ * @author Piotr Kotlicki (piotr.kotlicki@gmail.com)
  * @version $Id$
  * @since 1.0
  */
-@Immutable
-@Loggable(Loggable.DEBUG)
-public final class SMTP implements Wire {
-
+public interface Token {
     /**
-     * SMTP password.
+     * Access for given protocol.
+     * @param protocol Protocol.
+     * @return Session.
      */
-    private final transient Session session;
-
-    /**
-     * Public ctor.
-     * @param sess Session.
-     */
-    public SMTP(final Session sess) {
-        this.session = sess;
-    }
-
-    @Override
-    public Transport connect() throws IOException {
-        try {
-            final Transport transport = this.session.getTransport("smtp");
-            transport.connect();
-            return transport;
-        } catch (final MessagingException ex) {
-            throw new IOException(ex);
-        }
-    }
-
+    Session access(Protocol protocol);
 }
