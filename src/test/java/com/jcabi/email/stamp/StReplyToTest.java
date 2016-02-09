@@ -55,12 +55,13 @@ public final class StReplyToTest {
         final Message msg = new MimeMessage(
             Session.getDefaultInstance(new Properties())
         );
-        new StReplyTo("john.doe@testmail.com").attach(msg);
+        final String replyto = "john.doe@testmail.com";
+        new StReplyTo(replyto).attach(msg);
         MatcherAssert.assertThat(
             new InternetAddress(
                 msg.getReplyTo()[0].toString()
             ).getAddress(),
-            Matchers.containsString("doe@testmail.com")
+            Matchers.equalTo(replyto)
         );
     }
 }
