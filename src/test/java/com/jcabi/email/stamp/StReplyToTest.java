@@ -39,7 +39,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link com.jcabi.email.stamp.StReplyTo}.
+ * Test case for {@link StReplyTo}.
  *
  * @author Mihai Andronache (amihaiemil@gmail.com)
  * @version $Id$
