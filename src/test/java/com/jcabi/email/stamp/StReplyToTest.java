@@ -43,6 +43,7 @@ import org.junit.Test;
  *
  * @author Mihai Andronache (amihaiemil@gmail.com)
  * @version $Id$
+ * @since 1.8
  */
 public final class StReplyToTest {
 
@@ -55,13 +56,13 @@ public final class StReplyToTest {
         final Message msg = new MimeMessage(
             Session.getDefaultInstance(new Properties())
         );
-        final String replyto = "john.doe@testmail.com";
-        new StReplyTo(replyto).attach(msg);
+        final String address = "john.doe@testmail.com";
+        new StReplyTo(address).attach(msg);
         MatcherAssert.assertThat(
             new InternetAddress(
                 msg.getReplyTo()[0].toString()
             ).getAddress(),
-            Matchers.equalTo(replyto)
+            Matchers.equalTo(address)
         );
     }
 }
