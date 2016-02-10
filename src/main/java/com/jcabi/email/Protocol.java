@@ -32,6 +32,7 @@ package com.jcabi.email;
 import com.google.common.collect.ImmutableMap;
 import com.jcabi.aspects.Immutable;
 import java.util.Map;
+import javax.net.ssl.SSLSocketFactory;
 
 /**
  * Mail network protocol.
@@ -118,7 +119,7 @@ public interface Protocol {
                 .put("mail.smtp.ssl.checkserveridentity", TRUE)
                 .put(
                     "mail.smtp.socketFactory.class",
-                    "javax.net.ssl.SSLSocketFactory"
+                    SSLSocketFactory.class.getName()
                 )
                 .put(
                     "mail.smtp.socketFactory.port",
