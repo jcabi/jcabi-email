@@ -43,6 +43,7 @@ import lombok.ToString;
  * Stamp for a MIME envelope, with a replyTo.
  *
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
+ * @author Mihai Andronache (amihaiemil@gmail.com)
  * @version $Id$
  * @since 2.31
  */
