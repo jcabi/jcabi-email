@@ -41,7 +41,7 @@ import com.jcabi.email.stamp.StCC;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
 import com.jcabi.email.stamp.StSubject;
-import com.jcabi.email.token.Sign;
+import com.jcabi.email.token.Token;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Iterator;
@@ -70,7 +70,7 @@ public final class SMTPTest {
         try {
             new Postman.Default(
                 new SMTP(
-                    new Sign("", "")
+                    new Token("", "")
                         .access(new Protocol.SMTP("localhost", port))
                 )
             ).send(

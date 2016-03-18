@@ -44,11 +44,6 @@ import javax.net.ssl.SSLSocketFactory;
 public interface Protocol {
 
     /**
-     * Check flag.
-     */
-    String TRUE = "true";
-
-    /**
      * Guarantee of access for protocol.
      * @return Entry parameters.
      */
@@ -57,7 +52,7 @@ public interface Protocol {
     /**
      * SNMP protocol.
      */
-    class SMTP implements Protocol {
+    final class SMTP implements Protocol {
         /**
          * SMTP host.
          */
@@ -81,7 +76,7 @@ public interface Protocol {
         @Override
         public Map<String, String> entries() {
             return new ImmutableMap.Builder<String, String>()
-                .put("mail.smtp.auth", TRUE)
+                .put("mail.smtp.auth", Boolean.TRUE.toString())
                 .put("mail.smtp.host", this.host)
                 .put("mail.smtp.port", Integer.toString(this.port))
                 .build();
@@ -91,7 +86,7 @@ public interface Protocol {
     /**
      * SMTPS protocol.
      */
-    class SMTPS implements Protocol {
+    final class SMTPS implements Protocol {
         /**
          * SMTPS host.
          */
@@ -115,17 +110,17 @@ public interface Protocol {
         @Override
         public Map<String, String> entries() {
             return new ImmutableMap.Builder<String, String>()
-                .putAll(new SMTP(this.host, this.port).entries())
-                .put("mail.smtp.ssl.checkserveridentity", TRUE)
+                .putAll(new Protocol.SMTP(this.host, this.port).entries())
                 .put(
+                    "mail.smtp.ssl.checkserveridentity",
+                    Boolean.TRUE.toString()
+                ).put(
                     "mail.smtp.socketFactory.class",
                     SSLSocketFactory.class.getName()
-                )
-                .put(
+                ).put(
                     "mail.smtp.socketFactory.port",
                     Integer.toString(this.port)
-                )
-                .put("mail.smtp.socketFactory.fallback", "false").build();
+                ).put("mail.smtp.socketFactory.fallback", "false").build();
         }
     }
 }

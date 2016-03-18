@@ -32,7 +32,6 @@ package com.jcabi.email.token;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
 import com.jcabi.email.Protocol;
-import com.jcabi.email.Token;
 import java.util.Map;
 import java.util.Properties;
 import javax.mail.Authenticator;
@@ -51,7 +50,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(of = {"user", "password"})
 @Loggable(Loggable.DEBUG)
-public final class Sign implements Token {
+public final class Token {
 
     /**
      * User name with access.
@@ -68,12 +67,16 @@ public final class Sign implements Token {
      * @param usr User name with access
      * @param pwd User's password
      */
-    public Sign(final String usr, final String pwd) {
+    public Token(final String usr, final String pwd) {
         this.user = usr;
         this.password = pwd;
     }
 
-    @Override
+    /**
+     * Access for given protocol.
+     * @param protocol Protocol.
+     * @return Session.
+     */
     public Session access(final Protocol protocol) {
         final Properties props = new Properties();
         for (final Map.Entry<String, String> entry : protocol.entries()
@@ -82,14 +85,14 @@ public final class Sign implements Token {
         }
         return Session.getInstance(
             props,
-            new Verification(this.user, this.password)
+            new Token.Verification(this.user, this.password)
         );
     }
 
     /**
      * Authenticating credentials.
      */
-    class Verification extends Authenticator {
+    private static final class Verification extends Authenticator {
         /**
          * User name.
          */
@@ -104,14 +107,14 @@ public final class Sign implements Token {
          * @param usr User name
          * @param pwd User password
          */
-        public Verification(final String usr, final String pwd) {
+        Verification(final String usr, final String pwd) {
             super();
             this.user = usr;
             this.password = pwd;
         }
 
         @Override
-        protected PasswordAuthentication getPasswordAuthentication() {
+        public PasswordAuthentication getPasswordAuthentication() {
             return new PasswordAuthentication(this.user, this.password);
         }
     }
