@@ -32,79 +32,43 @@ package com.jcabi.email.wire;
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
 import com.jcabi.email.Wire;
-import com.jcabi.log.Logger;
 import java.io.IOException;
-import java.util.Properties;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * SMTP postman.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
  */
 @Immutable
-@ToString
-@EqualsAndHashCode(of = { "host", "port", "user", "password" })
 @Loggable(Loggable.DEBUG)
 public final class SMTP implements Wire {
 
     /**
-     * SMTP host.
-     */
-    private final transient String host;
-
-    /**
-     * SMTP port.
-     */
-    private final transient int port;
-
-    /**
-     * SMTP user name.
-     */
-    private final transient String user;
-
-    /**
      * SMTP password.
      */
-    private final transient String password;
+    private final transient Session session;
 
     /**
      * Public ctor.
-     * @param hst SMTP Host
-     * @param prt SMTP Port
-     * @param usr SMTP user name
-     * @param pwd SMTP password
-     * @checkstyle ParameterNumberCheck (6 lines)
+     * @param sess Session.
      */
-    public SMTP(final String hst, final int prt,
-        final String usr, final String pwd) {
-        this.host = hst;
-        this.port = prt;
-        this.user = usr;
-        this.password = pwd;
+    public SMTP(final Session sess) {
+        this.session = sess;
     }
 
     @Override
     public Transport connect() throws IOException {
-        final Properties props = new Properties();
-        props.setProperty("mail.smtp.auth", "true");
-        final Session session = Session.getInstance(props);
         try {
-            final Transport transport = session.getTransport("smtp");
-            transport.connect(this.host, this.port, this.user, this.password);
-            Logger.info(
-                this, "sending email through %s:%s as %s...",
-                this.host, this.port, this.user
-            );
+            final Transport transport = this.session.getTransport("smtp");
+            transport.connect();
             return transport;
         } catch (final MessagingException ex) {
             throw new IOException(ex);
         }
     }
+
 }

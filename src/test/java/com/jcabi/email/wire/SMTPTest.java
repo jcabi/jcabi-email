@@ -33,6 +33,8 @@ import com.dumbster.smtp.SimpleSmtpServer;
 import com.dumbster.smtp.SmtpMessage;
 import com.jcabi.email.Envelope;
 import com.jcabi.email.Postman;
+import com.jcabi.email.Protocol;
+import com.jcabi.email.Token;
 import com.jcabi.email.enclosure.EnHTML;
 import com.jcabi.email.enclosure.EnPlain;
 import com.jcabi.email.stamp.StBCC;
@@ -50,11 +52,10 @@ import org.junit.Test;
 
 /**
  * Test case for {@link SMTP}.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 1.0
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @since 1.0
  */
 public final class SMTPTest {
 
@@ -67,7 +68,12 @@ public final class SMTPTest {
         final int port = SMTPTest.port();
         final SimpleSmtpServer server = SimpleSmtpServer.start(port);
         try {
-            new Postman.Default(new SMTP("localhost", port, "", "")).send(
+            new Postman.Default(
+                new SMTP(
+                    new Token("", "")
+                        .access(new Protocol.SMTP("localhost", port))
+                )
+            ).send(
                 new Envelope.Safe(
                     new Envelope.MIME()
                         .with(new StSender("from <test-from@jcabi.com>"))
