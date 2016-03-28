@@ -128,8 +128,8 @@ public interface Envelope {
          */
         public MIME(final Iterable<Stamp> stmps,
             final Iterable<Enclosure> list) {
-            this.stamps = new Array<Stamp>(stmps);
-            this.encs = new Array<Enclosure>(list);
+            this.stamps = new Array<>(stmps);
+            this.encs = new Array<>(list);
         }
         @Override
         public Message unwrap() throws IOException {

@@ -97,11 +97,8 @@ public final class SMTPTest {
      * @throws IOException In case of error.
      */
     private static int port() throws IOException {
-        final ServerSocket socket = new ServerSocket(0);
-        try {
+        try (ServerSocket socket = new ServerSocket(0)) {
             return socket.getLocalPort();
-        } finally {
-            socket.close();
         }
     }
 
