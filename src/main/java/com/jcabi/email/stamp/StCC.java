@@ -90,7 +90,7 @@ public final class StCC implements Stamp {
 
     @Override
     public void attach(final Message message) throws MessagingException {
-        message.setRecipient(
+        message.addRecipient(
             Message.RecipientType.CC,
             new InternetAddress(this.email)
         );

@@ -57,11 +57,18 @@ public final class StCCTest {
             Session.getDefaultInstance(new Properties())
         );
         new StCC("Jeff Петровский", "jeff@gmail.com").attach(msg);
+        new StCC("Jeff Again", "jeff+again@gmail.com").attach(msg);
         MatcherAssert.assertThat(
             new InternetAddress(
                 msg.getRecipients(Message.RecipientType.CC)[0].toString()
             ).getPersonal(),
             Matchers.containsString("Петровский")
+        );
+        MatcherAssert.assertThat(
+            new InternetAddress(
+                msg.getRecipients(Message.RecipientType.CC)[1].toString()
+            ).getPersonal(),
+            Matchers.containsString("Again")
         );
     }
 

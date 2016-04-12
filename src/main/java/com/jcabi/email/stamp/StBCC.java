@@ -90,7 +90,7 @@ public final class StBCC implements Stamp {
 
     @Override
     public void attach(final Message message) throws MessagingException {
-        message.setRecipient(
+        message.addRecipient(
             Message.RecipientType.BCC,
             new InternetAddress(this.email)
         );
