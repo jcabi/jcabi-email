@@ -52,7 +52,7 @@
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  <em class="jxr_javadoccomment"> * Stamp for a MIME envelope, with a BCC recipient.</em>
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  <em class="jxr_javadoccomment"> *</em>
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  <em class="jxr_javadoccomment"> * @author Yegor Bugayenko (yegor@teamed.io)</em>
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>  <em class="jxr_javadoccomment"> * @version $Id: 0f4c1b677a59ef41f22d6cf6112e66b100c99373 $</em>
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>  <em class="jxr_javadoccomment"> * @version $Id: b7ccfea22991065ea953519d1a1a588456a9d4ee $</em>
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>  <em class="jxr_javadoccomment"> * @since 1.0</em>
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>  @Immutable
@@ -98,7 +98,7 @@
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>  
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>      @Override
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> attach(<strong class="jxr_keyword">final</strong> Message message) <strong class="jxr_keyword">throws</strong> MessagingException {
-<a class="jxr_linenumber" name="L93" href="#L93">93</a>          message.setRecipient(
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>          message.addRecipient(
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>              Message.RecipientType.BCC,
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>              <strong class="jxr_keyword">new</strong> InternetAddress(<strong class="jxr_keyword">this</strong>.email)
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>          );
@@ -106,6 +106,6 @@
 <a class="jxr_linenumber" name="L98" href="#L98">98</a>  }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2012&#x2013;2015 <a href="http://www.jcabi.com">jcabi.com</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2012&#x2013;2016 <a href="http://www.jcabi.com">jcabi.com</a>. All rights reserved.</div>
 </body>
 </html>
