@@ -41,6 +41,18 @@ import lombok.ToString;
 
 /**
  * User signature to network node.
+ *
+ * <p>This is how you're supposed to use it:
+ *
+ * <pre> Postman postman = new Postman.Default(
+ *   new SMTP(
+ *     new Token("user", "password").access(
+ *       new Protocol.SMTPS("smtp.gmail.com", 587)
+ *     )
+ *   )
+ * );
+ * </pre>
+ *
  * @author Piotr Kotlicki (piotr.kotlicki@gmail.com)
  * @version $Id$
  * @since 1.0
@@ -78,13 +90,12 @@ public final class Token {
      */
     public Session access(final Protocol protocol) {
         final Properties props = new Properties();
-        for (final Map.Entry<String, String> entry : protocol.entries()
-            .entrySet()) {
+        for (final Map.Entry<String, String> entry
+            : protocol.entries().entrySet()) {
             props.setProperty(entry.getKey(), entry.getValue());
         }
         return Session.getInstance(
-            props,
-            new Token.Verification(this.user, this.password)
+            props, new Token.Verification(this.user, this.password)
         );
     }
 

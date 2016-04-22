@@ -48,7 +48,11 @@ import lombok.ToString;
  * {@link com.jcabi.email.Postman.Default}:
  *
  * <pre> Postman postman = new Postman.Default(
- *   new SMTP("smtp.googlemail.com", 465, "username", "password")
+ *   new SMTP(
+ *     new Token("user", "password").access(
+ *       new Protocol.SMTPS("smtp.gmail.com", 587)
+ *     )
+ *   )
  * );
  * postman.send(
  *   new Envelope.MIME(

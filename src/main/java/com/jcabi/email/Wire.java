@@ -36,6 +36,17 @@ import javax.mail.Transport;
 /**
  * Wire used by a {@link Postman}.
  *
+ * <p>This is how you're supposed to use it:
+ *
+ * <pre> Postman postman = new Postman.Default(
+ *   new SMTP(
+ *     new Token("user", "password").access(
+ *       new Protocol.SMTPS("smtp.gmail.com", 587)
+ *     )
+ *   )
+ * );
+ * </pre>
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
