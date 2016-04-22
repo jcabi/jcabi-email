@@ -73,11 +73,7 @@ public final class StCC implements Stamp {
      * @since 1.1
      */
     public StCC(final String name, final String addr) {
-        try {
-            this.email = new InternetAddress(addr, name, "UTF-8").toString();
-        } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
-        }
+        this(StCC.addr(name, addr));
     }
 
     /**
@@ -95,4 +91,20 @@ public final class StCC implements Stamp {
             new InternetAddress(this.email)
         );
     }
+
+    /**
+     * Make email.
+     * @param name Name of the recipient
+     * @param addr His email
+     * @return Email
+     * @since 1.1
+     */
+    private static String addr(final String name, final String addr) {
+        try {
+            return new InternetAddress(addr, name, "UTF-8").toString();
+        } catch (final UnsupportedEncodingException ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
+
 }
