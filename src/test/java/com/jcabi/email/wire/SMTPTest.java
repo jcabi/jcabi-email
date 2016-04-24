@@ -31,6 +31,9 @@ package com.jcabi.email.wire;
 
 import com.dumbster.smtp.SimpleSmtpServer;
 import com.dumbster.smtp.SmtpMessage;
+import com.icegreen.greenmail.util.GreenMail;
+import com.icegreen.greenmail.util.ServerSetup;
+import com.icegreen.greenmail.util.ServerSetupTest;
 import com.jcabi.email.Envelope;
 import com.jcabi.email.Postman;
 import com.jcabi.email.Protocol;
@@ -46,8 +49,11 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Iterator;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -58,15 +64,24 @@ import org.junit.Test;
  * @since 1.0
  */
 public final class SMTPTest {
-
+//    @Rule
+//    public final GreenMailRule greenMail = new GreenMailRule(ServerSetupTest.ALL);
     /**
      * SMTP can send errors by email through SMTP.
      * @throws Exception If fails
      */
     @Test
     public void sendsErrorsBySmtp() throws Exception {
+
         final int port = SMTPTest.port();
-        final SimpleSmtpServer server = SimpleSmtpServer.start(port);
+        GreenMail server = new GreenMail(
+                                   new ServerSetup(
+                                       port, "localhost",
+                                       ServerSetup.PROTOCOL_SMTP
+                                   )
+                               );
+        server.start();
+        server.setUser("test-to@jcabi.com", "test-to", "password");
         try {
             new Postman.Default(
                 new SMTP(
@@ -76,8 +91,8 @@ public final class SMTPTest {
             ).send(
                 new Envelope.Safe(
                     new Envelope.MIME()
-                        .with(new StSender("from <test-from@jcabi.com>"))
-                        .with(new StRecipient("to", "test-to@jcabi.com"))
+                        .with(new StSender("test-from@jcabi.com"))
+                        .with(new StRecipient("test-to@jcabi.com"))
                         .with(new StCC(new InternetAddress("cc <c@jcabi.com>")))
                         .with(new StBCC("bcc <bcc@jcabi.com>"))
                         .with(new StSubject("test subject: test me"))
@@ -85,16 +100,35 @@ public final class SMTPTest {
                         .with(new EnHTML("<p>how are you?</p>"))
                 )
             );
+            final MimeMessage[] messages = server.getReceivedMessages();
+            MatcherAssert.assertThat(messages.length, Matchers.is(1));
+            for(int i=0;i<messages.length;i++){
+                System.out.println(messages[i].getFrom()[0].toString());
+                for (int j=0;j<messages[i].getAllRecipients().length;j++){
+                    System.out.print(messages[i].getAllRecipients()[j].toString() + " ");
+                }
+                System.out.println(messages[i].getSubject());
+                System.out.println(messages[i].getMessageID());
+
+                System.out.println("--------------------------");
+            }
+            MatcherAssert.assertThat(
+                    messages[0].getSubject(),
+                    Matchers.containsString("test me")
+            );
+            MatcherAssert.assertThat(
+                    messages[1].getSubject(),
+                    Matchers.containsString("test me")
+            );
+            MatcherAssert.assertThat(
+                    messages[2].getSubject(),
+                    Matchers.containsString("test me")
+            );
+
+
         } finally {
             server.stop();
         }
-        MatcherAssert.assertThat(server.getReceivedEmailSize(), Matchers.is(1));
-        final Iterator<?> emails = server.getReceivedEmail();
-        final SmtpMessage email = SmtpMessage.class.cast(emails.next());
-        MatcherAssert.assertThat(
-            email.getHeaderValue("Subject"),
-            Matchers.containsString("test me")
-        );
     }
 
     /**
