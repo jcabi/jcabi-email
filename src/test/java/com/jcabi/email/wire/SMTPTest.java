@@ -28,15 +28,6 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package com.jcabi.email.wire;
-import java.io.IOException;
-import java.net.ServerSocket;
-
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
 
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.ServerSetup;
@@ -51,6 +42,13 @@ import com.jcabi.email.stamp.StCC;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
 import com.jcabi.email.stamp.StSubject;
+import java.io.IOException;
+import java.net.ServerSocket;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
  * Test case for {@link SMTP}.
@@ -60,27 +58,34 @@ import com.jcabi.email.stamp.StSubject;
  * @since 1.0
  */
 public final class SMTPTest {
-	private static final String BIND_ADDRESS = "localhost";
     /**
-     * SMTP can send emails through SMTP.
+     * Bind address for the smtp server.
+     */
+    private static final String BIND_ADDRESS = "localhost";
+    /**
+     * Constant three.
+     */
+    private static final int THREE = 3;
+
+    /**
+     * SMTP can send email through SMTP.
      * @throws Exception If fails
      */
     @Test
     public void sendsEmailToSmtpServer() throws Exception {
-
         final int port = SMTPTest.port();
-        GreenMail server = new GreenMail(
-                                   new ServerSetup(
-                                       port, BIND_ADDRESS,
-                                       ServerSetup.PROTOCOL_SMTP
-                                   )
-                               );
+        final GreenMail server = new GreenMail(
+            new ServerSetup(
+                port, SMTPTest.BIND_ADDRESS,
+                ServerSetup.PROTOCOL_SMTP
+            )
+        );
         server.start();
         try {
             new Postman.Default(
                 new SMTP(
                     new Token("", "")
-                        .access(new Protocol.SMTP(BIND_ADDRESS, port))
+                        .access(new Protocol.SMTP(SMTPTest.BIND_ADDRESS, port))
                 )
             ).send(
                 new Envelope.Safe(
@@ -95,18 +100,20 @@ public final class SMTPTest {
                 )
             );
             final MimeMessage[] messages = server.getReceivedMessages();
-            MatcherAssert.assertThat(messages.length, Matchers.is(3));
-            for(int i=0;i<messages.length;i++) {
-            	MatcherAssert.assertThat(
-                    messages[i].getFrom()[0].toString(),
+            MatcherAssert.assertThat(
+                messages.length,
+                Matchers.is(SMTPTest.THREE)
+            );
+            for (int idx = 0; idx < messages.length; ++idx) {
+                MatcherAssert.assertThat(
+                    messages[idx].getFrom()[0].toString(),
                     Matchers.containsString("<test-from@jcabi.com>")
                 );
                 MatcherAssert.assertThat(
-                    messages[i].getSubject(),
+                    messages[idx].getSubject(),
                     Matchers.containsString("test me")
                 );
             }
-
         } finally {
             server.stop();
         }
