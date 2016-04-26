@@ -28,12 +28,18 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package com.jcabi.email.wire;
+import java.io.IOException;
+import java.net.ServerSocket;
 
-import com.dumbster.smtp.SimpleSmtpServer;
-import com.dumbster.smtp.SmtpMessage;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.ServerSetup;
-import com.icegreen.greenmail.util.ServerSetupTest;
 import com.jcabi.email.Envelope;
 import com.jcabi.email.Postman;
 import com.jcabi.email.Protocol;
@@ -45,16 +51,6 @@ import com.jcabi.email.stamp.StCC;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
 import com.jcabi.email.stamp.StSubject;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.util.Iterator;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Rule;
-import org.junit.Test;
 
 /**
  * Test case for {@link SMTP}.
@@ -64,35 +60,33 @@ import org.junit.Test;
  * @since 1.0
  */
 public final class SMTPTest {
-//    @Rule
-//    public final GreenMailRule greenMail = new GreenMailRule(ServerSetupTest.ALL);
+	private static final String BIND_ADDRESS = "localhost";
     /**
-     * SMTP can send errors by email through SMTP.
+     * SMTP can send emails through SMTP.
      * @throws Exception If fails
      */
     @Test
-    public void sendsErrorsBySmtp() throws Exception {
+    public void sendsEmailToSmtpServer() throws Exception {
 
         final int port = SMTPTest.port();
         GreenMail server = new GreenMail(
                                    new ServerSetup(
-                                       port, "localhost",
+                                       port, BIND_ADDRESS,
                                        ServerSetup.PROTOCOL_SMTP
                                    )
                                );
         server.start();
-        server.setUser("test-to@jcabi.com", "test-to", "password");
         try {
             new Postman.Default(
                 new SMTP(
                     new Token("", "")
-                        .access(new Protocol.SMTP("localhost", port))
+                        .access(new Protocol.SMTP(BIND_ADDRESS, port))
                 )
             ).send(
                 new Envelope.Safe(
                     new Envelope.MIME()
-                        .with(new StSender("test-from@jcabi.com"))
-                        .with(new StRecipient("test-to@jcabi.com"))
+                        .with(new StSender("from <test-from@jcabi.com>"))
+                        .with(new StRecipient("to", "test-to@jcabi.com"))
                         .with(new StCC(new InternetAddress("cc <c@jcabi.com>")))
                         .with(new StBCC("bcc <bcc@jcabi.com>"))
                         .with(new StSubject("test subject: test me"))
@@ -101,30 +95,17 @@ public final class SMTPTest {
                 )
             );
             final MimeMessage[] messages = server.getReceivedMessages();
-            MatcherAssert.assertThat(messages.length, Matchers.is(1));
-            for(int i=0;i<messages.length;i++){
-                System.out.println(messages[i].getFrom()[0].toString());
-                for (int j=0;j<messages[i].getAllRecipients().length;j++){
-                    System.out.print(messages[i].getAllRecipients()[j].toString() + " ");
-                }
-                System.out.println(messages[i].getSubject());
-                System.out.println(messages[i].getMessageID());
-
-                System.out.println("--------------------------");
+            MatcherAssert.assertThat(messages.length, Matchers.is(3));
+            for(int i=0;i<messages.length;i++) {
+            	MatcherAssert.assertThat(
+                    messages[i].getFrom()[0].toString(),
+                    Matchers.containsString("<test-from@jcabi.com>")
+                );
+                MatcherAssert.assertThat(
+                    messages[i].getSubject(),
+                    Matchers.containsString("test me")
+                );
             }
-            MatcherAssert.assertThat(
-                    messages[0].getSubject(),
-                    Matchers.containsString("test me")
-            );
-            MatcherAssert.assertThat(
-                    messages[1].getSubject(),
-                    Matchers.containsString("test me")
-            );
-            MatcherAssert.assertThat(
-                    messages[2].getSubject(),
-                    Matchers.containsString("test me")
-            );
-
 
         } finally {
             server.stop();
