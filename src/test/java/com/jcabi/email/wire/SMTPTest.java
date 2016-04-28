@@ -44,6 +44,7 @@ import com.jcabi.email.stamp.StSender;
 import com.jcabi.email.stamp.StSubject;
 import java.io.IOException;
 import java.net.ServerSocket;
+import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.hamcrest.MatcherAssert;
@@ -58,14 +59,6 @@ import org.junit.Test;
  * @since 1.0
  */
 public final class SMTPTest {
-    /**
-     * Bind address for the smtp server.
-     */
-    private static final String BIND_ADDRESS = "localhost";
-    /**
-     * Constant three.
-     */
-    private static final int THREE = 3;
 
     /**
      * SMTP can send email through SMTP.
@@ -73,10 +66,12 @@ public final class SMTPTest {
      */
     @Test
     public void sendsEmailToSmtpServer() throws Exception {
+        final String bind = "localhost";
+        final int received = 3;
         final int port = SMTPTest.port();
         final GreenMail server = new GreenMail(
             new ServerSetup(
-                port, SMTPTest.BIND_ADDRESS,
+                port, bind,
                 ServerSetup.PROTOCOL_SMTP
             )
         );
@@ -85,7 +80,7 @@ public final class SMTPTest {
             new Postman.Default(
                 new SMTP(
                     new Token("", "")
-                        .access(new Protocol.SMTP(SMTPTest.BIND_ADDRESS, port))
+                        .access(new Protocol.SMTP(bind, port))
                 )
             ).send(
                 new Envelope.Safe(
@@ -102,15 +97,15 @@ public final class SMTPTest {
             final MimeMessage[] messages = server.getReceivedMessages();
             MatcherAssert.assertThat(
                 messages.length,
-                Matchers.is(SMTPTest.THREE)
+                Matchers.is(received)
             );
-            for (int idx = 0; idx < messages.length; ++idx) {
+            for (final Message msg : messages) {
                 MatcherAssert.assertThat(
-                    messages[idx].getFrom()[0].toString(),
+                    msg.getFrom()[0].toString(),
                     Matchers.containsString("<test-from@jcabi.com>")
                 );
                 MatcherAssert.assertThat(
-                    messages[idx].getSubject(),
+                    msg.getSubject(),
                     Matchers.containsString("test me")
                 );
             }
