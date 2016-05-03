@@ -97,6 +97,11 @@ public interface Protocol {
 
     /**
      * SMTPS protocol.
+     * @todo #36:30min Write unit test for email sending with SMTPS protocol
+     *  using Greenmail mock server (see http://www.icegreen.com/greenmail/
+     *  for Greenmail docs and example code). SMTPS was implemented in ticket
+     *  #33 but was not unit tested since the previous mock server (Dumbster)
+     *  did not support SSL.
      */
     final class SMTPS implements Protocol {
         /**
