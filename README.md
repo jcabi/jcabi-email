@@ -18,7 +18,11 @@ It is an object-oriented email sending SDK for Java:
 
 ```java
 Postman postman = new Postman.Default(
-  new SMTP("smtp.googlemail.com", 465, "username", "password")
+  new SMTP(
+    new Token("user", "password").access(
+      new Protocol.SMTP("smtp.gmail.com", 587)
+    )
+  )
 );
 postman.send(
   new Envelope.MIME()
