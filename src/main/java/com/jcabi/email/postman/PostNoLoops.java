@@ -35,10 +35,12 @@ import com.jcabi.email.Envelope;
 import com.jcabi.email.Postman;
 import com.jcabi.log.Logger;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -77,7 +79,7 @@ public final class PostNoLoops implements Postman {
             final Address[] from = msg.getFrom();
             final boolean intersects =
                 this.intersect(rcpts, reply, "Reply-To and Recipients")
-                || this.intersect(rcpts, from, "Recipients and From");
+                    || this.intersect(rcpts, from, "Recipients and From");
             if (!intersects) {
                 this.origin.send(env);
             }
@@ -95,24 +97,16 @@ public final class PostNoLoops implements Postman {
      */
     private boolean intersect(final Address[] first, final Address[] second,
         final String msg) {
-        boolean intersect = false;
-        if (first != null && second != null) {
-            for (final Address left : first) {
-                for (final Address right : second) {
-                    final String lft = InternetAddress.class.cast(left)
-                        .getAddress();
-                    final String rht = InternetAddress.class.cast(right)
-                        .getAddress();
-                    if (lft.equals(rht)) {
-                        Logger.info(
-                            this,
-                            "%s exists in %s as %s and %s",
-                            lft, msg, left, right
-                        );
-                        intersect = true;
-                    }
-                }
-            }
+        final Collection<Address> intersection =
+            new ArrayList<>(Arrays.asList(first));
+        intersection.retainAll(Arrays.asList(second));
+        final boolean intersect = !intersection.isEmpty();
+        if (intersect) {
+            Logger.info(
+                this,
+                "Address(es) %s exist in both %s",
+                intersection.toString(), msg
+            );
         }
         return intersect;
     }
