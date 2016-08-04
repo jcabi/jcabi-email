@@ -79,7 +79,7 @@ public final class PostNoLoops implements Postman {
             final Address[] from = msg.getFrom();
             final boolean intersects =
                 this.intersect(rcpts, reply, "Reply-To and Recipients")
-                    || this.intersect(rcpts, from, "Recipients and From");
+                || this.intersect(rcpts, from, "Recipients and From");
             if (!intersects) {
                 this.origin.send(env);
             }
@@ -105,7 +105,7 @@ public final class PostNoLoops implements Postman {
             Logger.info(
                 this,
                 "Address(es) %s exist in both %s",
-                intersection.toString(), msg
+                intersection, msg
             );
         }
         return intersect;
