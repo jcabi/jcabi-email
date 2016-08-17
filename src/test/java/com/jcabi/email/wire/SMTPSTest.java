@@ -43,6 +43,8 @@ import com.jcabi.email.stamp.StCC;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
 import com.jcabi.email.stamp.StSubject;
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.security.Security;
 import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
@@ -68,17 +70,12 @@ public final class SMTPSTest {
     public void sendsEmailToThroughSmtps() throws Exception {
         final String bind = "localhost";
         final int received = 3;
-        final int port = 465;
+        final int port = SMTPSTest.port();
         Security.setProperty(
             "ssl.SocketFactory.provider",
             DummySSLSocketFactory.class.getName()
         );
-        final GreenMail server = new GreenMail(
-            new ServerSetup(
-                port, bind,
-                ServerSetup.PROTOCOL_SMTPS
-            )
-        );
+        final GreenMail server = new GreenMail(ServerSetup.SMTPS);
         server.start();
         try {
             new Postman.Default(
@@ -115,6 +112,17 @@ public final class SMTPSTest {
             }
         } finally {
             server.stop();
+        }
+    }
+
+    /**
+     * Allocate free port.
+     * @return Found port.
+     * @throws IOException In case of error.
+     */
+    private static int port() throws IOException {
+        try (ServerSocket socket = new ServerSocket(0)) {
+            return socket.getLocalPort();
         }
     }
 
