@@ -124,7 +124,9 @@ public interface Protocol {
         @Override
         public Map<String, String> entries() {
             return new ImmutableMap.Builder<String, String>()
-                .putAll(new Protocol.SMTP(this.host, this.port).entries())
+                .put("mail.smtps.auth", Boolean.TRUE.toString())
+                .put("mail.smtps.host", this.host)
+                .put("mail.smtps.port", Integer.toString(this.port))
                 .put(
                     "mail.smtp.ssl.checkserveridentity",
                     Boolean.TRUE.toString()
