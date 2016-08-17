@@ -32,7 +32,6 @@ package com.jcabi.email.wire;
 import com.icegreen.greenmail.util.DummySSLSocketFactory;
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.ServerSetup;
-import com.icegreen.greenmail.util.ServerSetupTest;
 import com.jcabi.email.Envelope;
 import com.jcabi.email.Postman;
 import com.jcabi.email.Protocol;
@@ -44,15 +43,12 @@ import com.jcabi.email.stamp.StCC;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
 import com.jcabi.email.stamp.StSubject;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.security.Security;
-
 import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -81,10 +77,10 @@ public final class SMTPSTest {
         );
         final GreenMail server = new GreenMail(
             new ServerSetup(
-                port, bind, 
+                port, bind,
                 ServerSetup.PROTOCOL_SMTPS
             )
-        ); 
+        );
         server.start();
         try {
             new Postman.Default(
