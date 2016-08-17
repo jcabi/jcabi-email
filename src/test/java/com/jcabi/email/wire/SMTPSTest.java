@@ -29,6 +29,7 @@
  */
 package com.jcabi.email.wire;
 
+import com.icegreen.greenmail.util.DummySSLSocketFactory;
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.ServerSetup;
 import com.jcabi.email.Envelope;
@@ -42,8 +43,7 @@ import com.jcabi.email.stamp.StCC;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
 import com.jcabi.email.stamp.StSubject;
-import java.io.IOException;
-import java.net.ServerSocket;
+import java.security.Security;
 import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -52,35 +52,39 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link SMTP}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link SMTPS}.
+ * @author Mihai Andronache (amihaiemil@gmail.com)
  * @version $Id$
+ * @since 1.9
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @since 1.0
  */
-public final class SMTPTest {
+public final class SMTPSTest {
 
     /**
-     * SMTP postman can send email through SMTP wire.
+     * SMTPS postman can send email through SMTPS wire.
      * @throws Exception If fails
      */
     @Test
-    public void sendsEmailToSmtpServer() throws Exception {
+    public void sendsEmailToThroughSmtps() throws Exception {
         final String bind = "localhost";
         final int received = 3;
-        final int port = SMTPTest.port();
+        final int port = 465;
+        Security.setProperty(
+            "ssl.SocketFactory.provider",
+            DummySSLSocketFactory.class.getName()
+        );
         final GreenMail server = new GreenMail(
             new ServerSetup(
                 port, bind,
-                ServerSetup.PROTOCOL_SMTP
+                ServerSetup.PROTOCOL_SMTPS
             )
         );
         server.start();
         try {
             new Postman.Default(
-                new SMTP(
+                new SMTPS(
                     new Token("", "")
-                        .access(new Protocol.SMTP(bind, port))
+                        .access(new Protocol.SMTPS(bind, port))
                 )
             ).send(
                 new Envelope.Safe(
@@ -111,17 +115,6 @@ public final class SMTPTest {
             }
         } finally {
             server.stop();
-        }
-    }
-
-    /**
-     * Allocate free port.
-     * @return Found port.
-     * @throws IOException In case of error.
-     */
-    private static int port() throws IOException {
-        try (ServerSocket socket = new ServerSocket(0)) {
-            return socket.getLocalPort();
         }
     }
 

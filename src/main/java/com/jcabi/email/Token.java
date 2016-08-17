@@ -47,7 +47,7 @@ import lombok.ToString;
  * <pre> Postman postman = new Postman.Default(
  *   new SMTP(
  *     new Token("user", "password").access(
- *       new Protocol.SMTPS("smtp.gmail.com", 587)
+ *       new Protocol.SMTP("bind", "port")
  *     )
  *   )
  * );

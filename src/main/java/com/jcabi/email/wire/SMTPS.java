@@ -29,8 +29,6 @@
  */
 package com.jcabi.email.wire;
 
-import com.jcabi.aspects.Immutable;
-import com.jcabi.aspects.Loggable;
 import com.jcabi.email.Wire;
 import java.io.IOException;
 import javax.mail.MessagingException;
@@ -38,26 +36,24 @@ import javax.mail.Session;
 import javax.mail.Transport;
 
 /**
- * SMTP wire.
+ * SMTPS wire.
  *
  * <p>This is how you're supposed to use it:
  *
  * <pre> Postman postman = new Postman.Default(
- *   new SMTP(
+ *   new SMTPS(
  *     new Token("user", "password").access(
- *       new Protocol.SMTP("bind", "port")
+ *       new Protocol.SMTPS("smtp.gmail.com", 587)
  *     )
  *   )
  * );
  * </pre>
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Mihai Andronache (amihaiemil@gmail.com)
  * @version $Id$
- * @since 1.0
+ * @since 1.9
  */
-@Immutable
-@Loggable(Loggable.DEBUG)
-public final class SMTP implements Wire {
+public final class SMTPS implements Wire {
 
     /**
      * SMTP password.
@@ -68,19 +64,18 @@ public final class SMTP implements Wire {
      * Public ctor.
      * @param sess Session.
      */
-    public SMTP(final Session sess) {
+    public SMTPS(final Session sess) {
         this.session = sess;
     }
 
     @Override
     public Transport connect() throws IOException {
         try {
-            final Transport transport = this.session.getTransport("smtp");
+            final Transport transport = this.session.getTransport("smtps");
             transport.connect();
             return transport;
         } catch (final MessagingException ex) {
             throw new IOException(ex);
         }
     }
-
 }
