@@ -60,7 +60,7 @@ import javax.mail.Transport;
 public final class SMTP implements Wire {
 
     /**
-     * SMTP password.
+     * Mail session.
      */
     private final transient Session session;
 

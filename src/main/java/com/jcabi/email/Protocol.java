@@ -48,7 +48,13 @@ import javax.net.ssl.SSLSocketFactory;
  * );
  * </pre>
  * For <b>SMTPS</b> use the {@link com.jcabi.email.wire.SMTPS} wire and
- * {@link Protocol.SMTPS} respectively.
+ * {@link Protocol.SMTPS} respectively. SMTPS protocol should work only with
+ * the SMTPS wire because the wire uses the "smtps" transport to make the
+ * connection to the mail server:
+ * <pre>
+ *     final Transport transport = this.session.getTransport("smtps");
+ *     transport.connect();
+ * </pre>
  *
  * @author Piotr Kotlicki (piotr.kotlicki@gmail.com)
  * @version $Id$
