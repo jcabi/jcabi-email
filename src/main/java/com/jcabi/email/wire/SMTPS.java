@@ -62,10 +62,10 @@ public final class SMTPS implements Wire {
 
     /**
      * Public ctor.
-     * @param sess Session.
+     * @param session Session.
      */
-    public SMTPS(final Session sess) {
-        this.session = sess;
+    public SMTPS(final Session session) {
+        this.session = session;
     }
 
     @Override
