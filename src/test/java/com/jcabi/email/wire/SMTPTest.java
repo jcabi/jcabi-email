@@ -69,12 +69,12 @@ public final class SMTPTest {
         final String bind = "localhost";
         final int received = 3;
         final int port = SMTPTest.port();
-        final GreenMail server = new GreenMail(
-            new ServerSetup(
-                port, bind,
-                ServerSetup.PROTOCOL_SMTP
-            )
+        final int timeout = 3000;
+        final ServerSetup setup = new ServerSetup(
+            port, bind, ServerSetup.PROTOCOL_SMTP
         );
+        setup.setServerStartupTimeout(timeout);
+        final GreenMail server = new GreenMail(setup);
         server.start();
         try {
             new Postman.Default(

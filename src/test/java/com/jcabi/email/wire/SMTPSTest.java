@@ -67,13 +67,16 @@ public final class SMTPSTest {
         final String bind = "localhost";
         final int received = 1;
         final int port = SMTPSTest.port();
+        final int timeout = 3000;
         Security.setProperty(
             "ssl.SocketFactory.provider",
             DummySSLSocketFactory.class.getName()
         );
-        final GreenMail server = new GreenMail(
-            new ServerSetup(port, bind, ServerSetup.PROTOCOL_SMTPS)
+        final ServerSetup setup = new ServerSetup(
+            port, bind, ServerSetup.PROTOCOL_SMTPS
         );
+        setup.setServerStartupTimeout(timeout);
+        final GreenMail server = new GreenMail(setup);
         server.start();
         try {
             new Postman.Default(
