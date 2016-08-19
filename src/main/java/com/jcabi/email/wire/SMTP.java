@@ -66,10 +66,10 @@ public final class SMTP implements Wire {
 
     /**
      * Public ctor.
-     * @param sess Session.
+     * @param session Session.
      */
-    public SMTP(final Session sess) {
-        this.session = sess;
+    public SMTP(final Session session) {
+        this.session = session;
     }
 
     @Override
