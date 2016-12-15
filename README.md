@@ -4,6 +4,7 @@
 [![DevOps By Rultor.com](http://www.rultor.com/b/jcabi/jcabi-email)](http://www.rultor.com/p/jcabi/jcabi-email)
 
 [![Build Status](https://travis-ci.org/jcabi/jcabi-email.svg?branch=master)](https://travis-ci.org/jcabi/jcabi-email)
+[![PDD status](http://www.0pdd.com/svg?name=jcabi/jcabi-email)](http://www.0pdd.com/p?name=teamed/jcabi/jcabi-email)
 [![Build status](https://ci.appveyor.com/api/projects/status/ueunlwvuxyiws57s/branch/master?svg=true)](https://ci.appveyor.com/project/yegor256/jcabi-email/branch/master)
 [![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.jcabi/jcabi-email/badge.svg)](http://www.javadoc.io/doc/com.jcabi/jcabi-email)
 
