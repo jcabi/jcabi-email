@@ -42,6 +42,23 @@ postman.send(
 );
 ```
 
+Make sure you have this dependencies:
+
+```
+<dependency>
+  <groupId>javax.mail</groupId>
+  <artifactId>mailapi</artifactId>
+  <version>1.4.3</version>
+  <scope>provided</scope>
+</dependency>
+<dependency>
+  <groupId>javax.mail</groupId>
+  <artifactId>mail</artifactId>
+  <version>1.5.0-b01</version>
+  <scope>runtime</scope>
+</dependency>
+```
+
 ## Questions?
 
 If you have any questions about the framework, or something doesn't work as expected,
