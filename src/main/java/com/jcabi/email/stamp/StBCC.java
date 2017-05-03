@@ -73,7 +73,17 @@ public final class StBCC implements Stamp {
      * @since 1.1
      */
     public StBCC(final String name, final String addr) {
-        this(StBCC.addr(name, addr));
+        this(name, addr, "UTF-8");
+    }
+
+    /**
+     * Ctor.
+     * @param name Name of the recipient
+     * @param addr His email
+     * @param charset Name charset
+     */
+    public StBCC(final String name, final String addr, final String charset) {
+        this(StBCC.addr(name, addr, charset));
     }
 
     /**
@@ -96,12 +106,17 @@ public final class StBCC implements Stamp {
      * Make email.
      * @param name Name of the recipient
      * @param addr His email
+     * @param charset Name charset
      * @return Email
      * @since 1.1
      */
-    private static String addr(final String name, final String addr) {
+    private static String addr(
+        final String name,
+        final String addr,
+        final String charset
+    ) {
         try {
-            return new InternetAddress(addr, name, "UTF-8").toString();
+            return new InternetAddress(addr, name, charset).toString();
         } catch (final UnsupportedEncodingException ex) {
             throw new IllegalStateException(ex);
         }
