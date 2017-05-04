@@ -36,52 +36,39 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link EnPlain}.
+ * Test case for {@link EnHTML}.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Valeriy Vyrva (valery1707@gmail.com)
  * @version $Id$
- * @since 1.3.2
+ * @since 1.8.2
  */
-public final class EnPlainTest {
-
-    /**
-     * EnPlain can create a plain MIME part.
-     * @throws Exception If fails
-     */
-    @Test
-    public void createsPlainMimePart() throws Exception {
-        final MimeBodyPart part = new EnPlain("hello, друг").part();
-        MatcherAssert.assertThat(
-            part.getContent().toString(),
-            Matchers.endsWith("друг")
-        );
-    }
+public final class EnHTMLTest {
 
     /**
      * EnPlain can create a plain MIME part with custom encoding.
      * @throws Exception If fails
      */
     @Test
-    public void createsPlainMimePartWithCustomEncoding() throws Exception {
+    public void createsHTMLMimePartWithCustomEncoding() throws Exception {
         final String charset = "KOI8-R";
-        final MimeBodyPart part = new EnPlain(
-            "hello, приятель",
+        final MimeBodyPart part = new EnHTML(
+            "<p>hello, приятель</p>",
             charset
         ).part();
-        final String suffix = "приятель";
+        final String substring = "приятель";
         MatcherAssert.assertThat(
             part.getContent().toString(),
-            Matchers.endsWith(suffix)
+            Matchers.containsString(substring)
         );
         final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         part.writeTo(bytes);
         MatcherAssert.assertThat(
             new String(bytes.toByteArray(), charset),
-            Matchers.endsWith(suffix)
+            Matchers.containsString(substring)
         );
         MatcherAssert.assertThat(
             new String(bytes.toByteArray(), "UTF-8"),
-            Matchers.not(Matchers.endsWith(suffix))
+            Matchers.not(Matchers.containsString(substring))
         );
     }
 }

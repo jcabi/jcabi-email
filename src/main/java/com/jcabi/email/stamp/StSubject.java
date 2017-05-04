@@ -48,7 +48,7 @@ import lombok.ToString;
  */
 @Immutable
 @ToString
-@EqualsAndHashCode(of = "subject")
+@EqualsAndHashCode(of = {"subject", "charset"})
 @Loggable(Loggable.DEBUG)
 public final class StSubject implements Stamp {
 
@@ -58,18 +58,33 @@ public final class StSubject implements Stamp {
     private final transient String subject;
 
     /**
+     * Subject charset.
+     */
+    private final transient String charset;
+
+    /**
      * Ctor.
      * @param subj Subject
      */
     public StSubject(final String subj) {
+        this(subj, "UTF-8");
+    }
+
+    /**
+     * Ctor.
+     * @param subj Subject
+     * @param charset Subject charset
+     */
+    public StSubject(final String subj, final String charset) {
         this.subject = subj;
+        this.charset = charset;
     }
 
     @Override
     public void attach(final Message message) throws MessagingException {
         try {
             message.setSubject(
-                MimeUtility.encodeText(this.subject, "UTF-8", "Q")
+                MimeUtility.encodeText(this.subject, this.charset, "Q")
             );
         } catch (final UnsupportedEncodingException ex) {
             throw new IllegalStateException(ex);

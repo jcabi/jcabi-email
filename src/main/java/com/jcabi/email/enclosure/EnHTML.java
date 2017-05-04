@@ -34,6 +34,7 @@ import com.jcabi.aspects.Loggable;
 import com.jcabi.email.Enclosure;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeUtility;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -46,7 +47,7 @@ import lombok.ToString;
  */
 @Immutable
 @ToString
-@EqualsAndHashCode(of = "text")
+@EqualsAndHashCode(of = {"text", "charset"})
 @Loggable(Loggable.DEBUG)
 public final class EnHTML implements Enclosure {
 
@@ -56,17 +57,39 @@ public final class EnHTML implements Enclosure {
     private final transient String text;
 
     /**
+     * Text charset.
+     */
+    private final transient String charset;
+
+    /**
      * Ctor.
      * @param content HTML content
      */
     public EnHTML(final String content) {
+        this(content, "UTF-8");
+    }
+
+    /**
+     * Ctor.
+     * @param content HTML content
+     * @param charset Content charset
+     */
+    public EnHTML(final String content, final String charset) {
         this.text = content;
+        this.charset = charset;
     }
 
     @Override
     public MimeBodyPart part() throws MessagingException {
         final MimeBodyPart mime = new MimeBodyPart();
-        final String ctype = "text/html;charset=\"utf-8\"";
+        final String characterset = MimeUtility.quote(
+            this.charset,
+            "()<>@,;:\\\"\t []/?="
+        );
+        final String ctype = String.format(
+            "text/html;charset=\"%s\"",
+            characterset
+        );
         mime.setContent(this.text, ctype);
         mime.addHeader("Content-Type", ctype);
         return mime;

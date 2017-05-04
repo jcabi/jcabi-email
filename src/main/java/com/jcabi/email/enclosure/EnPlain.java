@@ -46,7 +46,7 @@ import lombok.ToString;
  */
 @Immutable
 @ToString
-@EqualsAndHashCode(of = "text")
+@EqualsAndHashCode(of = {"text", "charset"})
 @Loggable(Loggable.DEBUG)
 public final class EnPlain implements Enclosure {
 
@@ -56,17 +56,32 @@ public final class EnPlain implements Enclosure {
     private final transient String text;
 
     /**
+     * Text charset.
+     */
+    private final transient String charset;
+
+    /**
      * Ctor.
-     * @param content HTML content
+     * @param content Plain content
      */
     public EnPlain(final String content) {
+        this(content, "UTF-8");
+    }
+
+    /**
+     * Ctor.
+     * @param content Plain content
+     * @param charset Content charset
+     */
+    public EnPlain(final String content, final String charset) {
         this.text = content;
+        this.charset = charset;
     }
 
     @Override
     public MimeBodyPart part() throws MessagingException {
         final MimeBodyPart mime = new MimeBodyPart();
-        mime.setText(this.text, "UTF-8");
+        mime.setText(this.text, this.charset);
         mime.addHeader("Content-Type", "text/plain");
         return mime;
     }

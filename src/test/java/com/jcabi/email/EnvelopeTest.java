@@ -92,7 +92,7 @@ public final class EnvelopeTest {
             msgtxt,
             Matchers.allOf(
                 Matchers.containsString(
-                    "Content-Type: text/html;charset=\"utf-8\""
+                    "Content-Type: text/html;charset=\"UTF-8\""
                 ),
                 Matchers.containsString(
                     "Content-Transfer-Encoding: quoted-printable"
