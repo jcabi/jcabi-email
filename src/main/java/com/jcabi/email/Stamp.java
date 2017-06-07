@@ -36,7 +36,7 @@ import javax.mail.MessagingException;
 /**
  * Stamp for a MIME envelope.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 1.0
  * @see com.jcabi.email.stamp.StRecipient

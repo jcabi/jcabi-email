@@ -47,7 +47,7 @@ import lombok.ToString;
 /**
  * Postman that ignores loops (sender equals to recipient).
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 1.6
  */
