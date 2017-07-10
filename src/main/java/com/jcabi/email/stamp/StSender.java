@@ -82,11 +82,8 @@ public final class StSender implements Stamp {
      * @param addr His email
      * @param charset Name charset
      */
-    public StSender(
-        final String name,
-        final String addr,
-        final String charset
-    ) {
+    public StSender(final String name, final String addr,
+        final String charset) {
         this(StSender.addr(name, addr, charset));
     }
 
@@ -100,6 +97,11 @@ public final class StSender implements Stamp {
 
     @Override
     public void attach(final Message message) throws MessagingException {
+        if (this.email == null) {
+            throw new IllegalArgumentException(
+                "Email address can't be NULL"
+            );
+        }
         message.setFrom(new InternetAddress(this.email));
     }
 
@@ -111,11 +113,8 @@ public final class StSender implements Stamp {
      * @return Email
      * @since 1.1
      */
-    private static String addr(
-        final String name,
-        final String addr,
-        final String charset
-    ) {
+    private static String addr(final String name, final String addr,
+        final String charset) {
         try {
             return new InternetAddress(addr, name, charset).toString();
         } catch (final UnsupportedEncodingException ex) {

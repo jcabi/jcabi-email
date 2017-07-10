@@ -96,6 +96,11 @@ public final class StCC implements Stamp {
 
     @Override
     public void attach(final Message message) throws MessagingException {
+        if (this.email == null) {
+            throw new IllegalArgumentException(
+                "Email address can't be NULL"
+            );
+        }
         message.addRecipient(
             Message.RecipientType.CC,
             new InternetAddress(this.email)

@@ -76,6 +76,11 @@ public final class StReplyTo implements Stamp {
 
     @Override
     public void attach(final Message message) throws MessagingException {
+        if (this.email == null) {
+            throw new IllegalArgumentException(
+                "Email address can't be NULL"
+            );
+        }
         final Address[] addresses = {new InternetAddress(this.email)};
         message.setReplyTo(addresses);
     }

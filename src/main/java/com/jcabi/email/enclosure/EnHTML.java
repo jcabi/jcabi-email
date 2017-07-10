@@ -81,6 +81,16 @@ public final class EnHTML implements Enclosure {
 
     @Override
     public MimeBodyPart part() throws MessagingException {
+        if (this.text == null) {
+            throw new IllegalArgumentException(
+                "Attachment text can't be NULL"
+            );
+        }
+        if (this.charset == null) {
+            throw new IllegalArgumentException(
+                "Attachment charset can't be NULL"
+            );
+        }
         final MimeBodyPart mime = new MimeBodyPart();
         final String characterset = MimeUtility.quote(
             this.charset,

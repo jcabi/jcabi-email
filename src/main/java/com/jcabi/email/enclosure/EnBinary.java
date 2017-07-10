@@ -81,6 +81,16 @@ public final class EnBinary implements Enclosure {
 
     @Override
     public MimeBodyPart part() throws MessagingException {
+        if (this.name == null) {
+            throw new IllegalArgumentException(
+                "Attachment name can't be NULL"
+            );
+        }
+        if (this.ctype == null) {
+            throw new IllegalArgumentException(
+                "Attachment ctype can't be NULL"
+            );
+        }
         final MimeBodyPart mime = new MimeBodyPart();
         try {
             mime.attachFile(new File(this.path));

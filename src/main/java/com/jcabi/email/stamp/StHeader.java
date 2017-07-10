@@ -73,6 +73,16 @@ public final class StHeader implements Stamp {
 
     @Override
     public void attach(final Message message) throws MessagingException {
+        if (this.name == null) {
+            throw new IllegalArgumentException(
+                "Header name can't be NULL"
+            );
+        }
+        if (this.value == null) {
+            throw new IllegalArgumentException(
+                "Header value can't be NULL"
+            );
+        }
         message.addHeader(
             this.name,
             this.value

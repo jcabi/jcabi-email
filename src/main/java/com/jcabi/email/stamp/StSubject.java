@@ -82,6 +82,16 @@ public final class StSubject implements Stamp {
 
     @Override
     public void attach(final Message message) throws MessagingException {
+        if (this.subject == null) {
+            throw new IllegalArgumentException(
+                "Email subject can't be NULL"
+            );
+        }
+        if (this.charset == null) {
+            throw new IllegalArgumentException(
+                "Subject charset can't be NULL"
+            );
+        }
         try {
             message.setSubject(
                 MimeUtility.encodeText(this.subject, this.charset, "Q")
