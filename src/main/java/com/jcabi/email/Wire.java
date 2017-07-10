@@ -30,6 +30,7 @@
 package com.jcabi.email;
 
 import com.jcabi.aspects.Immutable;
+import com.jcabi.email.wire.Smtp;
 import java.io.IOException;
 import javax.mail.Transport;
 
@@ -50,7 +51,7 @@ import javax.mail.Transport;
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 1.0
- * @see com.jcabi.email.wire.SMTP
+ * @see Smtp
  */
 @Immutable
 public interface Wire {

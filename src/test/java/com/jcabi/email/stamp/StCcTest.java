@@ -41,16 +41,16 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link com.jcabi.email.stamp.StBCC}.
+ * Test case for {@link StCc}.
  *
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 1.3.1
  */
-public final class StBCCTest {
+public final class StCcTest {
 
     /**
-     * StBCC can add a BCC recipient to the message.
+     * StCC can add a CC recipient to the message.
      * @throws Exception If fails
      */
     @Test
@@ -58,24 +58,24 @@ public final class StBCCTest {
         final Message msg = new MimeMessage(
             Session.getDefaultInstance(new Properties())
         );
-        new StBCC("Jeff Петровский", "jeff@gmail.com").attach(msg);
-        new StBCC("Jeff Again", "jeff+again@gmail.com").attach(msg);
+        new StCc("Jeff Петровский", "jeff@gmail.com").attach(msg);
+        new StCc("Jeff Again", "jeff+again@gmail.com").attach(msg);
         MatcherAssert.assertThat(
             new InternetAddress(
-                msg.getRecipients(Message.RecipientType.BCC)[0].toString()
+                msg.getRecipients(Message.RecipientType.CC)[0].toString()
             ).getPersonal(),
             Matchers.containsString("Петровский")
         );
         MatcherAssert.assertThat(
             new InternetAddress(
-                msg.getRecipients(Message.RecipientType.BCC)[1].toString()
+                msg.getRecipients(Message.RecipientType.CC)[1].toString()
             ).getPersonal(),
             Matchers.containsString("Again")
         );
     }
 
     /**
-     * StBCC can add a BCC recipient with custom encoding to the message.
+     * StCC can add a CC recipient with custom encoding to the message.
      * @throws Exception If fails
      */
     @Test
@@ -86,27 +86,27 @@ public final class StBCCTest {
         );
         final String name = "Ivan Иванов";
         final String family = "Иванов";
-        new StBCC(name, "ivan@gmail.com", charset).attach(msg);
+        new StCc(name, "ivan@gmail.com", charset).attach(msg);
         MatcherAssert.assertThat(
             new InternetAddress(
-                msg.getRecipients(Message.RecipientType.BCC)[0].toString()
+                msg.getRecipients(Message.RecipientType.CC)[0].toString()
             ).getPersonal(),
             Matchers.containsString(family)
         );
         MatcherAssert.assertThat(
-            msg.getRecipients(Message.RecipientType.BCC)[0].toString(),
+            msg.getRecipients(Message.RecipientType.CC)[0].toString(),
             Matchers.not(Matchers.containsString(family))
         );
         MatcherAssert.assertThat(
-            msg.getRecipients(Message.RecipientType.BCC)[0].toString(),
+            msg.getRecipients(Message.RecipientType.CC)[0].toString(),
             Matchers.not(Matchers.containsString("UTF"))
         );
         MatcherAssert.assertThat(
-            msg.getRecipients(Message.RecipientType.BCC)[0].toString(),
+            msg.getRecipients(Message.RecipientType.CC)[0].toString(),
             Matchers.containsString(charset)
         );
         MatcherAssert.assertThat(
-            msg.getRecipients(Message.RecipientType.BCC)[0].toString(),
+            msg.getRecipients(Message.RecipientType.CC)[0].toString(),
             Matchers.containsString(encodeText(name, charset))
         );
     }

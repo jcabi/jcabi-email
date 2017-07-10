@@ -30,6 +30,8 @@
 package com.jcabi.email;
 
 import com.jcabi.aspects.Immutable;
+import com.jcabi.email.stamp.StBcc;
+import com.jcabi.email.stamp.StCc;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 
@@ -41,8 +43,8 @@ import javax.mail.MessagingException;
  * @since 1.0
  * @see com.jcabi.email.stamp.StRecipient
  * @see com.jcabi.email.stamp.StSender
- * @see com.jcabi.email.stamp.StCC
- * @see com.jcabi.email.stamp.StBCC
+ * @see StCc
+ * @see StBcc
  * @see com.jcabi.email.stamp.StSubject
  */
 @Immutable

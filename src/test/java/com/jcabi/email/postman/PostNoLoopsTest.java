@@ -55,7 +55,7 @@ public final class PostNoLoopsTest {
         final Postman post = Mockito.mock(Postman.class);
         final String email = "test@example.com";
         new PostNoLoops(post).send(
-            new Envelope.MIME()
+            new Envelope.Mime()
                 .with(new StRecipient(email))
                 .with(new StRecipient("hello@example.com"))
                 .with(new StSender("Jeff", email))
@@ -72,7 +72,7 @@ public final class PostNoLoopsTest {
     public void doesntTouchNormalMessages() throws Exception {
         final Postman post = Mockito.mock(Postman.class);
         new PostNoLoops(post).send(
-            new Envelope.MIME()
+            new Envelope.Mime()
                 .with(new StRecipient("jeff@example.com"))
                 .with(new StSender("Walter", "walter@example.com"))
         );

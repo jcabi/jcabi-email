@@ -50,13 +50,13 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link SMTPS}.
+ * Test case for {@link Smtps}.
  * @author Mihai Andronache (amihaiemil@gmail.com)
  * @version $Id$
  * @since 1.9
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class SMTPSTest {
+public final class SmtpsTest {
 
     /**
      * SMTPS postman can send an email to the server through SMTPS wire.
@@ -66,7 +66,7 @@ public final class SMTPSTest {
     public void sendsEmailToTheServerThroughSmtps() throws Exception {
         final String bind = "localhost";
         final int received = 1;
-        final int port = SMTPSTest.port();
+        final int port = SmtpsTest.port();
         final int timeout = 3000;
         Security.setProperty(
             "ssl.SocketFactory.provider",
@@ -80,13 +80,13 @@ public final class SMTPSTest {
         server.start();
         try {
             new Postman.Default(
-                new SMTPS(
+                new Smtps(
                     new Token("", "")
-                        .access(new Protocol.SMTPS(bind, port))
+                        .access(new Protocol.Smtps(bind, port))
                 )
             ).send(
                 new Envelope.Safe(
-                    new Envelope.MIME()
+                    new Envelope.Mime()
                         .with(new StSender("from <test-from@jcabi.com>"))
                         .with(new StRecipient("to", "test-to@jcabi.com"))
                         .with(new StSubject("test subject: test me"))

@@ -47,8 +47,8 @@ import javax.net.ssl.SSLSocketFactory;
  *   )
  * );
  * </pre>
- * For <b>SMTPS</b> use the {@link com.jcabi.email.wire.SMTPS} wire and
- * {@link Protocol.SMTPS} respectively. SMTPS protocol should work only with
+ * For <b>SMTPS</b> use the {@link com.jcabi.email.wire.Smtps} wire and
+ * {@link Smtps} respectively. SMTPS protocol should work only with
  * the SMTPS wire because the wire uses the "smtps" transport to make the
  * connection to the mail server:
  * <pre>
@@ -72,7 +72,7 @@ public interface Protocol {
     /**
      * SNMP protocol.
      */
-    final class SMTP implements Protocol {
+    final class Smtp implements Protocol {
         /**
          * SMTP host.
          */
@@ -88,7 +88,7 @@ public interface Protocol {
          * @param hst SMTP Host
          * @param prt SMTP Port
          */
-        public SMTP(final String hst, final int prt) {
+        public Smtp(final String hst, final int prt) {
             this.host = hst;
             this.port = prt;
         }
@@ -106,7 +106,7 @@ public interface Protocol {
     /**
      * SMTPS protocol.
      */
-    final class SMTPS implements Protocol {
+    final class Smtps implements Protocol {
         /**
          * SMTPS host.
          */
@@ -122,7 +122,7 @@ public interface Protocol {
          * @param hst SMTPS Host
          * @param prt SMTPS Port
          */
-        public SMTPS(final String hst, final int prt) {
+        public Smtps(final String hst, final int prt) {
             this.host = hst;
             this.port = prt;
         }

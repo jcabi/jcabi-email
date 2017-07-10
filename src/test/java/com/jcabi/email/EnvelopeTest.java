@@ -30,7 +30,7 @@
 package com.jcabi.email;
 
 import com.google.common.base.Joiner;
-import com.jcabi.email.enclosure.EnHTML;
+import com.jcabi.email.enclosure.EnHtml;
 import com.jcabi.email.enclosure.EnPlain;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
@@ -79,11 +79,11 @@ public final class EnvelopeTest {
      */
     @Test
     public void handlesUnicodeCorrectly() throws Exception {
-        final Envelope env = new Envelope.MIME()
+        final Envelope env = new Envelope.Mime()
             .with(new StSender("from <test-from@jcabi.com>"))
             .with(new StRecipient("to", "test-to@jcabi.com"))
             .with(new StSubject("test subject: test me"))
-            .with(new EnHTML("<html><body>привет</body></html>"));
+            .with(new EnHtml("<html><body>привет</body></html>"));
         final ByteArrayOutputStream stream =
             new ByteArrayOutputStream();
         env.unwrap().writeTo(stream);
@@ -113,10 +113,10 @@ public final class EnvelopeTest {
      */
     @Test
     public void wrapsAnotherEnvelope() throws Exception {
-        final Envelope origin = new Envelope.MIME().with(
+        final Envelope origin = new Envelope.Mime().with(
             new StSender("jack@example.com")
         );
-        final Message message = new Envelope.MIME(origin).with(
+        final Message message = new Envelope.Mime(origin).with(
             new StRecipient("paul@example.com")
         ).unwrap();
         MatcherAssert.assertThat(
@@ -135,10 +135,10 @@ public final class EnvelopeTest {
      */
     @Test
     public void wrapsAnotherEnvelopeWithEnclosures() throws Exception {
-        final Envelope origin = new Envelope.MIME().with(
+        final Envelope origin = new Envelope.Mime().with(
             new EnPlain("first enclosure")
         );
-        final Message message = new Envelope.MIME(origin).with(
+        final Message message = new Envelope.Mime(origin).with(
             new EnPlain("second enclosure")
         ).unwrap();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();

@@ -41,7 +41,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * Stamp for a MIME envelope, with a BCC recipient.
+ * Stamp for a MIME envelope, with a CC recipient.
  *
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
@@ -51,7 +51,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(of = "email")
 @Loggable(Loggable.DEBUG)
-public final class StBCC implements Stamp {
+public final class StCc implements Stamp {
 
     /**
      * Email to send to.
@@ -62,7 +62,7 @@ public final class StBCC implements Stamp {
      * Ctor.
      * @param addr Address
      */
-    public StBCC(final Address addr) {
+    public StCc(final Address addr) {
         this(addr.toString());
     }
 
@@ -72,7 +72,7 @@ public final class StBCC implements Stamp {
      * @param addr His email
      * @since 1.1
      */
-    public StBCC(final String name, final String addr) {
+    public StCc(final String name, final String addr) {
         this(name, addr, "UTF-8");
     }
 
@@ -82,15 +82,15 @@ public final class StBCC implements Stamp {
      * @param addr His email
      * @param charset Name charset
      */
-    public StBCC(final String name, final String addr, final String charset) {
-        this(StBCC.addr(name, addr, charset));
+    public StCc(final String name, final String addr, final String charset) {
+        this(StCc.addr(name, addr, charset));
     }
 
     /**
      * Ctor.
      * @param addr Address
      */
-    public StBCC(final String addr) {
+    public StCc(final String addr) {
         this.email = addr;
     }
 
@@ -102,7 +102,7 @@ public final class StBCC implements Stamp {
             );
         }
         message.addRecipient(
-            Message.RecipientType.BCC,
+            Message.RecipientType.CC,
             new InternetAddress(this.email)
         );
     }

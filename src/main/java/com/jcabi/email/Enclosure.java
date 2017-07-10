@@ -30,6 +30,7 @@
 package com.jcabi.email;
 
 import com.jcabi.aspects.Immutable;
+import com.jcabi.email.enclosure.EnHtml;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 
@@ -41,7 +42,7 @@ import javax.mail.internet.MimeBodyPart;
  * @since 1.0
  * @see com.jcabi.email.enclosure.EnPlain
  * @see com.jcabi.email.enclosure.EnBinary
- * @see com.jcabi.email.enclosure.EnHTML
+ * @see EnHtml
  */
 @Immutable
 public interface Enclosure {

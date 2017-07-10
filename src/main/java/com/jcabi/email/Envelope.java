@@ -54,7 +54,7 @@ import lombok.ToString;
 /**
  * Envelope.
  *
- * <p>The best way is to use {@link com.jcabi.email.Envelope.MIME}, but
+ * <p>The best way is to use {@link Mime}, but
  * you can easily create your own implementation of it.
  *
  * <p>It is recommended to always wrap your envelope into
@@ -94,7 +94,7 @@ public interface Envelope {
     @ToString
     @EqualsAndHashCode(of = "encs")
     @Loggable(Loggable.DEBUG)
-    final class MIME implements Envelope {
+    final class Mime implements Envelope {
         /**
          * List of stamps.
          */
@@ -107,7 +107,7 @@ public interface Envelope {
          * Ctor.
          * @since 1.3
          */
-        public MIME() {
+        public Mime() {
             this(new Array<Stamp>(), new Array<Enclosure>());
         }
         /**
@@ -115,10 +115,10 @@ public interface Envelope {
          * @param env Original envelope
          * @since 1.5
          */
-        public MIME(final Envelope env) {
+        public Mime(final Envelope env) {
             this(
-                Envelope.MIME.class.cast(env).stamps,
-                Envelope.MIME.class.cast(env).encs
+                Mime.class.cast(env).stamps,
+                Mime.class.cast(env).encs
             );
         }
         /**
@@ -126,7 +126,7 @@ public interface Envelope {
          * @param stmps Stamps
          * @param list List of enclosures
          */
-        public MIME(final Iterable<Stamp> stmps,
+        public Mime(final Iterable<Stamp> stmps,
             final Iterable<Enclosure> list) {
             this.stamps = new Array<>(stmps);
             this.encs = new Array<>(list);
@@ -154,8 +154,8 @@ public interface Envelope {
          * @return MIME envelope
          * @since 1.3
          */
-        public Envelope.MIME with(final Stamp stamp) {
-            return new Envelope.MIME(
+        public Mime with(final Stamp stamp) {
+            return new Mime(
                 this.stamps.with(stamp),
                 this.encs
             );
@@ -166,8 +166,8 @@ public interface Envelope {
          * @return MIME envelope
          * @since 1.3
          */
-        public Envelope.MIME with(final Enclosure enc) {
-            return new Envelope.MIME(
+        public Mime with(final Enclosure enc) {
+            return new Mime(
                 this.stamps,
                 this.encs.with(enc)
             );

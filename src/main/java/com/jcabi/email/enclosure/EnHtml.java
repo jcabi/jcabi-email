@@ -27,21 +27,19 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jcabi.email.stamp;
+package com.jcabi.email.enclosure;
 
 import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
-import com.jcabi.email.Stamp;
-import java.io.UnsupportedEncodingException;
-import javax.mail.Address;
-import javax.mail.Message;
+import com.jcabi.email.Enclosure;
 import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeUtility;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * Stamp for a MIME envelope, with a CC recipient.
+ * HTML enclosure in MIME envelope.
  *
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
@@ -49,82 +47,62 @@ import lombok.ToString;
  */
 @Immutable
 @ToString
-@EqualsAndHashCode(of = "email")
+@EqualsAndHashCode(of = {"text", "charset"})
 @Loggable(Loggable.DEBUG)
-public final class StCC implements Stamp {
+public final class EnHtml implements Enclosure {
 
     /**
-     * Email to send to.
+     * Text content.
      */
-    private final transient String email;
+    private final transient String text;
+
+    /**
+     * Text charset.
+     */
+    private final transient String charset;
 
     /**
      * Ctor.
-     * @param addr Address
+     * @param content HTML content
      */
-    public StCC(final Address addr) {
-        this(addr.toString());
+    public EnHtml(final String content) {
+        this(content, "UTF-8");
     }
 
     /**
      * Ctor.
-     * @param name Name of the recipient
-     * @param addr His email
-     * @since 1.1
+     * @param content HTML content
+     * @param charset Content charset
      */
-    public StCC(final String name, final String addr) {
-        this(name, addr, "UTF-8");
-    }
-
-    /**
-     * Ctor.
-     * @param name Name of the recipient
-     * @param addr His email
-     * @param charset Name charset
-     */
-    public StCC(final String name, final String addr, final String charset) {
-        this(StCC.addr(name, addr, charset));
-    }
-
-    /**
-     * Ctor.
-     * @param addr Address
-     */
-    public StCC(final String addr) {
-        this.email = addr;
+    public EnHtml(final String content, final String charset) {
+        this.text = content;
+        this.charset = charset;
     }
 
     @Override
-    public void attach(final Message message) throws MessagingException {
-        if (this.email == null) {
+    public MimeBodyPart part() throws MessagingException {
+        if (this.text == null) {
             throw new IllegalArgumentException(
-                "Email address can't be NULL"
+                "Attachment text can't be NULL"
             );
         }
-        message.addRecipient(
-            Message.RecipientType.CC,
-            new InternetAddress(this.email)
-        );
-    }
-
-    /**
-     * Make email.
-     * @param name Name of the recipient
-     * @param addr His email
-     * @param charset Name charset
-     * @return Email
-     * @since 1.1
-     */
-    private static String addr(
-        final String name,
-        final String addr,
-        final String charset
-    ) {
-        try {
-            return new InternetAddress(addr, name, charset).toString();
-        } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
+        if (this.charset == null) {
+            throw new IllegalArgumentException(
+                "Attachment charset can't be NULL"
+            );
         }
+        final MimeBodyPart mime = new MimeBodyPart();
+        final String characterset = MimeUtility.quote(
+            this.charset,
+            "()<>@,;:\\\"\t []/?="
+        );
+        final String ctype = String.format(
+            "text/html;charset=\"%s\"",
+            characterset
+        );
+        mime.setContent(this.text, ctype);
+        mime.addHeader("Content-Type", ctype);
+        return mime;
     }
 
 }

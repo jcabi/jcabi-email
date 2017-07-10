@@ -27,60 +27,48 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jcabi.email.wire;
+package com.jcabi.email.enclosure;
 
-import com.jcabi.aspects.Immutable;
-import com.jcabi.aspects.Loggable;
-import com.jcabi.email.Wire;
-import java.io.IOException;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import java.io.ByteArrayOutputStream;
+import javax.mail.internet.MimeBodyPart;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * SMTP wire.
+ * Test case for {@link EnHtml}.
  *
- * <p>This is how you're supposed to use it:
- *
- * <pre> Postman postman = new Postman.Default(
- *   new SMTP(
- *     new Token("user", "password").access(
- *       new Protocol.SMTP("bind", "port")
- *     )
- *   )
- * );
- * </pre>
- *
- * @author Yegor Bugayenko (yegor256@gmail.com)
+ * @author Valeriy Vyrva (valery1707@gmail.com)
  * @version $Id$
- * @since 1.0
+ * @since 1.8.2
  */
-@Immutable
-@Loggable(Loggable.DEBUG)
-public final class SMTP implements Wire {
+public final class EnHtmlTest {
 
     /**
-     * Mail session.
+     * EnPlain can create a plain MIME part with custom encoding.
+     * @throws Exception If fails
      */
-    private final transient Session session;
-
-    /**
-     * Public ctor.
-     * @param session Session.
-     */
-    public SMTP(final Session session) {
-        this.session = session;
+    @Test
+    public void createsHtmlMimePartWithCustomEncoding() throws Exception {
+        final String charset = "KOI8-R";
+        final MimeBodyPart part = new EnHtml(
+            "<p>hello, приятель</p>",
+            charset
+        ).part();
+        final String substring = "приятель";
+        MatcherAssert.assertThat(
+            part.getContent().toString(),
+            Matchers.containsString(substring)
+        );
+        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        part.writeTo(bytes);
+        MatcherAssert.assertThat(
+            new String(bytes.toByteArray(), charset),
+            Matchers.containsString(substring)
+        );
+        MatcherAssert.assertThat(
+            new String(bytes.toByteArray(), "UTF-8"),
+            Matchers.not(Matchers.containsString(substring))
+        );
     }
-
-    @Override
-    public Transport connect() throws IOException {
-        try {
-            final Transport transport = this.session.getTransport("smtp");
-            transport.connect();
-            return transport;
-        } catch (final MessagingException ex) {
-            throw new IOException(ex);
-        }
-    }
-
 }

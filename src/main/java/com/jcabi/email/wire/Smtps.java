@@ -27,48 +27,55 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jcabi.email.enclosure;
+package com.jcabi.email.wire;
 
-import java.io.ByteArrayOutputStream;
-import javax.mail.internet.MimeBodyPart;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
+import com.jcabi.email.Wire;
+import java.io.IOException;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
 
 /**
- * Test case for {@link EnHTML}.
+ * SMTPS wire.
  *
- * @author Valeriy Vyrva (valery1707@gmail.com)
+ * <p>This is how you're supposed to use it:
+ *
+ * <pre> Postman postman = new Postman.Default(
+ *   new SMTPS(
+ *     new Token("user", "password").access(
+ *       new Protocol.SMTPS("smtp.gmail.com", 587)
+ *     )
+ *   )
+ * );
+ * </pre>
+ *
+ * @author Mihai Andronache (amihaiemil@gmail.com)
  * @version $Id$
- * @since 1.8.2
+ * @since 1.9
  */
-public final class EnHTMLTest {
+public final class Smtps implements Wire {
 
     /**
-     * EnPlain can create a plain MIME part with custom encoding.
-     * @throws Exception If fails
+     * Mail session.
      */
-    @Test
-    public void createsHTMLMimePartWithCustomEncoding() throws Exception {
-        final String charset = "KOI8-R";
-        final MimeBodyPart part = new EnHTML(
-            "<p>hello, приятель</p>",
-            charset
-        ).part();
-        final String substring = "приятель";
-        MatcherAssert.assertThat(
-            part.getContent().toString(),
-            Matchers.containsString(substring)
-        );
-        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        part.writeTo(bytes);
-        MatcherAssert.assertThat(
-            new String(bytes.toByteArray(), charset),
-            Matchers.containsString(substring)
-        );
-        MatcherAssert.assertThat(
-            new String(bytes.toByteArray(), "UTF-8"),
-            Matchers.not(Matchers.containsString(substring))
-        );
+    private final transient Session session;
+
+    /**
+     * Public ctor.
+     * @param session Session.
+     */
+    public Smtps(final Session session) {
+        this.session = session;
+    }
+
+    @Override
+    public Transport connect() throws IOException {
+        try {
+            final Transport transport = this.session.getTransport("smtps");
+            transport.connect();
+            return transport;
+        } catch (final MessagingException ex) {
+            throw new IOException(ex);
+        }
     }
 }

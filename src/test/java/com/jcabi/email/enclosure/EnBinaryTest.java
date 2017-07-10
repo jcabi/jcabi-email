@@ -30,10 +30,10 @@
 package com.jcabi.email.enclosure;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import javax.mail.internet.MimeBodyPart;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
@@ -63,7 +63,7 @@ public final class EnBinaryTest {
     @Test
     public void addsFileToMessage() throws Exception {
         final File file = this.temp.newFile();
-        FileUtils.write(file, "hey, привет", CharEncoding.UTF_8);
+        FileUtils.write(file, "hey, привет", StandardCharsets.UTF_8);
         final MimeBodyPart part = new EnBinary(
             file, "letter-другу.pdf", "text/plain"
         ).part();
@@ -72,7 +72,7 @@ public final class EnBinaryTest {
             Matchers.endsWith("другу.pdf")
         );
         MatcherAssert.assertThat(
-            IOUtils.toString(part.getInputStream(), CharEncoding.UTF_8),
+            IOUtils.toString(part.getInputStream(), StandardCharsets.UTF_8),
             Matchers.endsWith("привет")
         );
     }
