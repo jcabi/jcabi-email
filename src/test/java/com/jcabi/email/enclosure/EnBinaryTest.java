@@ -34,6 +34,7 @@ import java.nio.charset.StandardCharsets;
 import javax.mail.internet.MimeBodyPart;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
@@ -77,4 +78,23 @@ public final class EnBinaryTest {
         );
     }
 
+    /**
+     * EnBinary can add raw data to message.
+     * @throws Exception If fails
+     */
+    @Test
+    public void addsRawDataToMessage() throws Exception {
+        final byte[] bytes = RandomUtils.nextBytes(10);
+        final MimeBodyPart part = new EnBinary(
+            bytes, "test-report.xlsx", "application/vnd.ms-excel"
+        ).part();
+        MatcherAssert.assertThat(
+            part.getFileName(),
+            Matchers.endsWith("report.xlsx")
+        );
+        MatcherAssert.assertThat(
+            IOUtils.toString(part.getInputStream(), StandardCharsets.UTF_8),
+            Matchers.containsString(new String(bytes, "UTF-8"))
+        );
+    }
 }
