@@ -33,9 +33,12 @@ import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
 import com.jcabi.email.Enclosure;
 import java.io.File;
-import java.io.IOException;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
+import javax.mail.util.ByteArrayDataSource;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -48,14 +51,14 @@ import lombok.ToString;
  */
 @Immutable
 @ToString
-@EqualsAndHashCode(of = { "path", "name", "ctype" })
+@EqualsAndHashCode(of = { "source", "name", "ctype" })
 @Loggable(Loggable.DEBUG)
 public final class EnBinary implements Enclosure {
 
     /**
-     * File path.
+     * Data source.
      */
-    private final transient String path;
+    private final transient DataSource source;
 
     /**
      * Name.
@@ -74,7 +77,28 @@ public final class EnBinary implements Enclosure {
      * @param type MIME content type
      */
     public EnBinary(final File file, final String label, final String type) {
-        this.path = file.getAbsolutePath();
+        this(new FileDataSource(file), label, type);
+    }
+
+    /**
+     * Ctor.
+     * @param bytes Raw data to attach
+     * @param label Name of the file to show
+     * @param type MIME content type
+     */
+    public EnBinary(final byte[] bytes, final String label, final String type) {
+        this(new ByteArrayDataSource(bytes, type), label, type);
+    }
+
+    /**
+     * Ctor.
+     * @param src Data source to attach
+     * @param label Name of the file to show
+     * @param type MIME content type
+     */
+    public EnBinary(final DataSource src, final String label,
+        final String type) {
+        this.source = src;
         this.name = label;
         this.ctype = type;
     }
@@ -92,11 +116,7 @@ public final class EnBinary implements Enclosure {
             );
         }
         final MimeBodyPart mime = new MimeBodyPart();
-        try {
-            mime.attachFile(new File(this.path));
-        } catch (final IOException ex) {
-            throw new IllegalStateException(ex);
-        }
+        mime.setDataHandler(new DataHandler(this.source));
         mime.setFileName(this.name);
         mime.addHeader("Content-Type", this.ctype);
         return mime;
