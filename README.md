@@ -9,7 +9,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/ueunlwvuxyiws57s/branch/master?svg=true)](https://ci.appveyor.com/project/yegor256/jcabi-email/branch/master)
 [![Javadoc](https://javadoc.io/badge/com.jcabi/jcabi-email.svg)](http://www.javadoc.io/doc/com.jcabi/jcabi-email)
 
-[![jpeek report](http://i.jpeek.org/com.jcabi/jcabi-email/badge.svg)](http://i.jpeek.org/com.jcabi/jcabi-email/)
+[![jpeek report](https://i.jpeek.org/com.jcabi/jcabi-email/badge.svg)](https://i.jpeek.org/com.jcabi/jcabi-email/)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.jcabi/jcabi-email/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.jcabi/jcabi-email)
 [![Dependencies](https://www.versioneye.com/user/projects/561ac442a193340f2f0011cb/badge.svg?style=flat)](https://www.versioneye.com/user/projects/561ac442a193340f2f0011cb)
 
