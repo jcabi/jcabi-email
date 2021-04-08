@@ -43,8 +43,6 @@ import org.junit.Test;
 /**
  * Test case for {@link com.jcabi.email.stamp.StRecipient}.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.3.1
  */
 public final class StRecipientTest {

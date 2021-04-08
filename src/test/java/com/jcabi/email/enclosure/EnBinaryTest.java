@@ -43,8 +43,6 @@ import org.junit.rules.TemporaryFolder;
 /**
  * Test case for {@link EnBinary}.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.3.2
  */
 public final class EnBinaryTest {

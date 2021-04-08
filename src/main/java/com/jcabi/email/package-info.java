@@ -68,8 +68,6 @@
  *   &lt;artifactId&gt;jcabi-email&lt;/artifactId&gt;
  * &lt;/dependency&gt;</pre>
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.0
  * @see <a href="http://email.jcabi.com/">project website</a>
  */

@@ -41,8 +41,6 @@ import org.junit.Test;
 /**
  * Test case for {@link StReplyTo}.
  *
- * @author Mihai Andronache (amihaiemil@gmail.com)
- * @version $Id$
  * @since 1.8
  */
 public final class StReplyToTest {

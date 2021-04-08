@@ -40,8 +40,6 @@ import org.junit.Test;
 /**
  * Test case for {@link StHeader}.
  *
- * @author Felipe Pina (felipe.pina@gmail.com)
- * @version $Id$
  * @since 1.6.2
  */
 public final class StHeaderTest {

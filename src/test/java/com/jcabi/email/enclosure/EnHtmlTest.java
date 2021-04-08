@@ -38,8 +38,6 @@ import org.junit.Test;
 /**
  * Test case for {@link EnHtml}.
  *
- * @author Valeriy Vyrva (valery1707@gmail.com)
- * @version $Id$
  * @since 1.8.2
  */
 public final class EnHtmlTest {

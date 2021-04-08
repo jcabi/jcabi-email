@@ -51,8 +51,6 @@ import org.junit.Test;
 
 /**
  * Test case for {@link Smtps}.
- * @author Mihai Andronache (amihaiemil@gmail.com)
- * @version $Id$
  * @since 1.9
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */

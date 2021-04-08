@@ -31,8 +31,6 @@
 /**
  * Postmen.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.6
  */
 package com.jcabi.email.postman;

@@ -60,8 +60,6 @@ import lombok.ToString;
  * <p>It is recommended to always wrap your envelope into
  * {@link com.jcabi.email.Envelope.Safe}.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.0
  */
 @Immutable

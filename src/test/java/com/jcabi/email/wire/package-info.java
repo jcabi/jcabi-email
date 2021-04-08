@@ -31,8 +31,6 @@
 /**
  * Wires, tests.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.4
  */
 package com.jcabi.email.wire;

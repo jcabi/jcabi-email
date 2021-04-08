@@ -44,8 +44,6 @@ import lombok.ToString;
 /**
  * Postman that ignores drafts.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.6
  */
 @Immutable

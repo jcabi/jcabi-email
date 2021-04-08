@@ -38,8 +38,6 @@ import org.junit.Test;
 /**
  * Test case for {@link EnPlain}.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.3.2
  */
 public final class EnPlainTest {

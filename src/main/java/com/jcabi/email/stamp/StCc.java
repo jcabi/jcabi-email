@@ -43,8 +43,6 @@ import lombok.ToString;
 /**
  * Stamp for a MIME envelope, with a CC recipient.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.0
  */
 @Immutable

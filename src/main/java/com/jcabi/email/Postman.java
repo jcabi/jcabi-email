@@ -73,8 +73,6 @@ import lombok.ToString;
  *   )
  * );</pre>
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.0
  */
 @Immutable

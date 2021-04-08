@@ -49,8 +49,6 @@ import javax.mail.Transport;
  * );
  * </pre>
  *
- * @author Mihai Andronache (amihaiemil@gmail.com)
- * @version $Id$
  * @since 1.9
  */
 public final class Smtps implements Wire {
