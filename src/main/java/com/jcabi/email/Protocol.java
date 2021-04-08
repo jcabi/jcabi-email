@@ -69,6 +69,7 @@ public interface Protocol {
 
     /**
      * SNMP protocol.
+     * @since 1.0
      */
     final class Smtp implements Protocol {
         /**
@@ -103,6 +104,7 @@ public interface Protocol {
 
     /**
      * SMTPS protocol.
+     * @since 1.0
      */
     final class Smtps implements Protocol {
         /**

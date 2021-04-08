@@ -99,12 +99,14 @@ public final class Token {
 
     /**
      * Authenticating credentials.
+     * @since 1.0
      */
     private static final class Verification extends Authenticator {
         /**
          * User name.
          */
         private final transient String user;
+
         /**
          * User password.
          */

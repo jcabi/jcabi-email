@@ -87,6 +87,7 @@ public interface Envelope {
 
     /**
      * Default envelope.
+     * @since 1.0
      */
     @Immutable
     @ToString
@@ -97,10 +98,12 @@ public interface Envelope {
          * List of stamps.
          */
         private final transient Array<Stamp> stamps;
+
         /**
          * List of enclosures.
          */
         private final transient Array<Enclosure> encs;
+
         /**
          * Ctor.
          * @since 1.3
@@ -108,6 +111,7 @@ public interface Envelope {
         public Mime() {
             this(new Array<Stamp>(), new Array<Enclosure>());
         }
+
         /**
          * Ctor.
          * @param env Original envelope
@@ -119,6 +123,7 @@ public interface Envelope {
                 Mime.class.cast(env).encs
             );
         }
+
         /**
          * Ctor.
          * @param stmps Stamps
@@ -129,6 +134,7 @@ public interface Envelope {
             this.stamps = new Array<>(stmps);
             this.encs = new Array<>(list);
         }
+
         @Override
         public Message unwrap() throws IOException {
             final Message msg = Envelope.EMPTY.unwrap();
@@ -146,6 +152,7 @@ public interface Envelope {
             }
             return msg;
         }
+
         /**
          * With this stamp.
          * @param stamp Stamp
@@ -158,6 +165,7 @@ public interface Envelope {
                 this.encs
             );
         }
+
         /**
          * With this enclosure.
          * @param enc Enclosure
@@ -185,6 +193,7 @@ public interface Envelope {
          * Origin env.
          */
         private final transient Envelope origin;
+
         /**
          * Ctor.
          * @param env Envelope
@@ -192,6 +201,7 @@ public interface Envelope {
         public Strict(final Envelope env) {
             this.origin = env;
         }
+
         @Override
         public Message unwrap() throws IOException {
             final Message msg = this.origin.unwrap();
@@ -231,6 +241,7 @@ public interface Envelope {
          * Origin env.
          */
         private final transient Envelope origin;
+
         /**
          * Ctor.
          * @param env Envelope
@@ -238,6 +249,7 @@ public interface Envelope {
         public Safe(final Envelope env) {
             this.origin = env;
         }
+
         @Override
         public Message unwrap() throws IOException {
             final Message msg = this.origin.unwrap();
@@ -280,10 +292,12 @@ public interface Envelope {
             CacheBuilder.newBuilder()
                 .expireAfterWrite(1L, TimeUnit.HOURS)
                 .build();
+
         /**
          * Origin env.
          */
         private final transient Envelope origin;
+
         /**
          * Ctor.
          * @param env Envelope
@@ -291,6 +305,7 @@ public interface Envelope {
         public Constant(final Envelope env) {
             this.origin = env;
         }
+
         @Override
         public Message unwrap() throws IOException {
             try {
@@ -322,6 +337,7 @@ public interface Envelope {
          * Origin env.
          */
         private final transient Envelope env;
+
         /**
          * Ctor.
          * @param origin Envelope
@@ -329,6 +345,7 @@ public interface Envelope {
         public Draft(final Envelope origin) {
             this.env = origin;
         }
+
         @Override
         public Message unwrap() throws IOException {
             final Message msg = this.env.unwrap();
