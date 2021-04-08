@@ -158,7 +158,10 @@
                         <groupId>com.qulice</groupId>
                         <artifactId>qulice-maven-plugin</artifactId>
                         <configuration>
-                            <license>file:${basedir}/LICENSE.txt</license>
+                          <license>file:${basedir}/LICENSE.txt</license>
+                          <excludes>
+                            <exclude>findbugs:.*</exclude>
+                          </excludes>
                         </configuration>
                     </plugin>
                 </plugins>
