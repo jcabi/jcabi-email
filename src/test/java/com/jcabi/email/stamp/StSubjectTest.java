@@ -37,21 +37,21 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link com.jcabi.email.stamp.StSubject}.
  *
  * @since 1.3.1
  */
-public final class StSubjectTest {
+final class StSubjectTest {
 
     /**
      * StSubject can add a subject to the message.
      * @throws Exception If fails
      */
     @Test
-    public void addsSubjectToMessage() throws Exception {
+    void addsSubjectToMessage() throws Exception {
         final Message msg = new MimeMessage(
             Session.getDefaultInstance(new Properties())
         );
@@ -67,7 +67,7 @@ public final class StSubjectTest {
      * @throws Exception If fails
      */
     @Test
-    public void addsSubjectToMessageWithCustomEncoding() throws Exception {
+    void addsSubjectToMessageWithCustomEncoding() throws Exception {
         final String charset = "KOI8-R";
         final Message msg = new MimeMessage(
             Session.getDefaultInstance(new Properties())

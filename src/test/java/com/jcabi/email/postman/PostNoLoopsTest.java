@@ -33,7 +33,7 @@ import com.jcabi.email.Envelope;
 import com.jcabi.email.Postman;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 /**
@@ -41,7 +41,7 @@ import org.mockito.Mockito;
  *
  * @since 1.6
  */
-public final class PostNoLoopsTest {
+final class PostNoLoopsTest {
 
     /**
      * PostNoLoops can ignore messages.
@@ -49,7 +49,7 @@ public final class PostNoLoopsTest {
      */
     @Test
     @SuppressWarnings("unchecked")
-    public void ignoresLoopMessages() throws Exception {
+    void ignoresLoopMessages() throws Exception {
         final Postman post = Mockito.mock(Postman.class);
         final String email = "test@example.com";
         new PostNoLoops(post).send(
@@ -67,7 +67,7 @@ public final class PostNoLoopsTest {
      */
     @Test
     @SuppressWarnings("unchecked")
-    public void doesntTouchNormalMessages() throws Exception {
+    void doesntTouchNormalMessages() throws Exception {
         final Postman post = Mockito.mock(Postman.class);
         new PostNoLoops(post).send(
             new Envelope.Mime()

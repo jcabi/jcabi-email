@@ -38,21 +38,21 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link StCc}.
  *
  * @since 1.3.1
  */
-public final class StCcTest {
+final class StCcTest {
 
     /**
      * StCC can add a CC recipient to the message.
      * @throws Exception If fails
      */
     @Test
-    public void addsCopyToMessage() throws Exception {
+    void addsCopyToMessage() throws Exception {
         final Message msg = new MimeMessage(
             Session.getDefaultInstance(new Properties())
         );
@@ -77,7 +77,7 @@ public final class StCcTest {
      * @throws Exception If fails
      */
     @Test
-    public void addsCopyToMessageWithCustomCharset() throws Exception {
+    void addsCopyToMessageWithCustomCharset() throws Exception {
         final String charset = "KOI8-R";
         final Message msg = new MimeMessage(
             Session.getDefaultInstance(new Properties())

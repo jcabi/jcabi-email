@@ -49,21 +49,21 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link Smtp}.
  * @since 1.0
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class SmtpTest {
+final class SmtpTest {
 
     /**
      * SMTP postman can send email through SMTP wire.
      * @throws Exception If fails
      */
     @Test
-    public void sendsEmailToSmtpServer() throws Exception {
+    void sendsEmailToSmtpServer() throws Exception {
         final String bind = "localhost";
         final int received = 3;
         final int port = SmtpTest.port();

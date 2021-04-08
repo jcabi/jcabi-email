@@ -38,21 +38,21 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link com.jcabi.email.stamp.StRecipient}.
  *
  * @since 1.3.1
  */
-public final class StRecipientTest {
+final class StRecipientTest {
 
     /**
      * StRecipient can add a recipient to the message.
      * @throws Exception If fails
      */
     @Test
-    public void addsRecipientToMessage() throws Exception {
+    void addsRecipientToMessage() throws Exception {
         final Message msg = new MimeMessage(
             Session.getDefaultInstance(new Properties())
         );
@@ -72,7 +72,7 @@ public final class StRecipientTest {
      * @throws Exception If fails
      */
     @Test
-    public void addsRecipientToMessageWithCustomCharset() throws Exception {
+    void addsRecipientToMessageWithCustomCharset() throws Exception {
         final String charset = "KOI8-R";
         final Message msg = new MimeMessage(
             Session.getDefaultInstance(new Properties())

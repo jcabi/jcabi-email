@@ -43,7 +43,7 @@ import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 /**
@@ -52,14 +52,14 @@ import org.mockito.Mockito;
  * @since 1.4
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class EnvelopeTest {
+final class EnvelopeTest {
 
     /**
      * Envelope.Constant can cache.
      * @throws Exception If fails
      */
     @Test
-    public void cachesPreviousCall() throws Exception {
+    void cachesPreviousCall() throws Exception {
         final Envelope origin = Mockito.mock(Envelope.class);
         Mockito.doReturn(
             new MimeMessage(Session.getDefaultInstance(new Properties()))
@@ -76,7 +76,7 @@ public final class EnvelopeTest {
      *  string.
      */
     @Test
-    public void handlesUnicodeCorrectly() throws Exception {
+    void handlesUnicodeCorrectly() throws Exception {
         final Envelope env = new Envelope.Mime()
             .with(new StSender("from <test-from@jcabi.com>"))
             .with(new StRecipient("to", "test-to@jcabi.com"))
@@ -110,7 +110,7 @@ public final class EnvelopeTest {
      * @throws Exception If fails
      */
     @Test
-    public void wrapsAnotherEnvelope() throws Exception {
+    void wrapsAnotherEnvelope() throws Exception {
         final Envelope origin = new Envelope.Mime().with(
             new StSender("jack@example.com")
         );
@@ -132,7 +132,7 @@ public final class EnvelopeTest {
      * @throws Exception If fails
      */
     @Test
-    public void wrapsAnotherEnvelopeWithEnclosures() throws Exception {
+    void wrapsAnotherEnvelopeWithEnclosures() throws Exception {
         final Envelope origin = new Envelope.Mime().with(
             new EnPlain("first enclosure")
         );

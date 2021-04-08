@@ -36,21 +36,21 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link StReplyTo}.
  *
  * @since 1.8
  */
-public final class StReplyToTest {
+final class StReplyToTest {
 
     /**
      * StReplyTo can attach the reply to address to a message.
      * @throws Exception If something goes wrong.
      */
     @Test
-    public void addsReplyToAddressToMessage() throws Exception {
+    void addsReplyToAddressToMessage() throws Exception {
         final Message msg = new MimeMessage(
             Session.getDefaultInstance(new Properties())
         );
