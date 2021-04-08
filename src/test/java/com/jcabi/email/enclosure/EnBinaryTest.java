@@ -31,36 +31,25 @@ package com.jcabi.email.enclosure;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import javax.mail.internet.MimeBodyPart;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Test case for {@link EnBinary}.
  *
  * @since 1.3.2
  */
-public final class EnBinaryTest {
+final class EnBinaryTest {
 
-    /**
-     * Temp directory.
-     * @checkstyle VisibilityModifierCheck (5 lines)
-     */
-    @Rule
-    public final transient TemporaryFolder temp = new TemporaryFolder();
-
-    /**
-     * EnBinary can add a file to the message.
-     * @throws Exception If fails
-     */
     @Test
-    public void addsFileToMessage() throws Exception {
-        final File file = this.temp.newFile();
+    void addsFileToMessage(@TempDir final Path temp) throws Exception {
+        final File file = temp.resolve("test.txt").toFile();
         FileUtils.write(file, "hey, привет", StandardCharsets.UTF_8);
         final MimeBodyPart part = new EnBinary(
             file, "letter-другу.pdf", "text/plain"
