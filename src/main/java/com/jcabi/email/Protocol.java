@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2014-2017, jcabi.com
  * All rights reserved.
  *
@@ -56,8 +56,6 @@ import javax.net.ssl.SSLSocketFactory;
  *     transport.connect();
  * </pre>
  *
- * @author Piotr Kotlicki (piotr.kotlicki@gmail.com)
- * @version $Id$
  * @since 1.0
  */
 @Immutable
@@ -71,6 +69,7 @@ public interface Protocol {
 
     /**
      * SNMP protocol.
+     * @since 1.0
      */
     final class Smtp implements Protocol {
         /**
@@ -105,6 +104,7 @@ public interface Protocol {
 
     /**
      * SMTPS protocol.
+     * @since 1.0
      */
     final class Smtps implements Protocol {
         /**

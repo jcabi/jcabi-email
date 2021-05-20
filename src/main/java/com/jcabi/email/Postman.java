@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2014-2017, jcabi.com
  * All rights reserved.
  *
@@ -73,8 +73,6 @@ import lombok.ToString;
  *   )
  * );</pre>
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.0
  */
 @Immutable
@@ -110,6 +108,7 @@ public interface Postman {
 
     /**
      * Default postman.
+     * @since 1.0
      */
     @Immutable
     @ToString
@@ -120,6 +119,7 @@ public interface Postman {
          * Wire.
          */
         private final transient Wire wire;
+
         /**
          * Ctor.
          * @param wre Wire
@@ -127,6 +127,7 @@ public interface Postman {
         public Default(final Wire wre) {
             this.wire = wre;
         }
+
         @Override
         public void send(final Envelope env) throws IOException {
             final Message message = new Envelope.Strict(env).unwrap();
@@ -145,6 +146,7 @@ public interface Postman {
                 Postman.Default.close(transport);
             }
         }
+
         /**
          * Close transport.
          * @param transport Transport to close

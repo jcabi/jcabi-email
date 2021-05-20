@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2014-2017, jcabi.com
  * All rights reserved.
  *
@@ -37,8 +37,6 @@ import javax.mail.internet.MimeBodyPart;
 /**
  * Enclosure in MIME envelope.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.0
  * @see com.jcabi.email.enclosure.EnPlain
  * @see com.jcabi.email.enclosure.EnBinary

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2014-2017, jcabi.com
  * All rights reserved.
  *
@@ -33,23 +33,21 @@ import java.io.ByteArrayOutputStream;
 import javax.mail.internet.MimeBodyPart;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link EnHtml}.
  *
- * @author Valeriy Vyrva (valery1707@gmail.com)
- * @version $Id$
  * @since 1.8.2
  */
-public final class EnHtmlTest {
+final class EnHtmlTest {
 
     /**
      * EnPlain can create a plain MIME part with custom encoding.
      * @throws Exception If fails
      */
     @Test
-    public void createsHtmlMimePartWithCustomEncoding() throws Exception {
+    void createsHtmlMimePartWithCustomEncoding() throws Exception {
         final String charset = "KOI8-R";
         final MimeBodyPart part = new EnHtml(
             "<p>hello, приятель</p>",

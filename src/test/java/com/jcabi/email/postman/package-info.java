@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2014-2017, jcabi.com
  * All rights reserved.
  *
@@ -31,8 +31,6 @@
 /**
  * Postmen, tests.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.6
  */
 package com.jcabi.email.postman;

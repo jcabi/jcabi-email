@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2014-2017, jcabi.com
  * All rights reserved.
  *
@@ -35,23 +35,21 @@ import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link StHeader}.
  *
- * @author Felipe Pina (felipe.pina@gmail.com)
- * @version $Id$
  * @since 1.6.2
  */
-public final class StHeaderTest {
+final class StHeaderTest {
 
     /**
      * StHeader can add a header to the message.
      * @throws Exception If fails
      */
     @Test
-    public void addsHeaderToMessage() throws Exception {
+    void addsHeaderToMessage() throws Exception {
         final Message msg = new MimeMessage(
             Session.getDefaultInstance(new Properties())
         );

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2014-2017, jcabi.com
  * All rights reserved.
  *
@@ -53,8 +53,6 @@ import lombok.ToString;
  * );
  * </pre>
  *
- * @author Piotr Kotlicki (piotr.kotlicki@gmail.com)
- * @version $Id$
  * @since 1.0
  */
 @Immutable
@@ -101,12 +99,14 @@ public final class Token {
 
     /**
      * Authenticating credentials.
+     * @since 1.0
      */
     private static final class Verification extends Authenticator {
         /**
          * User name.
          */
         private final transient String user;
+
         /**
          * User password.
          */

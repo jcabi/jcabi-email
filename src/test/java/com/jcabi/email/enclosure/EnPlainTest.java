@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2014-2017, jcabi.com
  * All rights reserved.
  *
@@ -33,23 +33,21 @@ import java.io.ByteArrayOutputStream;
 import javax.mail.internet.MimeBodyPart;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link EnPlain}.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.3.2
  */
-public final class EnPlainTest {
+final class EnPlainTest {
 
     /**
      * EnPlain can create a plain MIME part.
      * @throws Exception If fails
      */
     @Test
-    public void createsPlainMimePart() throws Exception {
+    void createsPlainMimePart() throws Exception {
         final MimeBodyPart part = new EnPlain("hello, друг").part();
         MatcherAssert.assertThat(
             part.getContent().toString(),
@@ -62,7 +60,7 @@ public final class EnPlainTest {
      * @throws Exception If fails
      */
     @Test
-    public void createsPlainMimePartWithCustomEncoding() throws Exception {
+    void createsPlainMimePartWithCustomEncoding() throws Exception {
         final String charset = "KOI8-R";
         final MimeBodyPart part = new EnPlain(
             "hello, приятель",
