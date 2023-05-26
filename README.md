@@ -6,7 +6,6 @@
 
 [![mvn](https://github.com/jcabi/jcabi-email/actions/workflows/mvn.yml/badge.svg)](https://github.com/jcabi/jcabi-email/actions/workflows/mvn.yml)
 [![PDD status](http://www.0pdd.com/svg?name=jcabi/jcabi-email)](http://www.0pdd.com/p?name=jcabi/jcabi-email)
-[![Build status](https://ci.appveyor.com/api/projects/status/ueunlwvuxyiws57s/branch/master?svg=true)](https://ci.appveyor.com/project/yegor256/jcabi-email/branch/master)
 [![Javadoc](https://javadoc.io/badge/com.jcabi/jcabi-email.svg)](http://www.javadoc.io/doc/com.jcabi/jcabi-email)
 [![jpeek report](https://i.jpeek.org/com.jcabi/jcabi-email/badge.svg)](https://i.jpeek.org/com.jcabi/jcabi-email/)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.jcabi/jcabi-email/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.jcabi/jcabi-email)
