@@ -66,6 +66,7 @@ final class SmtpsTest {
         final int received = 1;
         final int port = SmtpsTest.port();
         final int timeout = 3000;
+        System.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
         Security.setProperty(
             "ssl.SocketFactory.provider",
             DummySSLSocketFactory.class.getName()
