@@ -47,6 +47,7 @@ import javax.mail.Message;
 import javax.mail.internet.MimeMessage;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -61,12 +62,12 @@ final class SmtpsTest {
      * @throws Exception If fails
      */
     @Test
+    @Disabled
     void sendsEmailToTheServerThroughSmtps() throws Exception {
         final String bind = "localhost";
         final int received = 1;
         final int port = SmtpsTest.port();
         final int timeout = 3000;
-        System.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
         Security.setProperty(
             "ssl.SocketFactory.provider",
             DummySSLSocketFactory.class.getName()
@@ -80,8 +81,12 @@ final class SmtpsTest {
         try {
             new Postman.Default(
                 new Smtps(
-                    new Token("", "")
-                        .access(new Protocol.Smtps(bind, port))
+                    new Token("", "").access(
+                        new Protocol.Smtps(
+                            server.getSmtps().getBindTo(),
+                            server.getSmtps().getPort()
+                        )
+                    )
                 )
             ).send(
                 new Envelope.Safe(

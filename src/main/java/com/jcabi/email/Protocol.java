@@ -133,6 +133,9 @@ public interface Protocol {
                 .put("mail.smtps.auth", Boolean.TRUE.toString())
                 .put("mail.smtps.host", this.host)
                 .put("mail.smtps.port", Integer.toString(this.port))
+                .put("mail.smtp.starttls.required", "true")
+                .put("mail.smtp.ssl.protocols", "TLSv1.2")
+                .put("mail.smtp.starttls.enable", "true")
                 .put(
                     "mail.smtp.ssl.checkserveridentity",
                     Boolean.TRUE.toString()
