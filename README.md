@@ -44,9 +44,8 @@ postman.send(
 );
 ```
 
-Make sure you have this dependencies:
-
-```
+Make sure you have these dependencies:
+```xml
 <dependency>
   <groupId>javax.mail</groupId>
   <artifactId>mailapi</artifactId>
