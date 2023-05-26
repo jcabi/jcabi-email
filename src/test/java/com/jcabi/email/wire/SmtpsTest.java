@@ -76,6 +76,7 @@ final class SmtpsTest {
         setup.setServerStartupTimeout(timeout);
         final GreenMail server = new GreenMail(setup);
         server.start();
+        Thread.sleep(1L);
         try {
             new Postman.Default(
                 new Smtps(
