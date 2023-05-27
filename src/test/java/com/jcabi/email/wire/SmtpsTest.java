@@ -58,7 +58,7 @@ import org.junit.jupiter.api.Test;
 final class SmtpsTest {
 
     /**
-     * SMTPS postman can send an email to the server through SMTPS wire.
+     * SMTPS postman can email the server through SMTPS wire.
      * @throws Exception If fails
      */
     @Test
