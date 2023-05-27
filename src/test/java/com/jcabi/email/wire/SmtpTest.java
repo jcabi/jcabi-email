@@ -77,8 +77,12 @@ final class SmtpTest {
         try {
             new Postman.Default(
                 new Smtp(
-                    new Token("", "")
-                        .access(new Protocol.Smtp(bind, port))
+                    new Token("", "").access(
+                        new Protocol.Smtp(
+                            server.getSmtp().getBindTo(),
+                            server.getSmtp().getPort()
+                        )
+                    )
                 )
             ).send(
                 new Envelope.Safe(
