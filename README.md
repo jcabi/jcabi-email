@@ -9,6 +9,7 @@
 [![jpeek report](https://i.jpeek.org/com.jcabi/jcabi-email/badge.svg)](https://i.jpeek.org/com.jcabi/jcabi-email/)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.jcabi/jcabi-email/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.jcabi/jcabi-email)
 [![Dependencies](https://www.versioneye.com/user/projects/561ac442a193340f2f0011cb/badge.svg?style=flat)](https://www.versioneye.com/user/projects/561ac442a193340f2f0011cb)
+[![libs.tech recommends](https://libs.tech/project/25780072/badge.svg)](https://libs.tech/project/25780072/jcabi-email)
 
 More details are here: [email.jcabi.com](http://email.jcabi.com/).
 This article explains how this library was designed:
