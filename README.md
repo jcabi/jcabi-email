@@ -1,11 +1,11 @@
 <img src="https://www.jcabi.com/logo-square.svg" width="64px" height="64px" />
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
-[![DevOps By Rultor.com](http://www.rultor.com/b/jcabi/jcabi-email)](http://www.rultor.com/p/jcabi/jcabi-email)
+[![DevOps By Rultor.com](https://www.rultor.com/b/jcabi/jcabi-email)](https://www.rultor.com/p/jcabi/jcabi-email)
 
 [![mvn](https://github.com/jcabi/jcabi-email/actions/workflows/mvn.yml/badge.svg)](https://github.com/jcabi/jcabi-email/actions/workflows/mvn.yml)
-[![PDD status](http://www.0pdd.com/svg?name=jcabi/jcabi-email)](http://www.0pdd.com/p?name=jcabi/jcabi-email)
-[![Javadoc](https://javadoc.io/badge/com.jcabi/jcabi-email.svg)](http://www.javadoc.io/doc/com.jcabi/jcabi-email)
+[![PDD status](https://www.0pdd.com/svg?name=jcabi/jcabi-email)](https://www.0pdd.com/p?name=jcabi/jcabi-email)
+[![Javadoc](https://javadoc.io/badge/com.jcabi/jcabi-email.svg)](https://www.javadoc.io/doc/com.jcabi/jcabi-email)
 [![jpeek report](https://i.jpeek.org/com.jcabi/jcabi-email/badge.svg)](https://i.jpeek.org/com.jcabi/jcabi-email/)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.jcabi/jcabi-email/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.jcabi/jcabi-email)
 [![Dependencies](https://www.versioneye.com/user/projects/561ac442a193340f2f0011cb/badge.svg?style=flat)](https://www.versioneye.com/user/projects/561ac442a193340f2f0011cb)
