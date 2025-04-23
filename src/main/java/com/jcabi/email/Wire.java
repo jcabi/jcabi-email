@@ -23,8 +23,8 @@ import javax.mail.Transport;
  * );
  * </pre>
  *
- * @since 1.0
  * @see Smtp
+ * @since 1.0
  */
 @Immutable
 public interface Wire {

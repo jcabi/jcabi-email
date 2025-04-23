@@ -13,12 +13,12 @@ import javax.mail.MessagingException;
 /**
  * Stamp for a MIME envelope.
  *
- * @since 1.0
  * @see com.jcabi.email.stamp.StRecipient
  * @see com.jcabi.email.stamp.StSender
  * @see StCc
  * @see StBcc
  * @see com.jcabi.email.stamp.StSubject
+ * @since 1.0
  */
 @Immutable
 public interface Stamp {
