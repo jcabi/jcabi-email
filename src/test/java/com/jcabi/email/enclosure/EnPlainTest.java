@@ -35,6 +35,7 @@ final class EnPlainTest {
      * @throws Exception If fails
      */
     @Test
+    @SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
     void createsPlainMimePartWithCustomEncoding() throws Exception {
         final String charset = "KOI8-R";
         final MimeBodyPart part = new EnPlain(

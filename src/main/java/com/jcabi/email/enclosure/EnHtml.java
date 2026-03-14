@@ -65,13 +65,12 @@ public final class EnHtml implements Enclosure {
             );
         }
         final MimeBodyPart mime = new MimeBodyPart();
-        final String characterset = MimeUtility.quote(
-            this.charset,
-            "()<>@,;:\\\"\t []/?="
-        );
         final String ctype = String.format(
             "text/html;charset=\"%s\"",
-            characterset
+            MimeUtility.quote(
+                this.charset,
+                "()<>@,;:\\\"\t []/?="
+            )
         );
         mime.setContent(this.text, ctype);
         mime.addHeader("Content-Type", ctype);

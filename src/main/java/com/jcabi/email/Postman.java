@@ -51,6 +51,7 @@ import lombok.ToString;
  * @since 1.0
  */
 @Immutable
+@FunctionalInterface
 public interface Postman {
 
     /**

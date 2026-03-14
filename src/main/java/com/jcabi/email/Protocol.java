@@ -34,6 +34,7 @@ import javax.net.ssl.SSLSocketFactory;
  * @since 1.0
  */
 @Immutable
+@FunctionalInterface
 public interface Protocol {
 
     /**

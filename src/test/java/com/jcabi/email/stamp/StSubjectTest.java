@@ -42,6 +42,7 @@ final class StSubjectTest {
      * @throws Exception If fails
      */
     @Test
+    @SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
     void addsSubjectToMessageWithCustomEncoding() throws Exception {
         final String charset = "KOI8-R";
         final Message msg = new MimeMessage(
@@ -81,8 +82,7 @@ final class StSubjectTest {
     ) throws UnsupportedEncodingException {
         final String encoded = MimeUtility.encodeText(text, charset, "Q");
         final int last = encoded.lastIndexOf('?');
-        final int prev = encoded.lastIndexOf('?', last - 1);
-        return encoded.substring(prev + 1, last);
+        return encoded.substring(encoded.lastIndexOf('?', last - 1) + 1, last);
     }
 
 }

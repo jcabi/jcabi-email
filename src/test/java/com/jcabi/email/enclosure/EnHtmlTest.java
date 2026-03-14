@@ -22,6 +22,7 @@ final class EnHtmlTest {
      * @throws Exception If fails
      */
     @Test
+    @SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
     void createsHtmlMimePartWithCustomEncoding() throws Exception {
         final String charset = "KOI8-R";
         final MimeBodyPart part = new EnHtml(

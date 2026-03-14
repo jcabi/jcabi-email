@@ -53,7 +53,6 @@ public final class StReplyTo implements Stamp {
                 "Email address can't be NULL"
             );
         }
-        final Address[] addresses = {new InternetAddress(this.email)};
-        message.setReplyTo(addresses);
+        message.setReplyTo(new Address[] {new InternetAddress(this.email)});
     }
 }

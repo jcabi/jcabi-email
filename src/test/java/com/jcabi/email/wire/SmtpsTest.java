@@ -38,19 +38,17 @@ final class SmtpsTest {
      */
     @Test
     @Disabled
+    @SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
     void sendsEmailToTheServerThroughSmtps() throws Exception {
-        final String bind = "localhost";
-        final int received = 1;
         final int port = SmtpsTest.port();
-        final int timeout = 3000;
         Security.setProperty(
             "ssl.SocketFactory.provider",
             DummySSLSocketFactory.class.getName()
         );
         final ServerSetup setup = new ServerSetup(
-            port, bind, ServerSetup.PROTOCOL_SMTPS
+            port, "localhost", ServerSetup.PROTOCOL_SMTPS
         );
-        setup.setServerStartupTimeout(timeout);
+        setup.setServerStartupTimeout(3000);
         final GreenMail server = new GreenMail(setup);
         server.start();
         try {
@@ -74,7 +72,7 @@ final class SmtpsTest {
             );
             final MimeMessage[] messages = server.getReceivedMessages();
             MatcherAssert.assertThat(
-                messages.length, Matchers.is(received)
+                messages.length, Matchers.is(1)
             );
             for (final Message msg : messages) {
                 MatcherAssert.assertThat(
@@ -95,6 +93,7 @@ final class SmtpsTest {
      * @return Found port.
      * @throws IOException In case of error.
      */
+    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     private static int port() throws IOException {
         try (ServerSocket socket = new ServerSocket(0)) {
             return socket.getLocalPort();

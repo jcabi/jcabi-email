@@ -11,6 +11,7 @@ import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
 import com.jcabi.email.stamp.StSubject;
 import java.io.ByteArrayOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.Multipart;
@@ -57,12 +58,10 @@ final class EnvelopeTest {
             .with(new StRecipient("to", "test-to@jcabi.com"))
             .with(new StSubject("test subject: test me"))
             .with(new EnHtml("<html><body>привет</body></html>"));
-        final ByteArrayOutputStream stream =
-            new ByteArrayOutputStream();
+        final ByteArrayOutputStream stream = new ByteArrayOutputStream();
         env.unwrap().writeTo(stream);
-        final String msgtxt = stream.toString();
         MatcherAssert.assertThat(
-            msgtxt,
+            stream.toString(StandardCharsets.UTF_8),
             Matchers.allOf(
                 Matchers.containsString(
                     "Content-Type: text/html;charset=\"UTF-8\""
@@ -85,13 +84,11 @@ final class EnvelopeTest {
      * @throws Exception If fails
      */
     @Test
+    @SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
     void wrapsAnotherEnvelope() throws Exception {
-        final Envelope origin = new Envelope.Mime().with(
-            new StSender("jack@example.com")
-        );
-        final Message message = new Envelope.Mime(origin).with(
-            new StRecipient("paul@example.com")
-        ).unwrap();
+        final Message message = new Envelope.Mime(
+            new Envelope.Mime().with(new StSender("jack@example.com"))
+        ).with(new StRecipient("paul@example.com")).unwrap();
         MatcherAssert.assertThat(
             message.getAllRecipients().length,
             Matchers.equalTo(1)
@@ -108,16 +105,14 @@ final class EnvelopeTest {
      */
     @Test
     void wrapsAnotherEnvelopeWithEnclosures() throws Exception {
-        final Envelope origin = new Envelope.Mime().with(
-            new EnPlain("first enclosure")
-        );
-        final Message message = new Envelope.Mime(origin).with(
-            new EnPlain("second enclosure")
-        ).unwrap();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Multipart.class.cast(message.getContent()).writeTo(baos);
+        Multipart.class.cast(
+            new Envelope.Mime(
+                new Envelope.Mime().with(new EnPlain("first enclosure"))
+            ).with(new EnPlain("second enclosure")).unwrap().getContent()
+        ).writeTo(baos);
         MatcherAssert.assertThat(
-            baos.toString(),
+            baos.toString(StandardCharsets.UTF_8),
             Matchers.allOf(
                 Matchers.containsString("first"),
                 Matchers.containsString("second")

@@ -47,6 +47,7 @@ final class StRecipientTest {
      * @throws Exception If fails
      */
     @Test
+    @SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
     void addsRecipientToMessageWithCustomCharset() throws Exception {
         final String charset = "KOI8-R";
         final Message msg = new MimeMessage(
@@ -92,8 +93,7 @@ final class StRecipientTest {
     ) throws UnsupportedEncodingException {
         final String encoded = MimeUtility.encodeWord(text, charset, null);
         final int last = encoded.lastIndexOf('?');
-        final int prev = encoded.lastIndexOf('?', last - 1);
-        return encoded.substring(prev + 1, last);
+        return encoded.substring(encoded.lastIndexOf('?', last - 1) + 1, last);
     }
 
 }

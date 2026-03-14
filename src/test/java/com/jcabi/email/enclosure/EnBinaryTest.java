@@ -25,6 +25,7 @@ import org.junit.jupiter.api.io.TempDir;
 final class EnBinaryTest {
 
     @Test
+    @SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
     void addsFileToMessage(@TempDir final Path temp) throws Exception {
         Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
         final File file = temp.resolve("test.txt").toFile();
