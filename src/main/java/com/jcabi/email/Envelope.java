@@ -44,6 +44,7 @@ public interface Envelope {
     /**
      * Empty (always returns an empty MIME message).
      * @since 1.5
+     * @checkstyle QualifyInnerClassCheck (5 lines)
      */
     Envelope EMPTY = new Envelope() {
         @Override
@@ -92,6 +93,7 @@ public interface Envelope {
          * Ctor.
          * @param env Original envelope
          * @since 1.5
+         * @checkstyle ConstructorsCodeFreeCheck (6 lines)
          */
         public Mime(final Envelope env) {
             this(
@@ -134,6 +136,7 @@ public interface Envelope {
          * @param stamp Stamp
          * @return MIME envelope
          * @since 1.3
+         * @checkstyle QualifyInnerClassCheck (6 lines)
          */
         public Mime with(final Stamp stamp) {
             return new Mime(
@@ -147,6 +150,7 @@ public interface Envelope {
          * @param enc Enclosure
          * @return MIME envelope
          * @since 1.3
+         * @checkstyle QualifyInnerClassCheck (6 lines)
          */
         public Mime with(final Enclosure enc) {
             return new Mime(
@@ -333,5 +337,4 @@ public interface Envelope {
             return msg;
         }
     }
-
 }

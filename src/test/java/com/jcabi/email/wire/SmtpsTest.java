@@ -40,13 +40,12 @@ final class SmtpsTest {
     @Disabled
     @SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
     void sendsEmailToTheServerThroughSmtps() throws Exception {
-        final int port = SmtpsTest.port();
         Security.setProperty(
             "ssl.SocketFactory.provider",
             DummySSLSocketFactory.class.getName()
         );
         final ServerSetup setup = new ServerSetup(
-            port, "localhost", ServerSetup.PROTOCOL_SMTPS
+            SmtpsTest.port(), "localhost", ServerSetup.PROTOCOL_SMTPS
         );
         setup.setServerStartupTimeout(3000);
         final GreenMail server = new GreenMail(setup);
@@ -80,7 +79,7 @@ final class SmtpsTest {
                     Matchers.containsString("<test-from@jcabi.com>")
                 );
                 MatcherAssert.assertThat(
-                    msg.getSubject(),  Matchers.containsString("test me")
+                    msg.getSubject(), Matchers.containsString("test me")
                 );
             }
         } finally {
@@ -99,5 +98,4 @@ final class SmtpsTest {
             return socket.getLocalPort();
         }
     }
-
 }

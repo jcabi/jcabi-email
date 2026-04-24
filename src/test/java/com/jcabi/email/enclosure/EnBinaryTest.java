@@ -42,5 +42,4 @@ final class EnBinaryTest {
             Matchers.endsWith("привет")
         );
     }
-
 }

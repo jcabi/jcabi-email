@@ -30,5 +30,4 @@ public interface Stamp {
      * @throws MessagingException If fails
      */
     void attach(Message message) throws MessagingException;
-
 }

@@ -81,5 +81,4 @@ public final class PostNoLoops implements Postman {
         }
         return intersect;
     }
-
 }

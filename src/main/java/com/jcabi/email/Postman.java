@@ -57,6 +57,7 @@ public interface Postman {
     /**
      * Doesn't send anything, just logs to console.
      * @since 1.1
+     * @checkstyle QualifyInnerClassCheck (5 lines)
      */
     Postman CONSOLE = new Postman() {
         @Override
@@ -137,5 +138,4 @@ public interface Postman {
             }
         }
     }
-
 }

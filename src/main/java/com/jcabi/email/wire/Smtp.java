@@ -55,5 +55,4 @@ public final class Smtp implements Wire {
             throw new IOException(ex);
         }
     }
-
 }
