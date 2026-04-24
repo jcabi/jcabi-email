@@ -23,9 +23,8 @@ final class EnPlainTest {
      */
     @Test
     void createsPlainMimePart() throws Exception {
-        final MimeBodyPart part = new EnPlain("hello, друг").part();
         MatcherAssert.assertThat(
-            part.getContent().toString(),
+            new EnPlain("hello, друг").part().getContent().toString(),
             Matchers.endsWith("друг")
         );
     }

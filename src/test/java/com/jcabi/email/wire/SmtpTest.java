@@ -40,12 +40,12 @@ final class SmtpTest {
     @Test
     @SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
     void sendsEmailToSmtpServer() throws Exception {
-        final int port = SmtpTest.port();
         final ServerSetup setup = new ServerSetup(
-            port, "localhost", ServerSetup.PROTOCOL_SMTP
+            SmtpTest.port(), "localhost", ServerSetup.PROTOCOL_SMTP
         );
         setup.setServerStartupTimeout(3000);
         final GreenMail server = new GreenMail(setup);
+        server.getManagers().getUserManager().setAuthRequired(false);
         server.start();
         try {
             new Postman.Default(
@@ -100,5 +100,4 @@ final class SmtpTest {
             return socket.getLocalPort();
         }
     }
-
 }
