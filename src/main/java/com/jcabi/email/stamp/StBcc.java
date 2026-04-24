@@ -19,6 +19,8 @@ import lombok.ToString;
  * Stamp for a MIME envelope, with a BCC recipient.
  *
  * @since 1.0
+ * @checkstyle ConstructorsCodeFreeCheck (200 lines)
+ * @checkstyle ConstructorsOrderCheck (200 lines)
  */
 @Immutable
 @ToString
@@ -99,5 +101,4 @@ public final class StBcc implements Stamp {
             throw new IllegalStateException(ex);
         }
     }
-
 }

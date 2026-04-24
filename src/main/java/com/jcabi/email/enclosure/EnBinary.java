@@ -18,6 +18,7 @@ import lombok.ToString;
  * Binary enclosure in MIME envelope.
  *
  * @since 1.0
+ * @checkstyle ConstructorsCodeFreeCheck (100 lines)
  */
 @Immutable
 @ToString

@@ -49,6 +49,7 @@ import lombok.ToString;
  * );</pre>
  *
  * @since 1.0
+ * @checkstyle QualifyInnerClassCheck (500 lines)
  */
 @Immutable
 @FunctionalInterface
@@ -137,5 +138,4 @@ public interface Postman {
             }
         }
     }
-
 }

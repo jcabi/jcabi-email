@@ -76,5 +76,4 @@ public final class EnHtml implements Enclosure {
         mime.addHeader("Content-Type", ctype);
         return mime;
     }
-
 }

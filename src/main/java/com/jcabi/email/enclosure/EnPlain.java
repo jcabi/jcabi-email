@@ -68,5 +68,4 @@ public final class EnPlain implements Enclosure {
         mime.addHeader("Content-Type", "text/plain");
         return mime;
     }
-
 }

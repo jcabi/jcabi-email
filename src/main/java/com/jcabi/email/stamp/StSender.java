@@ -19,6 +19,8 @@ import lombok.ToString;
  * Stamp for a MIME envelope, with a sender.
  *
  * @since 1.0
+ * @checkstyle ConstructorsCodeFreeCheck (200 lines)
+ * @checkstyle ConstructorsOrderCheck (200 lines)
  */
 @Immutable
 @ToString
@@ -94,5 +96,4 @@ public final class StSender implements Stamp {
             throw new IllegalStateException(ex);
         }
     }
-
 }

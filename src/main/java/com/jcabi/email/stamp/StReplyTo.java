@@ -18,6 +18,8 @@ import lombok.ToString;
  * Stamp for a MIME envelope, with a replyTo.
  *
  * @since 1.8
+ * @checkstyle ConstructorsCodeFreeCheck (100 lines)
+ * @checkstyle ConstructorsOrderCheck (100 lines)
  */
 @Immutable
 @ToString

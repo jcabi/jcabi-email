@@ -36,6 +36,8 @@ import lombok.ToString;
  * {@link com.jcabi.email.Envelope.Safe}.
  *
  * @since 1.0
+ * @checkstyle QualifyInnerClassCheck (500 lines)
+ * @checkstyle ConstructorsCodeFreeCheck (500 lines)
  */
 @Immutable
 @FunctionalInterface
@@ -136,7 +138,7 @@ public interface Envelope {
          * @since 1.3
          */
         public Mime with(final Stamp stamp) {
-            return new Mime(
+            return new Envelope.Mime(
                 this.stamps.with(stamp),
                 this.encs
             );
@@ -149,7 +151,7 @@ public interface Envelope {
          * @since 1.3
          */
         public Mime with(final Enclosure enc) {
-            return new Mime(
+            return new Envelope.Mime(
                 this.stamps,
                 this.encs.with(enc)
             );
@@ -333,5 +335,4 @@ public interface Envelope {
             return msg;
         }
     }
-
 }
