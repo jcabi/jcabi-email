@@ -27,5 +27,4 @@ public interface Enclosure {
      * @throws MessagingException If fails
      */
     MimeBodyPart part() throws MessagingException;
-
 }

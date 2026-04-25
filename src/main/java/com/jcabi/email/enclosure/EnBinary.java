@@ -45,6 +45,7 @@ public final class EnBinary implements Enclosure {
      * @param file File to attach
      * @param label Name of the file to show
      * @param type MIME content type
+     * @checkstyle ConstructorsCodeFreeCheck (6 lines)
      */
     public EnBinary(final File file, final String label, final String type) {
         this.path = file.getAbsolutePath();

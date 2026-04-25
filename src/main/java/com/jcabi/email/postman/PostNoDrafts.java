@@ -53,5 +53,4 @@ public final class PostNoDrafts implements Postman {
             throw new IOException(ex);
         }
     }
-
 }

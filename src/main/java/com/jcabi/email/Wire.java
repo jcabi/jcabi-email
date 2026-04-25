@@ -36,5 +36,4 @@ public interface Wire {
      * @throws IOException If fails
      */
     Transport connect() throws IOException;
-
 }

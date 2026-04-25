@@ -73,5 +73,4 @@ public final class StSubject implements Stamp {
             throw new IllegalStateException(ex);
         }
     }
-
 }

@@ -95,5 +95,4 @@ final class StRecipientTest {
         final int last = encoded.lastIndexOf('?');
         return encoded.substring(encoded.lastIndexOf('?', last - 1) + 1, last);
     }
-
 }

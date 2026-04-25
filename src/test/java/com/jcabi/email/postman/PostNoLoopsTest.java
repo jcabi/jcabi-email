@@ -51,5 +51,4 @@ final class PostNoLoopsTest {
         );
         Mockito.verify(post).send(Mockito.any(Envelope.class));
     }
-
 }

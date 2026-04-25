@@ -1,4 +1,6 @@
-<img src="https://www.jcabi.com/logo-square.svg" width="64px" height="64px" />
+# jcabi-email
+
+![jcabi logo](https://www.jcabi.com/logo-square.svg)
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![DevOps By Rultor.com](https://www.rultor.com/b/jcabi/jcabi-email)](https://www.rultor.com/p/jcabi/jcabi-email)
@@ -42,6 +44,7 @@ postman.send(
 ```
 
 Make sure you have these dependencies:
+
 ```xml
 <dependency>
   <groupId>javax.mail</groupId>
@@ -70,6 +73,6 @@ the `master` branch, if they look correct.
 
 Please run Maven build before submitting a pull request:
 
-```
-$ mvn clean install -Pqulice
+```bash
+mvn clean install -Pqulice
 ```
