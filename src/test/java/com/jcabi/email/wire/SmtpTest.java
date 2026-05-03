@@ -46,10 +46,11 @@ final class SmtpTest {
         setup.setServerStartupTimeout(3000);
         final GreenMail server = new GreenMail(setup);
         server.start();
+        server.setUser("test-from@jcabi.com", "user", "password");
         try {
             new Postman.Default(
                 new Smtp(
-                    new Token("", "").access(
+                    new Token("user", "password").access(
                         new Protocol.Smtp(
                             server.getSmtp().getBindTo(),
                             server.getSmtp().getPort()
@@ -90,8 +91,8 @@ final class SmtpTest {
 
     /**
      * Allocate free port.
-     * @return Found port.
-     * @throws IOException In case of error.
+     * @return Found port
+     * @throws IOException In case of error
      */
     @SuppressWarnings("PMD.UnnecessaryLocalRule")
     private static int port() throws IOException {

@@ -92,6 +92,7 @@ public interface Postman {
     @EqualsAndHashCode(of = "wire")
     @Loggable(Loggable.DEBUG)
     final class Default implements Postman {
+
         /**
          * Wire.
          */
