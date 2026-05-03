@@ -16,7 +16,6 @@ import lombok.ToString;
 
 /**
  * Stamp for a MIME envelope, with a replyTo.
- *
  * @since 1.8
  */
 @Immutable

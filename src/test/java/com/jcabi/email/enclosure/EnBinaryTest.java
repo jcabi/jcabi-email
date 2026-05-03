@@ -19,7 +19,6 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Test case for {@link EnBinary}.
- *
  * @since 1.3.2
  */
 final class EnBinaryTest {

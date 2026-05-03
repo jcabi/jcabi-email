@@ -13,7 +13,6 @@ import org.mockito.Mockito;
 
 /**
  * Test case for {@link PostNoLoops}.
- *
  * @since 1.6
  */
 final class PostNoLoopsTest {

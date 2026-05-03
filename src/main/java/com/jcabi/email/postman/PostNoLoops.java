@@ -21,7 +21,6 @@ import lombok.ToString;
 
 /**
  * Postman that ignores loops (sender equals to recipient).
- *
  * @since 1.6
  */
 @Immutable

@@ -17,7 +17,6 @@ import lombok.ToString;
 
 /**
  * Stamp for a MIME envelope, with a CC recipient.
- *
  * @since 1.0
  */
 @Immutable

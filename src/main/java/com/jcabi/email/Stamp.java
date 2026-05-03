@@ -12,7 +12,6 @@ import javax.mail.MessagingException;
 
 /**
  * Stamp for a MIME envelope.
- *
  * @see com.jcabi.email.stamp.StRecipient
  * @see com.jcabi.email.stamp.StSender
  * @see StCc

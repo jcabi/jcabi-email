@@ -16,7 +16,6 @@ import lombok.ToString;
 
 /**
  * Binary enclosure in MIME envelope.
- *
  * @since 1.0
  */
 @Immutable
