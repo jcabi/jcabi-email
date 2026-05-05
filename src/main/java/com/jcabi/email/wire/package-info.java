@@ -5,7 +5,6 @@
 
 /**
  * Wires.
- *
  * @since 1.4
  */
 package com.jcabi.email.wire;

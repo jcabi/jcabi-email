@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link StBcc}.
- *
  * @since 1.3.1
  */
 final class StBccTest {

@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link StReplyTo}.
- *
  * @since 1.8
  */
 final class StReplyToTest {

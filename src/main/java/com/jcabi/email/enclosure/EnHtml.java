@@ -15,7 +15,6 @@ import lombok.ToString;
 
 /**
  * HTML enclosure in MIME envelope.
- *
  * @since 1.0
  */
 @Immutable

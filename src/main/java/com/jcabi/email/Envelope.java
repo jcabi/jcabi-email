@@ -71,6 +71,7 @@ public interface Envelope {
     @EqualsAndHashCode(of = "encs")
     @Loggable(Loggable.DEBUG)
     final class Mime implements Envelope {
+
         /**
          * List of stamps.
          */
@@ -169,6 +170,7 @@ public interface Envelope {
     @EqualsAndHashCode(of = "origin")
     @Loggable(Loggable.DEBUG)
     final class Strict implements Envelope {
+
         /**
          * Origin env.
          */
@@ -217,6 +219,7 @@ public interface Envelope {
     @EqualsAndHashCode(of = "origin")
     @Loggable(Loggable.DEBUG)
     final class Safe implements Envelope {
+
         /**
          * Origin env.
          */
@@ -265,6 +268,7 @@ public interface Envelope {
     @EqualsAndHashCode(of = "origin")
     @Loggable(Loggable.DEBUG)
     final class Constant implements Envelope {
+
         /**
          * Guava cache.
          */
@@ -313,6 +317,7 @@ public interface Envelope {
     @EqualsAndHashCode(of = "env")
     @Loggable(Loggable.DEBUG)
     final class Draft implements Envelope {
+
         /**
          * Origin env.
          */

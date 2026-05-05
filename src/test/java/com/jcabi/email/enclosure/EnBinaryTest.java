@@ -5,6 +5,7 @@
 package com.jcabi.email.enclosure;
 
 import java.io.File;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -19,13 +20,14 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Test case for {@link EnBinary}.
- *
  * @since 1.3.2
  */
 final class EnBinaryTest {
 
     @Test
-    @SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
+    @SuppressWarnings({
+        "PMD.UnitTestContainsTooManyAsserts", "PMD.UnnecessaryLocalRule"
+    })
     void addsFileToMessage(@TempDir final Path temp) throws Exception {
         Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
         final File file = temp.resolve("test.txt").toFile();
@@ -37,9 +39,11 @@ final class EnBinaryTest {
             part.getFileName(),
             Matchers.endsWith("другу.pdf")
         );
-        MatcherAssert.assertThat(
-            IOUtils.toString(part.getInputStream(), StandardCharsets.UTF_8),
-            Matchers.endsWith("привет")
-        );
+        try (InputStream stream = part.getInputStream()) {
+            MatcherAssert.assertThat(
+                IOUtils.toString(stream, StandardCharsets.UTF_8),
+                Matchers.endsWith("привет")
+            );
+        }
     }
 }

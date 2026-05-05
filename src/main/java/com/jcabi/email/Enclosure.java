@@ -11,7 +11,6 @@ import javax.mail.internet.MimeBodyPart;
 
 /**
  * Enclosure in MIME envelope.
- *
  * @see com.jcabi.email.enclosure.EnPlain
  * @see com.jcabi.email.enclosure.EnBinary
  * @see EnHtml

@@ -89,8 +89,8 @@ final class SmtpsTest {
 
     /**
      * Allocate free port.
-     * @return Found port.
-     * @throws IOException In case of error.
+     * @return Found port
+     * @throws IOException In case of error
      */
     @SuppressWarnings("PMD.UnnecessaryLocalRule")
     private static int port() throws IOException {
