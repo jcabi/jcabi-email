@@ -38,8 +38,13 @@ import javax.net.ssl.SSLSocketFactory;
 public interface Protocol {
 
     /**
+     * String value of {@code true}, for SMTP property values.
+     */
+    String TRUE = "true";
+
+    /**
      * Guarantee of access for protocol.
-     * @return Entry parameters.
+     * @return Entry parameters
      */
     Map<String, String> entries();
 
@@ -48,6 +53,7 @@ public interface Protocol {
      * @since 1.0
      */
     final class Smtp implements Protocol {
+
         /**
          * SMTP host.
          */
@@ -71,7 +77,7 @@ public interface Protocol {
         @Override
         public Map<String, String> entries() {
             return new ImmutableMap.Builder<String, String>()
-                .put("mail.smtp.auth", Boolean.TRUE.toString())
+                .put("mail.smtp.auth", Protocol.TRUE)
                 .put("mail.smtp.host", this.host)
                 .put("mail.smtp.port", Integer.toString(this.port))
                 .build();
@@ -83,6 +89,7 @@ public interface Protocol {
      * @since 1.0
      */
     final class Smtps implements Protocol {
+
         /**
          * SMTPS host.
          */
@@ -106,22 +113,17 @@ public interface Protocol {
         @Override
         public Map<String, String> entries() {
             return new ImmutableMap.Builder<String, String>()
-                .put("mail.smtps.auth", Boolean.TRUE.toString())
+                .put("mail.smtps.auth", Protocol.TRUE)
                 .put("mail.smtps.host", this.host)
                 .put("mail.smtps.port", Integer.toString(this.port))
-                .put("mail.smtp.starttls.required", "true")
+                .put("mail.smtp.starttls.required", Protocol.TRUE)
                 .put("mail.smtp.ssl.protocols", "TLSv1.2")
-                .put("mail.smtp.starttls.enable", "true")
-                .put(
-                    "mail.smtp.ssl.checkserveridentity",
-                    Boolean.TRUE.toString()
-                ).put(
-                    "mail.smtp.socketFactory.class",
-                    SSLSocketFactory.class.getName()
-                ).put(
-                    "mail.smtp.socketFactory.port",
-                    Integer.toString(this.port)
-                ).put("mail.smtp.socketFactory.fallback", "false").build();
+                .put("mail.smtp.starttls.enable", Protocol.TRUE)
+                .put("mail.smtp.ssl.checkserveridentity", Protocol.TRUE)
+                .put("mail.smtp.socketFactory.class", SSLSocketFactory.class.getName())
+                .put("mail.smtp.socketFactory.port", Integer.toString(this.port))
+                .put("mail.smtp.socketFactory.fallback", "false")
+                .build();
         }
     }
 }

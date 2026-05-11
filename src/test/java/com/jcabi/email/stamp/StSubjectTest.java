@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link com.jcabi.email.stamp.StSubject}.
- *
  * @since 1.3.1
  */
 final class StSubjectTest {

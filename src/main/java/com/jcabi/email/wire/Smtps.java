@@ -35,7 +35,7 @@ public final class Smtps implements Wire {
 
     /**
      * Public ctor.
-     * @param session Session.
+     * @param session Session
      */
     public Smtps(final Session session) {
         this.session = session;
