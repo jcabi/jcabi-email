@@ -11,13 +11,13 @@ import javax.mail.internet.MimeBodyPart;
 
 /**
  * Enclosure in MIME envelope.
- *
- * @since 1.0
  * @see com.jcabi.email.enclosure.EnPlain
  * @see com.jcabi.email.enclosure.EnBinary
  * @see EnHtml
+ * @since 1.0
  */
 @Immutable
+@FunctionalInterface
 public interface Enclosure {
 
     /**
@@ -26,5 +26,4 @@ public interface Enclosure {
      * @throws MessagingException If fails
      */
     MimeBodyPart part() throws MessagingException;
-
 }

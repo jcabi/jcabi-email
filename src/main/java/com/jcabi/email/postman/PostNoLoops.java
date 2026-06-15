@@ -21,7 +21,6 @@ import lombok.ToString;
 
 /**
  * Postman that ignores loops (sender equals to recipient).
- *
  * @since 1.6
  */
 @Immutable
@@ -48,11 +47,9 @@ public final class PostNoLoops implements Postman {
         final Message msg = env.unwrap();
         try {
             final Address[] rcpts = msg.getAllRecipients();
-            final Address[] reply = msg.getReplyTo();
-            final Address[] from = msg.getFrom();
             final boolean intersects =
-                this.intersect(rcpts, reply, "Reply-To and Recipients")
-                || this.intersect(rcpts, from, "Recipients and From");
+                this.intersect(rcpts, msg.getReplyTo(), "Reply-To and Recipients")
+                || this.intersect(rcpts, msg.getFrom(), "Recipients and From");
             if (!intersects) {
                 this.origin.send(env);
             }
@@ -83,5 +80,4 @@ public final class PostNoLoops implements Postman {
         }
         return intersect;
     }
-
 }

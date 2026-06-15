@@ -16,7 +16,6 @@ import lombok.ToString;
 
 /**
  * Stamp for a MIME envelope, with a replyTo.
- *
  * @since 1.8
  */
 @Immutable
@@ -33,6 +32,7 @@ public final class StReplyTo implements Stamp {
     /**
      * Ctor.
      * @param addr Address
+     * @checkstyle ConstructorsCodeFreeCheck (5 lines)
      */
     public StReplyTo(final Address addr) {
         this(addr.toString());
@@ -53,7 +53,6 @@ public final class StReplyTo implements Stamp {
                 "Email address can't be NULL"
             );
         }
-        final Address[] addresses = {new InternetAddress(this.email)};
-        message.setReplyTo(addresses);
+        message.setReplyTo(new Address[] {new InternetAddress(this.email)});
     }
 }

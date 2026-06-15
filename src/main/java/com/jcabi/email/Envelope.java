@@ -38,11 +38,13 @@ import lombok.ToString;
  * @since 1.0
  */
 @Immutable
+@FunctionalInterface
 public interface Envelope {
 
     /**
      * Empty (always returns an empty MIME message).
      * @since 1.5
+     * @checkstyle QualifyInnerClassCheck (5 lines)
      */
     Envelope EMPTY = new Envelope() {
         @Override
@@ -69,6 +71,7 @@ public interface Envelope {
     @EqualsAndHashCode(of = "encs")
     @Loggable(Loggable.DEBUG)
     final class Mime implements Envelope {
+
         /**
          * List of stamps.
          */
@@ -91,6 +94,7 @@ public interface Envelope {
          * Ctor.
          * @param env Original envelope
          * @since 1.5
+         * @checkstyle ConstructorsCodeFreeCheck (6 lines)
          */
         public Mime(final Envelope env) {
             this(
@@ -133,6 +137,7 @@ public interface Envelope {
          * @param stamp Stamp
          * @return MIME envelope
          * @since 1.3
+         * @checkstyle QualifyInnerClassCheck (6 lines)
          */
         public Mime with(final Stamp stamp) {
             return new Mime(
@@ -146,6 +151,7 @@ public interface Envelope {
          * @param enc Enclosure
          * @return MIME envelope
          * @since 1.3
+         * @checkstyle QualifyInnerClassCheck (6 lines)
          */
         public Mime with(final Enclosure enc) {
             return new Mime(
@@ -164,6 +170,7 @@ public interface Envelope {
     @EqualsAndHashCode(of = "origin")
     @Loggable(Loggable.DEBUG)
     final class Strict implements Envelope {
+
         /**
          * Origin env.
          */
@@ -212,6 +219,7 @@ public interface Envelope {
     @EqualsAndHashCode(of = "origin")
     @Loggable(Loggable.DEBUG)
     final class Safe implements Envelope {
+
         /**
          * Origin env.
          */
@@ -260,6 +268,7 @@ public interface Envelope {
     @EqualsAndHashCode(of = "origin")
     @Loggable(Loggable.DEBUG)
     final class Constant implements Envelope {
+
         /**
          * Guava cache.
          */
@@ -308,6 +317,7 @@ public interface Envelope {
     @EqualsAndHashCode(of = "env")
     @Loggable(Loggable.DEBUG)
     final class Draft implements Envelope {
+
         /**
          * Origin env.
          */
@@ -332,5 +342,4 @@ public interface Envelope {
             return msg;
         }
     }
-
 }

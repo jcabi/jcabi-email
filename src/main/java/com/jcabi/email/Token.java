@@ -58,8 +58,8 @@ public final class Token {
 
     /**
      * Access for given protocol.
-     * @param protocol Protocol.
-     * @return Session.
+     * @param protocol Protocol
+     * @return Session
      */
     public Session access(final Protocol protocol) {
         final Properties props = new Properties();
@@ -77,6 +77,7 @@ public final class Token {
      * @since 1.0
      */
     private static final class Verification extends Authenticator {
+
         /**
          * User name.
          */

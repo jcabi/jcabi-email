@@ -39,7 +39,7 @@ public final class Smtp implements Wire {
 
     /**
      * Public ctor.
-     * @param session Session.
+     * @param session Session
      */
     public Smtp(final Session session) {
         this.session = session;
@@ -55,5 +55,4 @@ public final class Smtp implements Wire {
             throw new IOException(ex);
         }
     }
-
 }

@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link StHeader}.
- *
  * @since 1.6.2
  */
 final class StHeaderTest {
@@ -36,5 +35,4 @@ final class StHeaderTest {
             Matchers.equalTo(value)
         );
     }
-
 }

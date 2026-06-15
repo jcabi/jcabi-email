@@ -14,7 +14,6 @@ import lombok.ToString;
 
 /**
  * Plain enclosure in MIME envelope.
- *
  * @since 1.0
  */
 @Immutable
@@ -68,5 +67,4 @@ public final class EnPlain implements Enclosure {
         mime.addHeader("Content-Type", "text/plain");
         return mime;
     }
-
 }

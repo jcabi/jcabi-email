@@ -1,4 +1,6 @@
-# [![Jcabi Logo](https://www.jcabi.com/logo-square.svg)](https://www.jcabi.com/logo-square.svg)
+# jcabi-email
+
+![jcabi logo](https://www.jcabi.com/logo-square.svg)
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![DevOps By Rultor.com](https://www.rultor.com/b/jcabi/jcabi-email)](https://www.rultor.com/p/jcabi/jcabi-email)

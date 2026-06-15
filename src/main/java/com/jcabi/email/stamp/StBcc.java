@@ -17,7 +17,6 @@ import lombok.ToString;
 
 /**
  * Stamp for a MIME envelope, with a BCC recipient.
- *
  * @since 1.0
  */
 @Immutable
@@ -34,6 +33,7 @@ public final class StBcc implements Stamp {
     /**
      * Ctor.
      * @param addr Address
+     * @checkstyle ConstructorsCodeFreeCheck (5 lines)
      */
     public StBcc(final Address addr) {
         this(addr.toString());
@@ -54,6 +54,7 @@ public final class StBcc implements Stamp {
      * @param name Name of the recipient
      * @param addr His email
      * @param charset Name charset
+     * @checkstyle ConstructorsCodeFreeCheck (5 lines)
      */
     public StBcc(final String name, final String addr, final String charset) {
         this(StBcc.addr(name, addr, charset));
@@ -99,5 +100,4 @@ public final class StBcc implements Stamp {
             throw new IllegalStateException(ex);
         }
     }
-
 }

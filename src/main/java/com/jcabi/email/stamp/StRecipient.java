@@ -17,7 +17,6 @@ import lombok.ToString;
 
 /**
  * Stamp for a MIME envelope, with a recipient.
- *
  * @since 1.0
  */
 @Immutable
@@ -34,6 +33,7 @@ public final class StRecipient implements Stamp {
     /**
      * Ctor.
      * @param addr Address
+     * @checkstyle ConstructorsCodeFreeCheck (5 lines)
      */
     public StRecipient(final Address addr) {
         this(addr.toString());
@@ -54,6 +54,7 @@ public final class StRecipient implements Stamp {
      * @param name Name of the recipient
      * @param addr His email
      * @param charset Name charset
+     * @checkstyle ConstructorsCodeFreeCheck (8 lines)
      */
     public StRecipient(
         final String name,
@@ -103,5 +104,4 @@ public final class StRecipient implements Stamp {
             throw new IllegalStateException(ex);
         }
     }
-
 }

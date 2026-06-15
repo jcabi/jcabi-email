@@ -23,10 +23,11 @@ import javax.mail.Transport;
  * );
  * </pre>
  *
- * @since 1.0
  * @see Smtp
+ * @since 1.0
  */
 @Immutable
+@FunctionalInterface
 public interface Wire {
 
     /**
@@ -35,5 +36,4 @@ public interface Wire {
      * @throws IOException If fails
      */
     Transport connect() throws IOException;
-
 }

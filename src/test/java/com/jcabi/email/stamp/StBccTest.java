@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link StBcc}.
- *
  * @since 1.3.1
  */
 final class StBccTest {
@@ -27,6 +26,7 @@ final class StBccTest {
      * @throws Exception If fails
      */
     @Test
+    @SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
     void addsCopyToMessage() throws Exception {
         final Message msg = new MimeMessage(
             Session.getDefaultInstance(new Properties())
@@ -52,6 +52,7 @@ final class StBccTest {
      * @throws Exception If fails
      */
     @Test
+    @SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
     void addsCopyToMessageWithCustomCharset() throws Exception {
         final String charset = "KOI8-R";
         final Message msg = new MimeMessage(
@@ -97,8 +98,6 @@ final class StBccTest {
     ) throws UnsupportedEncodingException {
         final String encoded = MimeUtility.encodeWord(text, charset, null);
         final int last = encoded.lastIndexOf('?');
-        final int prev = encoded.lastIndexOf('?', last - 1);
-        return encoded.substring(prev + 1, last);
+        return encoded.substring(encoded.lastIndexOf('?', last - 1) + 1, last);
     }
-
 }

@@ -18,7 +18,6 @@ import lombok.ToString;
 
 /**
  * Postman that ignores drafts.
- *
  * @since 1.6
  */
 @Immutable
@@ -53,5 +52,4 @@ public final class PostNoDrafts implements Postman {
             throw new IOException(ex);
         }
     }
-
 }

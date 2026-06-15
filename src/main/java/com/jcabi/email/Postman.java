@@ -51,11 +51,13 @@ import lombok.ToString;
  * @since 1.0
  */
 @Immutable
+@FunctionalInterface
 public interface Postman {
 
     /**
      * Doesn't send anything, just logs to console.
      * @since 1.1
+     * @checkstyle QualifyInnerClassCheck (5 lines)
      */
     Postman CONSOLE = new Postman() {
         @Override
@@ -90,6 +92,7 @@ public interface Postman {
     @EqualsAndHashCode(of = "wire")
     @Loggable(Loggable.DEBUG)
     final class Default implements Postman {
+
         /**
          * Wire.
          */
@@ -136,5 +139,4 @@ public interface Postman {
             }
         }
     }
-
 }
