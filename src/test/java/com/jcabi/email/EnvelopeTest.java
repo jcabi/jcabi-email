@@ -25,7 +25,6 @@ import org.mockito.Mockito;
 /**
  * Test case for {@link Envelope}.
  * @since 1.4
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class EnvelopeTest {
 

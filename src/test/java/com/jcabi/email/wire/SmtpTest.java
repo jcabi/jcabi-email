@@ -29,7 +29,6 @@ import org.junit.jupiter.api.Test;
 /**
  * Test case for {@link Smtp}.
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class SmtpTest {
 
@@ -94,7 +93,6 @@ final class SmtpTest {
      * @return Found port
      * @throws IOException In case of error
      */
-    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     private static int port() throws IOException {
         try (ServerSocket socket = new ServerSocket(0)) {
             return socket.getLocalPort();

@@ -32,7 +32,6 @@ public final class StReplyTo implements Stamp {
     /**
      * Ctor.
      * @param addr Address
-     * @checkstyle ConstructorsCodeFreeCheck (5 lines)
      */
     public StReplyTo(final Address addr) {
         this(addr.toString());
