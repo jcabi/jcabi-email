@@ -8,8 +8,6 @@ import com.jcabi.aspects.Immutable;
 import com.jcabi.aspects.Loggable;
 import java.util.Map;
 import java.util.Properties;
-import javax.mail.Authenticator;
-import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -68,40 +66,7 @@ public final class Token {
             props.setProperty(entry.getKey(), entry.getValue());
         }
         return Session.getInstance(
-            props, new Token.Verification(this.user, this.password)
+            props, new Verification(this.user, this.password)
         );
-    }
-
-    /**
-     * Authenticating credentials.
-     * @since 1.0
-     */
-    private static final class Verification extends Authenticator {
-
-        /**
-         * User name.
-         */
-        private final transient String user;
-
-        /**
-         * User password.
-         */
-        private final transient String password;
-
-        /**
-         * Public ctor.
-         * @param usr User name
-         * @param pwd User password
-         */
-        Verification(final String usr, final String pwd) {
-            super();
-            this.user = usr;
-            this.password = pwd;
-        }
-
-        @Override
-        public PasswordAuthentication getPasswordAuthentication() {
-            return new PasswordAuthentication(this.user, this.password);
-        }
     }
 }

@@ -58,13 +58,6 @@ public final class PostNoLoops implements Postman {
         }
     }
 
-    /**
-     * Check these two arrays for intersection.
-     * @param first Array of addresses
-     * @param second Second array
-     * @param msg Text for log
-     * @return TRUE if they intersect
-     */
     private boolean intersect(final Address[] first, final Address[] second,
         final String msg) {
         final Collection<Address> intersection =

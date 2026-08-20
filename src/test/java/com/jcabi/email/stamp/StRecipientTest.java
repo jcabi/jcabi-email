@@ -79,13 +79,6 @@ final class StRecipientTest {
         );
     }
 
-    /**
-     * Encode text into MIME with encoding.
-     * @param text Text
-     * @param charset Text charset
-     * @return Encoded text
-     * @throws UnsupportedEncodingException if fail
-     */
     private static String encodeText(
         final String text,
         final String charset

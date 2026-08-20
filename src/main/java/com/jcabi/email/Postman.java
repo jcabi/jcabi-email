@@ -124,11 +124,6 @@ public interface Postman {
             }
         }
 
-        /**
-         * Close transport.
-         * @param transport Transport to close
-         * @throws IOException If fails
-         */
         private static void close(final Transport transport)
             throws IOException {
             try {

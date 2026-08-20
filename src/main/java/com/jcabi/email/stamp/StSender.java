@@ -77,14 +77,6 @@ public final class StSender implements Stamp {
         message.setFrom(new InternetAddress(this.email));
     }
 
-    /**
-     * Make email.
-     * @param name Name of the recipient
-     * @param addr His email
-     * @param charset Name charset
-     * @return Email
-     * @since 1.1
-     */
     private static String addr(final String name, final String addr,
         final String charset) {
         try {

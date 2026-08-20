@@ -79,14 +79,6 @@ public final class StCc implements Stamp {
         );
     }
 
-    /**
-     * Make email.
-     * @param name Name of the recipient
-     * @param addr His email
-     * @param charset Name charset
-     * @return Email
-     * @since 1.1
-     */
     private static String addr(
         final String name,
         final String addr,

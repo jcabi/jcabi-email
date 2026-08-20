@@ -88,11 +88,6 @@ final class SmtpTest {
         }
     }
 
-    /**
-     * Allocate free port.
-     * @return Found port
-     * @throws IOException In case of error
-     */
     private static int port() throws IOException {
         try (ServerSocket socket = new ServerSocket(0)) {
             return socket.getLocalPort();
