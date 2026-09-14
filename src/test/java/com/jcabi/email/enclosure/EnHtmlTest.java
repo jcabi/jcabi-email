@@ -14,12 +14,14 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link EnHtml}.
+ *
  * @since 1.8.2
  */
 final class EnHtmlTest {
 
     /**
      * EnPlain can create a plain MIME part with custom encoding.
+     *
      * @throws Exception If fails
      */
     @Test

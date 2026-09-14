@@ -16,6 +16,7 @@ import lombok.ToString;
 
 /**
  * Binary enclosure in MIME envelope.
+ *
  * @since 1.0
  */
 @Immutable
@@ -41,6 +42,7 @@ public final class EnBinary implements Enclosure {
 
     /**
      * Ctor.
+     *
      * @param file File to attach
      * @param label Name of the file to show
      * @param type MIME content type

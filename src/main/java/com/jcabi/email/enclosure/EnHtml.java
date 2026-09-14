@@ -15,6 +15,7 @@ import lombok.ToString;
 
 /**
  * HTML enclosure in MIME envelope.
+ *
  * @since 1.0
  */
 @Immutable
@@ -35,6 +36,7 @@ public final class EnHtml implements Enclosure {
 
     /**
      * Ctor.
+     *
      * @param content HTML content
      */
     public EnHtml(final String content) {
@@ -43,6 +45,7 @@ public final class EnHtml implements Enclosure {
 
     /**
      * Ctor.
+     *
      * @param content HTML content
      * @param charset Content charset
      */

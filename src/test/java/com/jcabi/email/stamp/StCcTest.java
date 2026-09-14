@@ -17,12 +17,14 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link StCc}.
+ *
  * @since 1.3.1
  */
 final class StCcTest {
 
     /**
      * StCC can add a CC recipient to the message.
+     *
      * @throws Exception If fails
      */
     @Test
@@ -49,6 +51,7 @@ final class StCcTest {
 
     /**
      * StCC can add a CC recipient with custom encoding to the message.
+     *
      * @throws Exception If fails
      */
     @Test

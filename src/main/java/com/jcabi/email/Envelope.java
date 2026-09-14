@@ -30,10 +30,10 @@ import lombok.ToString;
  * Envelope.
  *
  * <p>The best way is to use {@link Mime}, but
- * you can easily create your own implementation of it.
+ * you can easily create your own implementation of it.</p>
  *
  * <p>It is recommended to always wrap your envelope into
- * {@link com.jcabi.email.Envelope.Safe}.
+ * {@link com.jcabi.email.Envelope.Safe}.</p>
  *
  * @since 1.0
  */
@@ -43,6 +43,7 @@ public interface Envelope {
 
     /**
      * Empty (always returns an empty MIME message).
+     *
      * @since 1.5
      */
     Envelope EMPTY = new Envelope() {
@@ -56,6 +57,7 @@ public interface Envelope {
 
     /**
      * Get a message out of it.
+     *
      * @return Message to send
      * @throws IOException If fails
      */
@@ -63,6 +65,7 @@ public interface Envelope {
 
     /**
      * Default envelope.
+     *
      * @since 1.0
      */
     @Immutable
@@ -83,6 +86,7 @@ public interface Envelope {
 
         /**
          * Ctor.
+         *
          * @since 1.3
          */
         public Mime() {
@@ -91,6 +95,7 @@ public interface Envelope {
 
         /**
          * Ctor.
+         *
          * @param env Original envelope
          * @since 1.5
          */
@@ -103,6 +108,7 @@ public interface Envelope {
 
         /**
          * Ctor.
+         *
          * @param stmps Stamps
          * @param list List of enclosures
          */
@@ -132,6 +138,7 @@ public interface Envelope {
 
         /**
          * With this stamp.
+         *
          * @param stamp Stamp
          * @return MIME envelope
          * @since 1.3
@@ -146,6 +153,7 @@ public interface Envelope {
 
         /**
          * With this enclosure.
+         *
          * @param enc Enclosure
          * @return MIME envelope
          * @since 1.3
@@ -161,6 +169,7 @@ public interface Envelope {
 
     /**
      * Strict envelope that fails if message is not valid.
+     *
      * @since 1.3
      */
     @Immutable
@@ -176,6 +185,7 @@ public interface Envelope {
 
         /**
          * Ctor.
+         *
          * @param env Envelope
          */
         public Strict(final Envelope env) {
@@ -210,6 +220,7 @@ public interface Envelope {
 
     /**
      * Safe envelope that adds missing parts to the message.
+     *
      * @since 1.3
      */
     @Immutable
@@ -225,6 +236,7 @@ public interface Envelope {
 
         /**
          * Ctor.
+         *
          * @param env Envelope
          */
         public Safe(final Envelope env) {
@@ -259,6 +271,7 @@ public interface Envelope {
 
     /**
      * Envelope that always returns the same message (within one hour).
+     *
      * @since 1.4
      */
     @Immutable
@@ -282,6 +295,7 @@ public interface Envelope {
 
         /**
          * Ctor.
+         *
          * @param env Envelope
          */
         public Constant(final Envelope env) {
@@ -308,6 +322,7 @@ public interface Envelope {
 
     /**
      * Envelope that adds DRAFT flag to the message.
+     *
      * @since 1.7
      */
     @Immutable
@@ -323,6 +338,7 @@ public interface Envelope {
 
         /**
          * Ctor.
+         *
          * @param origin Envelope
          */
         public Draft(final Envelope origin) {

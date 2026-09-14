@@ -15,7 +15,7 @@ import lombok.ToString;
 /**
  * User signature to network node.
  *
- * <p>This is how you're supposed to use it:
+ * <p>This is how you're supposed to use it:</p>
  *
  * <pre> Postman postman = new Postman.Default(
  *   new SMTP(
@@ -46,6 +46,7 @@ public final class Token {
 
     /**
      * Public ctor.
+     *
      * @param usr User name with access
      * @param pwd User's password
      */
@@ -56,6 +57,7 @@ public final class Token {
 
     /**
      * Access for given protocol.
+     *
      * @param protocol Protocol
      * @return Session
      */

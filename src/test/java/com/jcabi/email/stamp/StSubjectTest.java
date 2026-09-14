@@ -16,12 +16,14 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link com.jcabi.email.stamp.StSubject}.
+ *
  * @since 1.3.1
  */
 final class StSubjectTest {
 
     /**
      * StSubject can add a subject to the message.
+     *
      * @throws Exception If fails
      */
     @Test
@@ -38,6 +40,7 @@ final class StSubjectTest {
 
     /**
      * StSubject can add a subject to the message with custom encoding.
+     *
      * @throws Exception If fails
      */
     @Test

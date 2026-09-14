@@ -21,6 +21,7 @@ import lombok.ToString;
 
 /**
  * Postman that ignores loops (sender equals to recipient).
+ *
  * @since 1.6
  */
 @Immutable
@@ -36,6 +37,7 @@ public final class PostNoLoops implements Postman {
 
     /**
      * Ctor.
+     *
      * @param post Original postman
      */
     public PostNoLoops(final Postman post) {

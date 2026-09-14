@@ -12,6 +12,7 @@ import javax.mail.MessagingException;
 
 /**
  * Stamp for a MIME envelope.
+ *
  * @see com.jcabi.email.stamp.StRecipient
  * @see com.jcabi.email.stamp.StSender
  * @see StCc
@@ -25,6 +26,7 @@ public interface Stamp {
 
     /**
      * Attach yourself to the message.
+     *
      * @param message Message to add to
      * @throws MessagingException If fails
      */

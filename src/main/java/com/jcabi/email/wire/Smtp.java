@@ -15,7 +15,7 @@ import javax.mail.Transport;
 /**
  * SMTP wire.
  *
- * <p>This is how you're supposed to use it:
+ * <p>This is how you're supposed to use it:</p>
  *
  * <pre> Postman postman = new Postman.Default(
  *   new SMTP(
@@ -39,6 +39,7 @@ public final class Smtp implements Wire {
 
     /**
      * Public ctor.
+     *
      * @param session Session
      */
     public Smtp(final Session session) {

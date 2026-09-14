@@ -20,7 +20,7 @@ import lombok.ToString;
  * Postman.
  *
  * <p>The best way to use it is to make an instance of
- * {@link com.jcabi.email.Postman.Default}:
+ * {@link com.jcabi.email.Postman.Default}:</p>
  *
  * <pre> Postman postman = new Postman.Default(
  *   new SMTP(
@@ -56,6 +56,7 @@ public interface Postman {
 
     /**
      * Doesn't send anything, just logs to console.
+     *
      * @since 1.1
      */
     Postman CONSOLE = new Postman() {
@@ -77,6 +78,7 @@ public interface Postman {
 
     /**
      * Send this envelope.
+     *
      * @param env Envelope to send
      * @throws IOException If fails
      */
@@ -84,6 +86,7 @@ public interface Postman {
 
     /**
      * Default postman.
+     *
      * @since 1.0
      */
     @Immutable
@@ -99,6 +102,7 @@ public interface Postman {
 
         /**
          * Ctor.
+         *
          * @param wre Wire
          */
         public Default(final Wire wre) {

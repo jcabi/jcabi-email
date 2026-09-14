@@ -24,12 +24,14 @@ import org.mockito.Mockito;
 
 /**
  * Test case for {@link Envelope}.
+ *
  * @since 1.4
  */
 final class EnvelopeTest {
 
     /**
      * Envelope.Constant can cache.
+     *
      * @throws Exception If fails
      */
     @Test
@@ -46,6 +48,7 @@ final class EnvelopeTest {
 
     /**
      * Envelope should handle non-Latin characters.
+     *
      * @throws Exception Thrown in case of problem of writing a message to
      *  string.
      */
@@ -79,6 +82,7 @@ final class EnvelopeTest {
 
     /**
      * Envelope.MIME can wrap another envelope.
+     *
      * @throws Exception If fails
      */
     @Test
@@ -99,6 +103,7 @@ final class EnvelopeTest {
 
     /**
      * Envelope.MIME can wrap another envelope with enclosures.
+     *
      * @throws Exception If fails
      */
     @Test

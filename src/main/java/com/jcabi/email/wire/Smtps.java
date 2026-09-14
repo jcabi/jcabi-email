@@ -13,7 +13,7 @@ import javax.mail.Transport;
 /**
  * SMTPS wire.
  *
- * <p>This is how you're supposed to use it:
+ * <p>This is how you're supposed to use it:</p>
  *
  * <pre> Postman postman = new Postman.Default(
  *   new SMTPS(
@@ -35,6 +35,7 @@ public final class Smtps implements Wire {
 
     /**
      * Public ctor.
+     *
      * @param session Session
      */
     public Smtps(final Session session) {

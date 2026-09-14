@@ -5,6 +5,7 @@
 
 /**
  * Postmen.
+ *
  * @since 1.6
  */
 package com.jcabi.email.postman;

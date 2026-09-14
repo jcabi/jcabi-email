@@ -12,7 +12,7 @@ import javax.mail.Transport;
 /**
  * Wire used by a {@link Postman}.
  *
- * <p>This is how you're supposed to use it:
+ * <p>This is how you're supposed to use it:</p>
  *
  * <pre> Postman postman = new Postman.Default(
  *   new SMTP(
@@ -32,6 +32,7 @@ public interface Wire {
 
     /**
      * Make a transport.
+     *
      * @return Transport
      * @throws IOException If fails
      */

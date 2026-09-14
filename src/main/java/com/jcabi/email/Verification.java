@@ -9,6 +9,7 @@ import javax.mail.PasswordAuthentication;
 
 /**
  * Authenticating credentials.
+ *
  * @since 1.0
  */
 final class Verification extends Authenticator {
@@ -25,6 +26,7 @@ final class Verification extends Authenticator {
 
     /**
      * Public ctor.
+     *
      * @param usr User name
      * @param pwd User password
      */

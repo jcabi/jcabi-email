@@ -14,12 +14,14 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link StHeader}.
+ *
  * @since 1.6.2
  */
 final class StHeaderTest {
 
     /**
      * StHeader can add a header to the message.
+     *
      * @throws Exception If fails
      */
     @Test

@@ -16,6 +16,7 @@ import lombok.ToString;
 
 /**
  * Stamp for a MIME envelope, with a subject.
+ *
  * @since 1.0
  */
 @Immutable
@@ -36,6 +37,7 @@ public final class StSubject implements Stamp {
 
     /**
      * Ctor.
+     *
      * @param subj Subject
      */
     public StSubject(final String subj) {
@@ -44,6 +46,7 @@ public final class StSubject implements Stamp {
 
     /**
      * Ctor.
+     *
      * @param subj Subject
      * @param charset Subject charset
      */

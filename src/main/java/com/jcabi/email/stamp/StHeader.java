@@ -14,6 +14,7 @@ import lombok.ToString;
 
 /**
  * Stamp for a MIME envelope, with a header name and value.
+ *
  * @since 1.6.2
  */
 @Immutable
@@ -34,6 +35,7 @@ public final class StHeader implements Stamp {
 
     /**
      * Ctor.
+     *
      * @param nme Name of header
      * @param val Value to add under header's name
      * @since 1.1

@@ -27,12 +27,14 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link Smtps}.
+ *
  * @since 1.9
  */
 final class SmtpsTest {
 
     /**
      * SMTPS postman can email the server through SMTPS wire.
+     *
      * @throws Exception If fails
      */
     @Test

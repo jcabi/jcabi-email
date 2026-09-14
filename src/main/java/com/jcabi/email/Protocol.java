@@ -12,7 +12,7 @@ import javax.net.ssl.SSLSocketFactory;
 /**
  * Mail network protocol.
  *
- * <p>This is how you're supposed to use it:
+ * <p>This is how you're supposed to use it:</p>
  *
  * <pre> Postman postman = new Postman.Default(
  *   new SMTP(
@@ -44,12 +44,14 @@ public interface Protocol {
 
     /**
      * Guarantee of access for protocol.
+     *
      * @return Entry parameters
      */
     Map<String, String> entries();
 
     /**
      * SNMP protocol.
+     *
      * @since 1.0
      */
     final class Smtp implements Protocol {
@@ -66,6 +68,7 @@ public interface Protocol {
 
         /**
          * Public ctor.
+         *
          * @param hst SMTP Host
          * @param prt SMTP Port
          */
@@ -86,6 +89,7 @@ public interface Protocol {
 
     /**
      * SMTPS protocol.
+     *
      * @since 1.0
      */
     final class Smtps implements Protocol {
@@ -102,6 +106,7 @@ public interface Protocol {
 
         /**
          * Public ctor.
+         *
          * @param hst SMTPS Host
          * @param prt SMTPS Port
          */

@@ -14,6 +14,7 @@ import lombok.ToString;
 
 /**
  * Plain enclosure in MIME envelope.
+ *
  * @since 1.0
  */
 @Immutable
@@ -34,6 +35,7 @@ public final class EnPlain implements Enclosure {
 
     /**
      * Ctor.
+     *
      * @param content Plain content
      */
     public EnPlain(final String content) {
@@ -42,6 +44,7 @@ public final class EnPlain implements Enclosure {
 
     /**
      * Ctor.
+     *
      * @param content Plain content
      * @param charset Content charset
      */

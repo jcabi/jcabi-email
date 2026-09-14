@@ -16,6 +16,7 @@ import lombok.ToString;
 
 /**
  * Stamp for a MIME envelope, with a replyTo.
+ *
  * @since 1.8
  */
 @Immutable
@@ -31,6 +32,7 @@ public final class StReplyTo implements Stamp {
 
     /**
      * Ctor.
+     *
      * @param addr Address
      */
     public StReplyTo(final Address addr) {
@@ -39,6 +41,7 @@ public final class StReplyTo implements Stamp {
 
     /**
      * Ctor.
+     *
      * @param addr Address
      */
     public StReplyTo(final String addr) {

@@ -17,12 +17,14 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link com.jcabi.email.stamp.StRecipient}.
+ *
  * @since 1.3.1
  */
 final class StRecipientTest {
 
     /**
      * StRecipient can add a recipient to the message.
+     *
      * @throws Exception If fails
      */
     @Test
@@ -43,6 +45,7 @@ final class StRecipientTest {
 
     /**
      * StRecipient can add a recipient with custom encoding to the message.
+     *
      * @throws Exception If fails
      */
     @Test

@@ -5,6 +5,7 @@
 
 /**
  * Object-oriented email sending SDK, tests.
+ *
  * @since 1.0
  */
 package com.jcabi.email;

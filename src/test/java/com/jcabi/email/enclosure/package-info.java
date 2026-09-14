@@ -5,6 +5,7 @@
 
 /**
  * Enclosures, tests.
+ *
  * @since 1.2
  */
 package com.jcabi.email.enclosure;

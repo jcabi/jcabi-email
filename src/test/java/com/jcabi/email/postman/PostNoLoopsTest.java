@@ -13,12 +13,14 @@ import org.mockito.Mockito;
 
 /**
  * Test case for {@link PostNoLoops}.
+ *
  * @since 1.6
  */
 final class PostNoLoopsTest {
 
     /**
      * PostNoLoops can ignore messages.
+     *
      * @throws Exception If fails
      */
     @Test
@@ -37,6 +39,7 @@ final class PostNoLoopsTest {
 
     /**
      * PostNoLoops can pass normal messages through.
+     *
      * @throws Exception If fails
      */
     @Test

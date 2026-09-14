@@ -17,6 +17,7 @@ import lombok.ToString;
 
 /**
  * Stamp for a MIME envelope, with a CC recipient.
+ *
  * @since 1.0
  */
 @Immutable
@@ -32,6 +33,7 @@ public final class StCc implements Stamp {
 
     /**
      * Ctor.
+     *
      * @param addr Address
      */
     public StCc(final Address addr) {
@@ -40,6 +42,7 @@ public final class StCc implements Stamp {
 
     /**
      * Ctor.
+     *
      * @param name Name of the recipient
      * @param addr His email
      * @since 1.1
@@ -50,6 +53,7 @@ public final class StCc implements Stamp {
 
     /**
      * Ctor.
+     *
      * @param name Name of the recipient
      * @param addr His email
      * @param charset Name charset
@@ -60,6 +64,7 @@ public final class StCc implements Stamp {
 
     /**
      * Ctor.
+     *
      * @param addr Address
      */
     public StCc(final String addr) {

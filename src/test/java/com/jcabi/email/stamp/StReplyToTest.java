@@ -15,12 +15,14 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link StReplyTo}.
+ *
  * @since 1.8
  */
 final class StReplyToTest {
 
     /**
      * StReplyTo can attach the reply to address to a message.
+     *
      * @throws Exception If something goes wrong.
      */
     @Test

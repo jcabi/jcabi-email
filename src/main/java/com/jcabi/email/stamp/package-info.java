@@ -5,6 +5,7 @@
 
 /**
  * Stamps.
+ *
  * @since 1.2
  */
 package com.jcabi.email.stamp;
