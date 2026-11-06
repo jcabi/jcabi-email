@@ -53,4 +53,32 @@ final class PostNoLoopsTest {
         );
         Mockito.verify(post).send(Mockito.any(Envelope.class));
     }
+
+    /**
+     * PostNoLoops delegates messages without recipients.
+     *
+     * @throws Exception If fails
+     */
+    @Test
+    void delegatesWithoutRecipients() throws Exception {
+        final Postman post = Mockito.mock(Postman.class);
+        final Envelope env = new Envelope.Mime()
+            .with(new StSender("sender@example.com"));
+        new PostNoLoops(post).send(env);
+        Mockito.verify(post).send(env);
+    }
+
+    /**
+     * PostNoLoops delegates messages without sender headers.
+     *
+     * @throws Exception If fails
+     */
+    @Test
+    void delegatesWithoutSender() throws Exception {
+        final Postman post = Mockito.mock(Postman.class);
+        final Envelope env = new Envelope.Mime()
+            .with(new StRecipient("recipient@example.com"));
+        new PostNoLoops(post).send(env);
+        Mockito.verify(post).send(env);
+    }
 }

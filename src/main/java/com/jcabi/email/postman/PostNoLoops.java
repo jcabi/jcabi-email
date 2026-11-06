@@ -63,8 +63,11 @@ public final class PostNoLoops implements Postman {
     private boolean intersect(final Address[] first, final Address[] second,
         final String msg) {
         final Collection<Address> intersection =
-            new ArrayList<>(Arrays.asList(first));
-        intersection.retainAll(Arrays.asList(second));
+            new ArrayList<>(0);
+        if (first != null && second != null) {
+            intersection.addAll(Arrays.asList(first));
+            intersection.retainAll(Arrays.asList(second));
+        }
         final boolean intersect = !intersection.isEmpty();
         if (intersect) {
             Logger.info(
