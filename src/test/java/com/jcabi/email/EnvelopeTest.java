@@ -16,6 +16,7 @@ import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.Multipart;
 import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -44,6 +45,26 @@ final class EnvelopeTest {
         envelope.unwrap();
         envelope.unwrap();
         Mockito.verify(origin, Mockito.times(1)).unwrap();
+    }
+
+    /**
+     * Envelope.Constant keeps different recipients in separate cache entries.
+     *
+     * @throws Exception If fails
+     */
+    @Test
+    void cachesRecipientsSeparately() throws Exception {
+        final Envelope.Mime body = new Envelope.Mime()
+            .with(new EnPlain("Your order has shipped"));
+        new Envelope.Constant(
+            body.with(new StRecipient("alice@example.com"))
+        ).unwrap();
+        MatcherAssert.assertThat(
+            new Envelope.Constant(
+                body.with(new StRecipient("bob@example.com"))
+            ).unwrap().getAllRecipients(),
+            Matchers.arrayContaining(new InternetAddress("bob@example.com"))
+        );
     }
 
     /**
