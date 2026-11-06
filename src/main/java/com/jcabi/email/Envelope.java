@@ -11,10 +11,10 @@ import com.jcabi.aspects.Loggable;
 import com.jcabi.immutable.Array;
 import com.jcabi.log.Logger;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 import javax.mail.Flags;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -285,7 +285,7 @@ public interface Envelope {
          */
         private static final Cache<Envelope, Message> CACHE =
             CacheBuilder.newBuilder()
-                .expireAfterWrite(1L, TimeUnit.HOURS)
+                .expireAfterWrite(Duration.ofHours(1L))
                 .build();
 
         /**

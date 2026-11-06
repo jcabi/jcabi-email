@@ -103,10 +103,10 @@ public interface Postman {
         /**
          * Ctor.
          *
-         * @param wre Wire
+         * @param connection Wire
          */
-        public Default(final Wire wre) {
-            this.wire = wre;
+        public Default(final Wire connection) {
+            this.wire = connection;
         }
 
         @Override
