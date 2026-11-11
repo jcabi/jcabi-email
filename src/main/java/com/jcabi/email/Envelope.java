@@ -70,7 +70,7 @@ public interface Envelope {
      */
     @Immutable
     @ToString
-    @EqualsAndHashCode(of = "encs")
+    @EqualsAndHashCode(of = {"stamps", "encs"})
     @Loggable(Loggable.DEBUG)
     final class Mime implements Envelope {
 
