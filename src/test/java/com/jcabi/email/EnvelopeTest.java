@@ -5,13 +5,16 @@
 package com.jcabi.email;
 
 import com.google.common.base.Joiner;
+import com.jcabi.email.enclosure.EnBinary;
 import com.jcabi.email.enclosure.EnHtml;
 import com.jcabi.email.enclosure.EnPlain;
 import com.jcabi.email.stamp.StRecipient;
 import com.jcabi.email.stamp.StSender;
 import com.jcabi.email.stamp.StSubject;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.Multipart;
@@ -120,6 +123,38 @@ final class EnvelopeTest {
             message.getFrom().length,
             Matchers.equalTo(1)
         );
+    }
+
+    /**
+     * Envelope.Mime puts an attachment into a multipart/mixed container,
+     * next to the body, instead of a multipart/alternative one.
+     *
+     * @throws Exception If fails
+     */
+    @Test
+    void putsAttachmentsIntoMixedContainer() throws Exception {
+        final File file = File.createTempFile("jcabi-email", ".gif");
+        try {
+            Files.write(file.toPath(), new byte[] {1, 2, 3});
+            final ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            new Envelope.Mime()
+                .with(new EnPlain("Here is the picture attached"))
+                .with(new EnBinary(file, "my-picture.gif", "image/gif"))
+                .unwrap()
+                .writeTo(stream);
+            MatcherAssert.assertThat(
+                stream.toString(StandardCharsets.UTF_8),
+                Matchers.allOf(
+                    Matchers.containsString("multipart/mixed"),
+                    Matchers.not(
+                        Matchers.containsString("multipart/alternative")
+                    ),
+                    Matchers.containsString("filename=my-picture.gif")
+                )
+            );
+        } finally {
+            Files.delete(file.toPath());
+        }
     }
 
     /**
