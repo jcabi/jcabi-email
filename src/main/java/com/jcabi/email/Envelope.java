@@ -12,6 +12,8 @@ import com.jcabi.immutable.Array;
 import com.jcabi.log.Logger;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Properties;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -19,8 +21,10 @@ import javax.mail.Flags;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
+import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import lombok.EqualsAndHashCode;
@@ -121,15 +125,11 @@ public interface Envelope {
         @Override
         public Message unwrap() throws IOException {
             final Message msg = Envelope.EMPTY.unwrap();
-            final Multipart multi = new MimeMultipart("alternative");
             try {
-                for (final Enclosure enc : this.encs) {
-                    multi.addBodyPart(enc.part());
-                }
                 for (final Stamp stamp : this.stamps) {
                     stamp.attach(msg);
                 }
-                msg.setContent(multi);
+                msg.setContent(this.content());
             } catch (final MessagingException ex) {
                 throw new IOException(ex);
             }
@@ -164,6 +164,55 @@ public interface Envelope {
                 this.stamps,
                 this.encs.with(enc)
             );
+        }
+
+        private Multipart content() throws MessagingException {
+            final Collection<MimeBodyPart> bodies = new ArrayList<>(0);
+            final Collection<MimeBodyPart> files = new ArrayList<>(0);
+            for (final Enclosure enc : this.encs) {
+                final MimeBodyPart part = enc.part();
+                if (Mime.attachment(part)) {
+                    files.add(part);
+                } else {
+                    bodies.add(part);
+                }
+            }
+            final Multipart multi;
+            if (files.isEmpty()) {
+                multi = new MimeMultipart("alternative");
+                Mime.fill(multi, bodies);
+            } else {
+                multi = new MimeMultipart("mixed");
+                Mime.body(multi, bodies);
+                Mime.fill(multi, files);
+            }
+            return multi;
+        }
+
+        private static boolean attachment(final MimeBodyPart part)
+            throws MessagingException {
+            return part.getFileName() != null
+                || Part.ATTACHMENT.equalsIgnoreCase(part.getDisposition());
+        }
+
+        private static void fill(final Multipart multi,
+            final Iterable<MimeBodyPart> parts) throws MessagingException {
+            for (final MimeBodyPart part : parts) {
+                multi.addBodyPart(part);
+            }
+        }
+
+        private static void body(final Multipart mixed,
+            final Collection<MimeBodyPart> bodies) throws MessagingException {
+            if (bodies.size() == 1) {
+                mixed.addBodyPart(bodies.iterator().next());
+            } else if (bodies.size() > 1) {
+                final Multipart nested = new MimeMultipart("alternative");
+                Mime.fill(nested, bodies);
+                final MimeBodyPart part = new MimeBodyPart();
+                part.setContent(nested);
+                mixed.addBodyPart(part);
+            }
         }
     }
 
